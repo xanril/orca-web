@@ -24,7 +24,12 @@
             "tsConfig": "projects/app/tsconfig.app.json",
             "assets": [
               "projects/app/src/favicon.ico",
-              "projects/app/src/assets"
+              "projects/app/src/assets",
+              {
+                "glob": "**/*.*",
+                "input": "node_modules/@shoelace-style/shoelace/dist",
+                "output": "/assets/shoelace"
+              }
             ],
             "styles": [
               "./node_modules/tailwindcss/base.css",

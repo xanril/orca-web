@@ -30,7 +30,6 @@
               "./node_modules/tailwindcss/base.css",
               "./node_modules/tailwindcss/components.css",
               "./node_modules/tailwindcss/utilities.css",
-              "projects/app/src/theme.less",
               "projects/app/src/styles.css"
             ],
             "scripts": []

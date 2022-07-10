@@ -1,22 +1,45 @@
 <div>
   <h1 class="text-5xl">Add Movie</h1>
-  <div class="container mx-auto my-10">
-    <form>
-      <sl-input type="text" placeholder="Enter TMDB ID"></sl-input>
-      <sl-button type="button" variant="primary">Get Info</sl-button>
-      <div class="container my-10">
-        <sl-input type="text" placeholder="Movie Title"></sl-input>
-        <sl-textarea placeholder="Description"></sl-textarea>
-        <sl-input type="text" placeholder="Movie Rating"></sl-input>
-        <sl-input type="text" placeholder="Genre"></sl-input>
-        <sl-input type="text" placeholder="Show Date Start"></sl-input>
-        <sl-input type="text" placeholder="Show Date End"></sl-input>
-        <sl-input type="text" placeholder="Banner Image URL"></sl-input>
-        <sl-input type="text" placeholder="Poster Image URL"></sl-input>
-      </div>
-      <div class="container my-10">
-        <sl-button type="submit" variant="primary">Add Movie</sl-button>
+
+  <div class="max-w-5xl bg-black my-10 mx-auto p-5 rounded-md">
+    <form [formGroup]="searchForm" (ngSubmit)="onSearchMovie()">
+      <div class="flex-row items-center space-x-2">
+        <label for="tmdbId">hello</label>
+        <input
+          type="text"
+          class="form-input"
+          formControlName="tmdbId"
+          id="tmdbId"
+          required
+        />
+        <sl-button type="submit" variant="primary">Get Info</sl-button>
       </div>
     </form>
   </div>
+
+  <script type="module">
+    const form = document.querySelector(".input-validation-required");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      alert("All fields are valid!");
+    });
+  </script>
+
+  <!-- <form>
+    <div class="max-w-5xl my-10 mx-auto">
+      <div class="bg-neutral-800 py-10 px-5 rounded-t-md space-y-3">
+        <sl-input type="text" label="Movie Title:"></sl-input>
+        <sl-textarea label="Description:"></sl-textarea>
+        <sl-input type="text" label="Movie Rating:"></sl-input>
+        <sl-input type="text" label="Genre:"></sl-input>
+        <sl-input type="text" label="Show Date Start:"></sl-input>
+        <sl-input type="text" label="Show Date End:"></sl-input>
+        <sl-input type="text" label="Banner Image URL:"></sl-input>
+        <sl-input type="text" label="Poster Image URL:"></sl-input>
+      </div>
+      <div class="bg-neutral-900 flex justify-end p-5 rounded-b-md">
+        <sl-button type="submit" variant="primary">Add Movie</sl-button>
+      </div>
+    </div>
+  </form> -->
 </div>

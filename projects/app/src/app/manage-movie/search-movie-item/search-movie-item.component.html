@@ -1,0 +1,21 @@
+<sl-card class="w-48">
+  <img
+    class="object-cover w-48 h-72"
+    slot="image"
+    src="{{ cardImageUrl }}"
+    alt="A kitten walks towards camera on top of pallet."
+  />
+
+  <div class="space-y-2">
+    <p class="text-lg">{{ resultItem.title }}</p>
+    <p class="text-sm">
+      <sl-icon name="calendar3"></sl-icon>: {{ resultItem.release_date }}
+    </p>
+  </div>
+
+  <div class="flex flex-auto" slot="footer">
+    <sl-button class="flex-grow" slot="footer" variant="primary">
+      <span class="uppercase">Add Movie</span>
+    </sl-button>
+  </div>
+</sl-card>

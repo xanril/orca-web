@@ -1,4 +1,4 @@
-export class SearchMovieResponse {
+export interface SearchMovieResponse {
     page?:          number;
     results?:       SearchMovieResult[];
     total_pages?:   number;

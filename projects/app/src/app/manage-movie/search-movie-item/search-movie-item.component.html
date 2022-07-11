@@ -1,21 +1,29 @@
-<sl-card class="w-48">
-  <img
-    class="object-cover w-48 h-72"
-    slot="image"
-    src="{{ cardImageUrl }}"
-    alt="A kitten walks towards camera on top of pallet."
-  />
-
-  <div class="space-y-2">
-    <p class="text-lg">{{ resultItem.title }}</p>
-    <p class="text-sm">
-      <sl-icon name="calendar3"></sl-icon>: {{ resultItem.release_date }}
-    </p>
+<div
+  class="bg-neutral-900 shadow shadow-black rounded-md container overflow-hidden border-2 border-transparent 
+         hover:border-neutral-700/50"
+>
+  <div class="flex flex-row">
+    <img
+      class="object-cover w-40 h-60 flex-none"
+      slot="image"
+      src="{{ cardImageUrl }}"
+      alt="{{ resultItem.title }}"
+    />
+    <div class="flex-grow p-5">
+      <div class="flex flex-row">
+        <div class="flex-grow">
+          <p class="text-2xl font-semibold">{{ resultItem.title }}</p>
+          <p class="text-sm">
+            <sl-icon name="calendar3"></sl-icon>: {{ resultItem.release_date }}
+          </p>
+        </div>
+        <sl-button class="justify-self-end" slot="footer" variant="primary">
+          <span class="uppercase">Add Movie</span>
+        </sl-button>
+      </div>
+      <p class="text-neutral-400 text-sm pt-5">
+        {{ resultItem.overview }}
+      </p>
+    </div>
   </div>
-
-  <div class="flex flex-auto" slot="footer">
-    <sl-button class="flex-grow" slot="footer" variant="primary">
-      <span class="uppercase">Add Movie</span>
-    </sl-button>
-  </div>
-</sl-card>
+</div>

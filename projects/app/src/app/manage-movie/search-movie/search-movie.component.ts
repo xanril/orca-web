@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { TMDBService } from '../../shared/tmdb.service';
 import { AppState } from '../../store';
 import {
@@ -14,41 +15,35 @@ import { searchMovie } from '../store/manage-movie.actions';
   templateUrl: './search-movie.component.html',
   styleUrls: ['./search-movie.component.css'],
 })
-export class SearchMovieComponent implements OnInit {
+export class SearchMovieComponent implements OnInit, OnDestroy {
   searchResults?: SearchMovieResult[];
   target?: SearchMovieResult;
+  storeSubscription?: Subscription;
   searchForm: FormGroup = new FormGroup({
     movieTitle: new FormControl(null, [Validators.required]),
   });
 
-  constructor(private tmdbService: TMDBService,
-    private store: Store<AppState>) {}
+  constructor(
+    private tmdbService: TMDBService,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {
-    // this.tmdbService
-    //   .searchMovies("avengers")
-    //   .subscribe((response: SearchMovieResponse) => {
-    //     this.searchResults = response.results;
-    //     this.target = response?.results?.[0];
-    //     console.log(this.target);
-    //   });
-
-    this.store.select('manageMovie')
-      .subscribe(state => {
+    this.storeSubscription = this.store
+      .select('manageMovie')
+      .subscribe((state) => {
         this.searchResults = state.searchMovieResponse?.results;
         this.target = state.searchMovieResponse?.results?.[0];
-      })
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.storeSubscription?.unsubscribe();
   }
 
   onSearchMovie() {
-    // this.tmdbService
-    //   .searchMovies(this.searchForm.value['movieTitle'])
-    //   .subscribe((response: SearchMovieResponse) => {
-    //     this.searchResults = response.results;
-    //     this.target = response?.results?.[0];
-    //     console.log(this.target);
-    //   });
-
-    this.store.dispatch(searchMovie({ movieTitle: this.searchForm.value['movieTitle'] }));
+    this.store.dispatch(
+      searchMovie({ movieTitle: this.searchForm.value['movieTitle'] })
+    );
   }
 }

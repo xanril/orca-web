@@ -1,12 +1,11 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { SearchMovieResponse } from '../search-movie-result.model';
 import { searchMovie, searchMovieSuccess } from './manage-movie.actions';
-
 
 export const manageMovieFeatureKey = 'manageMovie';
 
 export interface State {
-  tmdbMovieId: number
+  tmdbMovieId: number,
   searchMovieResponse?: SearchMovieResponse
 }
 

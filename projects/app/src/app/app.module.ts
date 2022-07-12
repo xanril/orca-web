@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
-import { ManageMovieEffects } from './manage-movie/store/manage-movie.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
@@ -23,7 +22,6 @@ import { environment } from '../environments/environment';
       metaReducers
     }),
     EffectsModule.forRoot([]),
-    EffectsModule.forFeature([ManageMovieEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   bootstrap: [AppComponent],

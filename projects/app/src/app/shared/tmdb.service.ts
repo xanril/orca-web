@@ -33,7 +33,7 @@ export class TMDBService {
     );
   }
 
-  searchMovies(movieTitle: string) {
+  searchMovie(movieTitle: string) {
     let params: HttpParams = new HttpParams();
     params = params.append('api_key', this.apiKey);
     params = params.append('query', movieTitle);

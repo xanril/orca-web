@@ -16,7 +16,7 @@ export class ManageMovieEffects {
     this.actions$.pipe(
       ofType(searchMovie),
       switchMap((actionData) => {
-        return this.tmdbService.searchMovies(actionData.movieTitle).pipe(
+        return this.tmdbService.searchMovie(actionData.movieTitle).pipe(
           map((response) => {
             return searchMovieSuccess({ searchMovieResponse: response });
           }),

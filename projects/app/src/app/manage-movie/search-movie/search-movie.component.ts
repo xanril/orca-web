@@ -6,7 +6,7 @@ import { TMDBService } from '../../shared/tmdb.service';
 import { AppState } from '../../store';
 import {
   SearchMovieResult,
-} from '../../shared/interfaces/search-movie-result.model';
+} from '../../models/search-movie-result.model';
 import { searchMovie } from '../store/manage-movie.actions';
 
 @Component({

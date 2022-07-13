@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TMDBService } from '../../shared/tmdb.service';
-import { TMDBMovieDetails } from '../../shared/interfaces/tmdb-movie-details.model';
+import { TMDBMovieDetails } from '../../models/tmdb-movie-details.model';
 
 @Component({
   selector: 'app-manage-add-movie',
@@ -37,7 +37,7 @@ export class ManageAddMovieComponent implements OnInit {
 }
 
 const mockDetails: TMDBMovieDetails = {
-  backdrop_path: '/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg',
+  backdrop_path: '/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg', //7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg' p1F51Lvj3sMopG948F5HsBbl43C.jpg,
   genres: [
     {
       id: 12,

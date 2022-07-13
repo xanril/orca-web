@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { SearchMovieResponse } from './interfaces/search-movie-result.model';
-import { TMDBConfiguration } from './interfaces/tmdb-configuration.model';
-import { TMDBMovieDetails } from './interfaces/tmdb-movie-details.model';
+import { SearchMovieResponse } from '../models/search-movie-result.model';
+import { TMDBConfiguration } from '../models/tmdb-configuration.model';
+import { TMDBMovieDetails } from '../models/tmdb-movie-details.model';
 
 @Injectable({ providedIn: 'root' })
 export class TMDBService {

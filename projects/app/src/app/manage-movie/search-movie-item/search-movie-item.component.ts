@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TMDBService } from '../../shared/tmdb.service';
-import { SearchMovieResult } from '../../shared/interfaces/search-movie-result.model';
+import { SearchMovieResult } from '../../models/search-movie-result.model';
 
 @Component({
   selector: 'app-search-movie-item',

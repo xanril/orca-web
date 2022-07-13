@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { SearchMovieResponse } from '../search-movie-result.model';
+import { SearchMovieResponse } from '../../shared/interfaces/search-movie-result.model';
 
 const SEARCH_MOVIE: string = '[ManageMovie] Search Movie';
 const SEARCH_MOVIE_SUCCESS: string = '[ManageMovie] Search Movie Success';

@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { SearchMovieResponse } from '../search-movie-result.model';
+import { SearchMovieResponse } from '../../shared/interfaces/search-movie-result.model';
 import { searchMovie, searchMovieSuccess } from './manage-movie.actions';
 
 export const manageMovieFeatureKey = 'manageMovie';

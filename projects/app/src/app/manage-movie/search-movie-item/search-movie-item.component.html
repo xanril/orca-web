@@ -1,6 +1,6 @@
 <div
-  class="bg-neutral-900 shadow shadow-black rounded-md container overflow-hidden border-2 border-transparent 
-         hover:border-neutral-700/50"
+  class="bg-neutral-900 shadow shadow-black rounded-md container overflow-hidden 
+         hover:bg-neutral-800/20 transition"
 >
   <div class="flex flex-row">
     <img
@@ -17,8 +17,8 @@
             <sl-icon name="calendar3"></sl-icon>: {{ resultItem.release_date }}
           </p>
         </div>
-        <sl-button class="justify-self-end" slot="footer" variant="primary">
-          <span class="uppercase">Add Movie</span>
+        <sl-button class="justify-self-end" slot="footer" variant="success">
+          <span class="uppercase">+ Add Movie</span>
         </sl-button>
       </div>
       <p class="text-neutral-400 text-sm pt-5">

@@ -16,9 +16,8 @@
   </div>
 
   <!-- Display Results -->
-  <div class="max-w-5xl mx-auto" *ngIf="searchResults != undefined">
+  <div class="max-w-5xl mx-auto flex flex-col space-y-3" *ngIf="searchResults != undefined">
     <app-search-movie-item
-      class="m-5"
       *ngFor="let item of searchResults"
       [resultItem]="item"
     >

@@ -8,8 +8,8 @@ import { TMDBMovieDetails } from '../../models/tmdb-movie-details.model';
   styleUrls: ['./manage-add-movie.component.css'],
 })
 export class ManageAddMovieComponent implements OnInit {
-  backdropImageUrl: string = "";
-  posterImageUrl: string = "";
+  backdropImageUrl: string = '';
+  posterImageUrl: string = '';
   tmdbMovieDetails?: TMDBMovieDetails;
 
   constructor(private tmdbService: TMDBService) {}
@@ -33,6 +33,10 @@ export class ManageAddMovieComponent implements OnInit {
     this.posterImageUrl = this.tmdbService.composePosterUrl(
       mockDetails.poster_path!
     );
+  }
+
+  handleChange(event: any) {
+    console.log(event);
   }
 }
 

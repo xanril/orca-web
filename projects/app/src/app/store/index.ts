@@ -1,19 +1,16 @@
 import {
-  ActionReducer,
   ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
   MetaReducer
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 import * as fromManageMovie from '../manage-movie/store/manage-movie.reducer';
 
 export interface AppState {
-  manageMovie: fromManageMovie.State
+  movies: fromManageMovie.State
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  manageMovie: fromManageMovie.reducer
+  movies: fromManageMovie.reducer
 };
 
 

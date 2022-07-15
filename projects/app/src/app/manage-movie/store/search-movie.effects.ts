@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { switchMap, map, catchError, of } from 'rxjs';
 import { TMDBService } from '../../shared/tmdb.service';
-import {
-  searchMovie,
-  searchMovieFailed,
-  searchMovieSuccess,
-} from './manage-movie.actions';
+import * as SearchMovieActions from './search-movie.actions';
 
 @Injectable()
 export class ManageMovieEffects {
@@ -14,14 +10,16 @@ export class ManageMovieEffects {
 
   searchMovie$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(searchMovie),
+      ofType(SearchMovieActions.searchMovie),
       switchMap((actionData) => {
         return this.tmdbService.searchMovie(actionData.movieTitle).pipe(
           map((response) => {
-            return searchMovieSuccess({ searchMovieResponse: response });
+            return SearchMovieActions.searchMovieSuccess({
+              searchMovieResponse: response,
+            });
           }),
           catchError((error) => {
-            return of(searchMovieFailed({ error }));
+            return of(SearchMovieActions.searchMovieFailed({ error }));
           })
         );
       })

@@ -5,8 +5,9 @@ import { ManageMovieComponent } from './manage-movie.component';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
 import { SearchMovieItemComponent } from './search-movie-item/search-movie-item.component';
 import { CommonModule } from '@angular/common';
-import { ManageMovieEffects } from './store/manage-movie.effects';
+import { ManageMovieEffects } from './store/search-movie.effects';
 import { EffectsModule } from '@ngrx/effects';
+import { AddMovieEffects } from './store/add-movie.effects';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { EffectsModule } from '@ngrx/effects';
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    EffectsModule.forFeature([ManageMovieEffects]),
+    EffectsModule.forFeature([ManageMovieEffects, AddMovieEffects]),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [

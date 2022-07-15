@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 import { SearchMovieResponse } from '../../models/search-movie-result.model';
 
-const SEARCH_MOVIE: string = '[ManageMovie] Search Movie';
-const SEARCH_MOVIE_SUCCESS: string = '[ManageMovie] Search Movie Success';
-const SEARCH_MOVIE_FAILED: string = '[ManageMovie] Search Movie Failure';
+const SEARCH_MOVIE: string = '[Movies] Search Movie';
+const SEARCH_MOVIE_SUCCESS: string = '[Movies] Search Movie Success';
+const SEARCH_MOVIE_FAILED: string = '[Movies] Search Movie Failure';
 
 export const searchMovie = createAction(
   SEARCH_MOVIE,

@@ -10,12 +10,12 @@ import { reducers, metaReducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { NavbarModule } from './navbar/navbar.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    ManageMovieModule,
     HttpClientModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers, {
@@ -23,6 +23,8 @@ import { environment } from '../environments/environment';
     }),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    ManageMovieModule,
+    NavbarModule
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

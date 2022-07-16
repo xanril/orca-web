@@ -10,25 +10,8 @@
         <!-- Nav menu items grow flex justify-end -->
         <div class="w-full md:block md:w-auto">
             <ul class="flex flex-col mt-4 md:flex-row md:space-x-5 md:mt-0">
-                <li class="md:py-3 md:px-2 md:bg-sky-500 md:rounded"> 
-                  <a class="block py-2 pr-4 pl-3 text-white bg-sky-500 rounded 
-                            md:bg-transparent md:p-0"
-                     href="#" >Home</a>
-                </li>
-                <li class="md:py-3 md:px-2 md:rounded"> 
-                  <a class="block py-2 pl-3 text-gray-400 border-b border-gray-700 hover:bg-gray-700 hover:text-white
-                            md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-white"
-                     href="#">
-                     Menu 2
-                  </a>
-                </li>
-                <li class="md:py-3 md:px-2 md:rounded">
-                  <a class="block py-2 pl-3 text-gray-400 border-b border-gray-700 hover:bg-gray-700 hover:text-white
-                            md:hover:bg-transparent md:border-0 md:p-0 md:hover:text-white"
-                     href="#">
-                     Menu 3
-                  </a> 
-                </li>
+              <app-navbar-menu-item [isActive]="true">Home</app-navbar-menu-item>
+              <app-navbar-menu-item [isActive]="false">Menu 2</app-navbar-menu-item>
             </ul>
         </div>
     </div>

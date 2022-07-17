@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { ManageMovieEffects } from './store/search-movie.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { AddMovieEffects } from './store/add-movie.effects';
+import { ManageMovieRoutingModule } from './manage-movie-routing.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AddMovieEffects } from './store/add-movie.effects';
     ReactiveFormsModule,
     CommonModule,
     EffectsModule.forFeature([ManageMovieEffects, AddMovieEffects]),
+    ManageMovieRoutingModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [

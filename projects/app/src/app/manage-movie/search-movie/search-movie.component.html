@@ -1,26 +1,31 @@
-<div class="container mx-auto">
-  <h1 class="text-5xl">Search Movie</h1>
-  <div class="bg-black my-10 p-5 rounded-md">
-    <form [formGroup]="searchForm" (ngSubmit)="onSearchMovie()">
-      <div class="flex flex-row items-center space-x-2">
-        <input
-          type="text"
-          class="form-input flex-grow"
-          formControlName="movieTitle"
-          id="movieTitle"
-          placeholder="Movie Title"
-        />
-        <sl-button type="submit" variant="primary">Get Info</sl-button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Display Results -->
-  <div class="max-w-5xl mx-auto flex flex-col space-y-3" *ngIf="searchResults != undefined">
-    <app-search-movie-item
-      *ngFor="let item of searchResults"
-      [resultItem]="item"
-    >
-    </app-search-movie-item>
-  </div>
+<h1 class="text-5xl">Search Movie</h1>
+<div class="bg-black my-10 p-5 rounded-md">
+  <form [formGroup]="searchForm" (ngSubmit)="onSearchMovie()">
+    <div class="flex flex-row items-center space-x-2">
+      <input
+        type="text"
+        class="form-input flex-grow"
+        formControlName="movieTitle"
+        id="movieTitle"
+        placeholder="Movie Title"
+      />
+      <sl-button type="submit" variant="primary">Get Info</sl-button>
+    </div>
+  </form>
 </div>
+
+<!-- Pages -->
+<div>
+  <app-pagination></app-pagination>
+</div>
+
+<!-- Display Results -->
+<div
+  class="max-w-5xl mx-auto flex flex-col space-y-3"
+  *ngIf="searchResults != undefined"
+>
+  <app-search-movie-item *ngFor="let item of searchResults" [resultItem]="item">
+  </app-search-movie-item>
+</div>
+
+

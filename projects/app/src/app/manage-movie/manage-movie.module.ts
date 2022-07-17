@@ -9,6 +9,7 @@ import { ManageMovieEffects } from './store/search-movie.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { AddMovieEffects } from './store/add-movie.effects';
 import { ManageMovieRoutingModule } from './manage-movie-routing.module';
+import { SharedUIModule } from '../shared-ui/shared-ui.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ManageMovieRoutingModule } from './manage-movie-routing.module';
   imports: [
     ReactiveFormsModule,
     CommonModule,
+    SharedUIModule,
     EffectsModule.forFeature([ManageMovieEffects, AddMovieEffects]),
     ManageMovieRoutingModule
   ],

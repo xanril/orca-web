@@ -10,17 +10,21 @@ export interface State {
   tmdbMovieId: number;
   searchMovieResponse?: SearchMovieResponse;
   movies: Movie[];
+  searchedMovieTitle?: string;
 }
 
 export const initialState: State = {
   tmdbMovieId: -1,
-  movies: [],
+  movies: []
 };
 
 export const reducer = createReducer(
   initialState,
   on(SearchMovieActions.searchMovie, (state: State, action) => {
-    return initialState;
+    return {
+      ...state,
+      searchedMovieTitle: action.movieTitle
+    };
   }),
   on(SearchMovieActions.searchMovieSuccess, (state: State, action) => {
     return {

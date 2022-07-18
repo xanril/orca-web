@@ -7,12 +7,12 @@ const SEARCH_MOVIE_FAILED: string = '[Movies] Search Movie Failure';
 
 export const searchMovie = createAction(
   SEARCH_MOVIE,
-  props<{ movieTitle: string }>()
+  props<{ movieTitle: string, page: number }>()
 );
 
 export const searchMovieSuccess = createAction(
   SEARCH_MOVIE_SUCCESS,
-  props<{ searchMovieResponse: SearchMovieResponse }>()
+  props<{ movieTitle: string, searchMovieResponse: SearchMovieResponse }>()
 );
 
 export const searchMovieFailed = createAction(

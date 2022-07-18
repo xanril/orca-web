@@ -3,9 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AppState } from '../../store';
-import {
-  SearchMovieResult,
-} from '../../models/search-movie-result.model';
+import { SearchMovieResult } from '../../models/search-movie-result.model';
 import { searchMovie } from '../store/search-movie.actions';
 
 @Component({
@@ -15,21 +13,24 @@ import { searchMovie } from '../store/search-movie.actions';
 })
 export class SearchMovieComponent implements OnInit, OnDestroy {
   searchResults?: SearchMovieResult[];
+  searchedTitle?: string;
+  maxPage: number = 1;
+  currentPage: number = 1;
   storeSubscription?: Subscription;
   searchForm: FormGroup = new FormGroup({
     movieTitle: new FormControl(null, [Validators.required]),
   });
 
-  constructor(
-    private store: Store<AppState>
-  ) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.storeSubscription = this.store
-      .select('movies')
-      .subscribe((state) => {
-        this.searchResults = state.searchMovieResponse?.results;
-      });
+    this.storeSubscription = this.store.select('movies').subscribe((state) => {
+      this.searchResults = state.searchMovieResponse?.results;
+      this.searchedTitle = state.searchedMovieTitle;
+      this.searchForm.controls['movieTitle'].setValue(this.searchedTitle);
+      this.maxPage = state.searchMovieResponse?.total_pages ?? 1;
+      this.currentPage = state.searchMovieResponse?.page ?? 1;
+    });
   }
 
   ngOnDestroy(): void {
@@ -38,7 +39,19 @@ export class SearchMovieComponent implements OnInit, OnDestroy {
 
   onSearchMovie() {
     this.store.dispatch(
-      searchMovie({ movieTitle: this.searchForm.value['movieTitle'] })
+      searchMovie({
+        movieTitle: this.searchForm.value['movieTitle'],
+        page: 1,
+      })
+    );
+  }
+
+  onPagedSearchMovie(targetPage: number) {
+    this.store.dispatch(
+      searchMovie({
+        movieTitle: this.searchedTitle ?? this.searchForm.value['movieTitle'],
+        page: targetPage,
+      })
     );
   }
 }

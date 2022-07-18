@@ -28,19 +28,30 @@ export class TMDBService {
   }
 
   composePosterUrl(posterPath: string): string {
+
+    if (posterPath === null || posterPath === undefined || posterPath === '') {
+      return "";
+    }
+
     const posterSize = this.configuration?.images?.poster_sizes?.[1];
     return this.configuration?.images?.base_url! + posterSize + posterPath;
   }
 
   composeBackdropUrl(backdropPath: string): string {
+
+    if (backdropPath === null || backdropPath === undefined || backdropPath === '') {
+      return "";
+    }
+
     const imageSize = 'w1280';
     return this.configuration?.images?.base_url! + imageSize + backdropPath;
   }
 
-  searchMovie(movieTitle: string) {
+  searchMovie(movieTitle: string, page: number) {
     let params: HttpParams = new HttpParams();
     params = params.append('api_key', environment.tmdbApiKey);
     params = params.append('query', movieTitle);
+    params = params.append('page', page);
 
     return this.httpClient.get<SearchMovieResponse>(
       this.baseUrl + '/search/movie',

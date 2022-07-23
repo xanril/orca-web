@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AppState } from '../../store';
 import { SearchMovieResult } from '../../models/search-movie-result.model';
-import { searchMovie } from '../store/search-movie.actions';
+import { searchMovie, searchMovieReset } from '../store/search-movie.actions';
 
 @Component({
   selector: 'app-search-movie',
@@ -25,6 +25,7 @@ export class SearchMovieComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.storeSubscription = this.store.select('movies').subscribe((state) => {
+      console.log("read results");
       this.searchResults = state.searchMovieResponse?.results;
       this.searchedTitle = state.searchedMovieTitle;
       this.searchForm.controls['movieTitle'].setValue(this.searchedTitle);
@@ -35,6 +36,7 @@ export class SearchMovieComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.storeSubscription?.unsubscribe();
+    this.store.dispatch(searchMovieReset());
   }
 
   onSearchMovie() {

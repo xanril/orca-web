@@ -37,5 +37,12 @@ export const reducer = createReducer(
       ...state,
       movies: [...state.movies, action.movie],
     };
+  }),
+  on(SearchMovieActions.searchMovieReset, (state: State, action) => {
+    return {
+      ...state,
+      searchMovieResponse: undefined,
+      searchedMovieTitle: undefined
+    };
   })
 );

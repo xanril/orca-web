@@ -20,4 +20,5 @@ export interface SearchMovieResult {
     video?:             boolean;
     vote_average?:      number;
     vote_count?:        number;
+    isAdded?:           boolean;
 }

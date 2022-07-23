@@ -1,22 +1,18 @@
 <h1 class="text-3xl">Manage Movie</h1>
 
-<!-- Display Selected Movies -->
-<div *ngIf="movies != null && movies.length > 0"
-  class="flex flex-row space-x-5">
-  <sl-card
-  *ngFor="let item of movies">
-    <img
-      class="object-cover w-40 h-60"
-      slot="image"
-      src="{{ item.posterUrl }}"
-      alt="{{ item.title }}"
-    />
-    {{ item.title }}
-  </sl-card>
-</div>
-
 <div class="container mx-auto py-10">
   <sl-button (click)="onSearch()">Search Movie</sl-button>
   <sl-button>Edit Movie</sl-button>
   <sl-button>Delete Movie</sl-button>
+</div>
+
+<!-- Display selected movies -->
+<div
+  *ngIf="movies != null && movies.length > 0"
+  class="flex flex-row space-x-5"
+>
+  <app-movie-item
+    *ngFor="let item of movies"
+    [movieItem]="item"
+  ></app-movie-item>
 </div>

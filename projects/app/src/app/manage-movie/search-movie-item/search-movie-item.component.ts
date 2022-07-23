@@ -13,6 +13,7 @@ import * as fromAddMovieActions from '../store/add-movie.actions';
 export class SearchMovieItemComponent implements OnInit {
   @Input() resultItem!: SearchMovieResult;
   cardImageUrl!: string;
+  isMovieAdded: boolean = false;
 
   constructor(private tmdbService: TMDBService,
     private store: Store<AppState>) {}
@@ -21,6 +22,8 @@ export class SearchMovieItemComponent implements OnInit {
     this.cardImageUrl = this.tmdbService.composePosterUrl(
       this.resultItem.poster_path!
     );
+
+    this.isMovieAdded = this.resultItem.isAdded ?? false;
   }
 
   onAddMovie() {
@@ -28,6 +31,6 @@ export class SearchMovieItemComponent implements OnInit {
       searchMovieResult: this.resultItem
     }))
 
-    // TODO: navigate to manage movie page.
+    this.isMovieAdded = true;
   }
 }

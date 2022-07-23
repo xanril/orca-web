@@ -1,11 +1,9 @@
 <div
-  class="bg-neutral-900 shadow shadow-black rounded-md container overflow-hidden 
-         hover:bg-neutral-800/20 transition"
+  class="bg-neutral-900 shadow shadow-black rounded-md container overflow-hidden hover:bg-neutral-800/20 transition"
 >
   <div class="flex flex-row">
     <img
       class="object-cover w-40 h-60 flex-none"
-      slot="image"
       src="{{ cardImageUrl }}"
       alt="{{ resultItem.title }}"
     />
@@ -17,8 +15,24 @@
             <sl-icon name="calendar3"></sl-icon> {{ resultItem.release_date }}
           </p>
         </div>
-        <sl-button class="justify-self-end" slot="footer" variant="success" outline (click)="onAddMovie()">
-          <span class="uppercase">+ Add Movie</span>
+        <sl-button
+          class="justify-self-end"
+          slot="footer"
+          variant="success"
+          outline
+          (click)="onAddMovie()"
+          *ngIf=!isMovieAdded>
+        <sl-icon slot="prefix" name="plus"></sl-icon>
+          <span class="uppercase">Add Movie</span>
+        </sl-button>
+        <sl-button
+          class="justify-self-end"
+          slot="footer"
+          variant="success"
+          disabled
+          *ngIf=isMovieAdded>
+        <sl-icon slot="prefix" name="check"></sl-icon>
+          <span class="uppercase">Added</span>
         </sl-button>
       </div>
       <p class="text-neutral-400 text-sm pt-5">

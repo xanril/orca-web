@@ -22,6 +22,7 @@ export class AddMovieEffects {
           overview: actionData.searchMovieResult.overview,
           posterUrl: actionData.searchMovieResult.poster_path,
           backdropUrl: actionData.searchMovieResult.backdrop_path,
+          releaseDate: actionData.searchMovieResult.release_date?.toString()
         };
 
         return AddMovieActions.addMovieSuccess({

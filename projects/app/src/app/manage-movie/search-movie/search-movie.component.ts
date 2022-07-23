@@ -25,7 +25,6 @@ export class SearchMovieComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.storeSubscription = this.store.select('movies').subscribe((state) => {
-      console.log("read results");
       this.searchResults = state.searchMovieResponse?.results;
       this.searchedTitle = state.searchedMovieTitle;
       this.searchForm.controls['movieTitle'].setValue(this.searchedTitle);

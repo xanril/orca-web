@@ -1,7 +1,7 @@
 <nav class="bg-black py-1">
   <div class="container mx-auto px-5 flex flex-wrap justify-between items-center">
     <span class="flex-none text-xl text-white font-semibold">
-      <a routerLink="/movies">Gala Web</a>
+      <a routerLink="/theaters">Gala Web</a>
     </span>
 
     <!-- Button toggle -->
@@ -18,9 +18,9 @@
     <!-- Nav menu items -->
     <div class="w-full md:block md:w-auto">
       <ul class="flex flex-col mt-4 md:flex-row md:space-x-5 md:mt-0">
-        <app-navbar-menu-item [isActive]="true">Home</app-navbar-menu-item>
-        <app-navbar-menu-item [isActive]="false">Movies</app-navbar-menu-item>
-        <app-navbar-menu-item [isActive]="false">Theaters</app-navbar-menu-item>
+        <app-navbar-menu-item [isActive]="true" routePath="/movies">Home</app-navbar-menu-item>
+        <app-navbar-menu-item [isActive]="false" routePath="/movies">Movies</app-navbar-menu-item>
+        <app-navbar-menu-item [isActive]="false" routePath="/theaters">Theaters</app-navbar-menu-item>
       </ul>
     </div>
   </div>

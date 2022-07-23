@@ -10,6 +10,9 @@ const appRoutes: Routes = [
   {
     path: 'movies', loadChildren: () => import('./manage-movie/manage-movie.module').then(m => m.ManageMovieModule)
   },
+  {
+    path: 'theaters', loadChildren: () => import('./manage-theater/manage-theater.module').then(m => m.ManageTheaterModule)
+  },
 ];
 
 @NgModule({

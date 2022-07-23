@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NavbarMenuItemComponent implements OnInit {
   @Input() isActive: boolean = false;
-  @Input() label: string = "Menu Item";
+  @Input() routePath: string = "/";
 
   constructor() { }
 

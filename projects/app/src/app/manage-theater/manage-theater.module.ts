@@ -4,14 +4,18 @@ import { ManageTheaterComponent } from './manage-theater.component';
 import { ManageTheaterRoutingModule } from './manage-theater-routing.module';
 import { SharedUIModule } from '../shared-ui/shared-ui.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddTheaterComponent } from './add-theater/add-theater.component';
 
 @NgModule({
-  declarations: [ManageTheaterComponent],
+  declarations: [ManageTheaterComponent, AddTheaterComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     SharedUIModule,
     ManageTheaterRoutingModule,
+  ],
+  exports: [
+    ManageTheaterComponent, AddTheaterComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

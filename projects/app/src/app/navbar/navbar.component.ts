@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  isMobileMenuShown: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  showMobileMenuHandler(event: Event) {
+    this.isMobileMenuShown = !this.isMobileMenuShown;
+    console.log(this.isMobileMenuShown);
+  }
 }

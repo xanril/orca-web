@@ -7,14 +7,16 @@ import { AppState } from '../store';
 @Component({
   selector: 'app-manage-movie',
   templateUrl: './manage-movie.component.html',
-  styleUrls: ['./manage-movie.component.css']
+  styleUrls: ['./manage-movie.component.css'],
 })
 export class ManageMovieComponent implements OnInit {
-  movies: Movie[] = []
+  movies: Movie[] = [];
 
-  constructor(private router:Router, 
-    private activatedRoute:ActivatedRoute,
-    private store: Store<AppState>) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {
     this.store.select('movies').subscribe((data) => {
@@ -23,6 +25,6 @@ export class ManageMovieComponent implements OnInit {
   }
 
   onSearch() {
-    this.router.navigate(['search'], {relativeTo:this.activatedRoute});
+    this.router.navigate(['search'], { relativeTo: this.activatedRoute });
   }
 }

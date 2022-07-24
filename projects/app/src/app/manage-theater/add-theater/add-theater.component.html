@@ -1,1 +1,11 @@
-<p>add-theater works!</p>
+<span class="text-3xl">Add Theater</span>
+
+<div class="max-w-xl mx-auto m-10">
+  <form class="flex flex-col space-y-2" #targetForm>
+    <sl-input name="name" label="Name:" required></sl-input>
+    <sl-input name="location" label="Location" required></sl-input>
+    <div class="flex flex-row pt-5">
+      <sl-button type="submit" variant="primary">Add</sl-button>
+    </div>
+  </form>
+</div>

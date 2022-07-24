@@ -3,16 +3,17 @@ import { CommonModule } from '@angular/common';
 import { ManageTheaterComponent } from './manage-theater.component';
 import { ManageTheaterRoutingModule } from './manage-theater-routing.module';
 import { SharedUIModule } from '../shared-ui/shared-ui.module';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AddTheaterComponent } from './add-theater/add-theater.component';
+import { EffectsModule } from '@ngrx/effects';
+import { TheaterEffects } from './store/theater.effects';
 
 @NgModule({
   declarations: [ManageTheaterComponent, AddTheaterComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     SharedUIModule,
     ManageTheaterRoutingModule,
+    EffectsModule.forFeature([TheaterEffects]),
   ],
   exports: [
     ManageTheaterComponent, AddTheaterComponent

@@ -15,6 +15,5 @@ export class NavbarComponent implements OnInit {
 
   showMobileMenuHandler(event: Event) {
     this.isMobileMenuShown = !this.isMobileMenuShown;
-    console.log(this.isMobileMenuShown);
   }
 }

@@ -1,9 +1,37 @@
 <span class="text-3xl">Add Theater</span>
 
-<div class="max-w-xl mx-auto m-10">
+<div class="max-w-md mx-auto m-10">
   <form class="flex flex-col space-y-2" #targetForm>
     <sl-input name="name" label="Name:" required></sl-input>
     <sl-input name="location" label="Location" required></sl-input>
+
+    <br />
+    <span class="text-xl">Rooms</span>
+    <div class="flex flex-col max-w-md">
+      <!-- initial room name field -->
+      <app-new-room-input
+        [id]="'room' + (roomInputNames.length + 1)"
+        [name]="'room' + (roomInputNames.length + 1)"
+        [placeholder]="'room' + (roomInputNames.length + 1)"
+        initialStatus="new"
+        [useCustomValidity]="!(roomInputNames.length > 0)"
+        [willReturnToNewStatus]="true"
+        (onStatusChanged)="roomStatusChangedHandler($event)"
+      ></app-new-room-input>
+    </div>
+    <div class="flex flex-col-reverse max-w-md">
+      <!-- entered room name fields -->
+      <app-new-room-input
+        *ngFor="let item of roomInputNames; index as i"
+        [id]="'room' + (i + 1)"
+        [name]="'room' + (i + 1)"
+        [initialValue]="item.name"
+        initialStatus="added"
+        placeholder="Enter room name"
+        (onStatusChanged)="roomStatusChangedHandler($event)"
+      ></app-new-room-input>
+    </div>
+
     <div class="flex flex-row pt-5">
       <sl-button type="submit" variant="primary">Add</sl-button>
     </div>

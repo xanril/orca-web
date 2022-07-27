@@ -1,0 +1,41 @@
+<div class="flex flex-row items-center pt-2 text-lg">
+  <span class="text-base basis-5/6 px-4 py-2" *ngIf="!isInputShown">{{ enteredText }}</span>
+  <sl-input
+    class="basis-5/6"
+    [name]="name"
+    [placeholder]="name"
+    [value]="initialValue"
+    #roomInput
+    [required]="useCustomValidity"
+    [ngClass]="{hidden: !isInputShown}"
+  ></sl-input>
+  <sl-icon-button
+    class="add"
+    name="plus-circle-fill"
+    (click)="addHandler()"
+    *ngIf="isInputShown && status === 'new'"
+  ></sl-icon-button>
+  <sl-icon-button
+    name="pencil-fill"
+    (click)="editStartHandler()"
+    *ngIf="!isInputShown"
+  ></sl-icon-button>
+  <sl-icon-button
+    class="add"
+    name="check-circle-fill"
+    (click)="editCompleteHandler()"
+    *ngIf="isInputShown && status === 'editStart'"
+  ></sl-icon-button>
+  <sl-icon-button
+    class="remove"
+    name="x-circle-fill"
+    (click)="editCancelHandler()"
+    *ngIf="isInputShown && status === 'editStart'"
+  ></sl-icon-button>
+  <sl-icon-button
+    class="remove"
+    name="dash-circle-fill"
+    (click)="removeHandler()"
+    *ngIf="!isInputShown && status !== 'editStart'"
+  ></sl-icon-button>
+</div>

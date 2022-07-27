@@ -3,7 +3,7 @@ import { Theater } from '../../models/theater.model';
 
 export const addTheater = createAction(
   '[Theater] Add Theater',
-  props<{ name: string, location: string }>()
+  props<{ name: string, location: string, roomNames: string[] }>()
 );
 
 export const addTheaterSuccess = createAction(

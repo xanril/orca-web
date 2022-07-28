@@ -7,9 +7,10 @@ import { AddCinemaComponent } from './add-cinema/add-cinema.component';
 import { EffectsModule } from '@ngrx/effects';
 import { CinemaEffects } from './store/cinema.effects';
 import { NewRoomInputComponent } from './add-cinema/new-room-input/new-room-input.component';
+import { CinemaItemComponent } from './cinema-item/cinema-item.component';
 
 @NgModule({
-  declarations: [ManageCinemaComponent, AddCinemaComponent, NewRoomInputComponent],
+  declarations: [ManageCinemaComponent, AddCinemaComponent, NewRoomInputComponent, CinemaItemComponent],
   imports: [
     CommonModule,
     SharedUIModule,

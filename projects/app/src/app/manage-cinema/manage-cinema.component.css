@@ -1,0 +1,8 @@
+sl-card.add-new-cinema::part(base) {
+    @apply border-gray-500 border-dashed text-gray-500 transition cursor-pointer
+}
+
+sl-card.add-new-cinema:hover::part(base) {
+    @apply border-sky-500 border-dashed text-sky-500
+}
+

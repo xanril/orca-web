@@ -1,10 +1,10 @@
 import { Movie } from "./movie.model";
-import { TheaterRoom } from "./theater-room.model";
+import { CinemaRoom } from "./cinema-room.model";
 
-export interface Theater {
+export interface Cinema {
     id: number;
     name: string;
     location: string;
     movies: Movie[];
-    theaterRooms: TheaterRoom[];
+    cinemaRooms: CinemaRoom[];
   }

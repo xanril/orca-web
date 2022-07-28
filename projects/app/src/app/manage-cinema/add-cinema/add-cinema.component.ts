@@ -12,15 +12,14 @@ import { Store } from '@ngrx/store';
 import { serialize } from '@shoelace-style/shoelace/dist/utilities/form.js';
 import { Subscription } from 'rxjs';
 import { AppState } from '../../store';
-import * as TheaterActions from '../store/theater.actions';
+import * as CinemaActions from '../store/cinema.actions';
 import { NewRoomInputStatus } from './new-room-input/new-room-input.component';
 
 @Component({
-  selector: 'app-add-theater',
-  templateUrl: './add-theater.component.html',
-  styleUrls: ['./add-theater.component.css'],
+  selector: 'app-add-cinema',
+  templateUrl: './add-cinema.component.html'
 })
-export class AddTheaterComponent implements OnInit, OnDestroy {
+export class AddCinemaComponent implements OnInit, OnDestroy {
   @ViewChild('targetForm') targetForm!: ElementRef;
   successSubscription?: Subscription;
   roomInputNames: { key: string; name: string }[] = [];
@@ -34,9 +33,9 @@ export class AddTheaterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.successSubscription = this.actions$
-      .pipe(ofType(TheaterActions.addTheaterSuccess))
+      .pipe(ofType(CinemaActions.addCinemaSuccess))
       .subscribe((data) => {
-        this.navigateToTheater();
+        this.navigateToCinemas();
       });
   }
 
@@ -81,24 +80,24 @@ export class AddTheaterComponent implements OnInit, OnDestroy {
     }
 
     const data = serialize(this.targetForm.nativeElement);
-    const theaterName: string = (data['name'] as string) ?? '';
-    const theaterLocation: string = (data['location'] as string) ?? '';
+    const cinemaName: string = (data['name'] as string) ?? '';
+    const cinemaLocation: string = (data['location'] as string) ?? '';
 
-    if (!theaterName || !theaterLocation) {
+    if (!cinemaName || !cinemaLocation) {
       return; // either info is null or empty?
     }
     
     this.store.dispatch(
-      TheaterActions.addTheater({
-        name: theaterName,
-        location: theaterLocation,
+      CinemaActions.addCinema({
+        name: cinemaName,
+        location: cinemaLocation,
         roomNames: this.roomInputNames.map((roomItem) =>
         roomItem.name)
       })
     );
   }
 
-  navigateToTheater() {
-    // this.router.navigate(['/theaters']);
+  navigateToCinemas() {
+    this.router.navigate(['/cinemas']);
   }
 }

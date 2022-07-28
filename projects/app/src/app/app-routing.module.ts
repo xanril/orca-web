@@ -4,14 +4,14 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/theaters/add',
+    redirectTo: '/cinemas/add',
     pathMatch: 'full',
   },
   {
     path: 'movies', loadChildren: () => import('./manage-movie/manage-movie.module').then(m => m.ManageMovieModule)
   },
   {
-    path: 'theaters', loadChildren: () => import('./manage-theater/manage-theater.module').then(m => m.ManageTheaterModule)
+    path: 'cinemas', loadChildren: () => import('./manage-cinema/manage-cinema.module').then(m => m.ManageCinemaModule)
   },
 ];
 

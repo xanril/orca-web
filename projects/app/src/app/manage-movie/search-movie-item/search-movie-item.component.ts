@@ -8,7 +8,6 @@ import * as fromAddMovieActions from '../store/add-movie.actions';
 @Component({
   selector: 'app-search-movie-item',
   templateUrl: './search-movie-item.component.html',
-  styleUrls: ['./search-movie-item.component.css'],
 })
 export class SearchMovieItemComponent implements OnInit {
   @Input() resultItem!: SearchMovieResult;

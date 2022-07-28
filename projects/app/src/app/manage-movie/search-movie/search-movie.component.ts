@@ -9,7 +9,6 @@ import { searchMovie, searchMovieReset } from '../store/search-movie.actions';
 @Component({
   selector: 'app-search-movie',
   templateUrl: './search-movie.component.html',
-  styleUrls: ['./search-movie.component.css'],
 })
 export class SearchMovieComponent implements OnInit, OnDestroy {
   searchResults?: SearchMovieResult[];

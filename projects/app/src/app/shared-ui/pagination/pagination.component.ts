@@ -1,9 +1,16 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.css'],
 })
 export class PaginationComponent implements OnInit, OnChanges {
   @Input() maxPage: number = 3;
@@ -37,7 +44,7 @@ export class PaginationComponent implements OnInit, OnChanges {
       this.maxPage,
       this.currentPage + this.windowCount
     );
-    
+
     for (let index = 0; index <= endCount - startingCount; index++) {
       this.displayedIndexes[index] = {
         pageNumber: startingCount + index,

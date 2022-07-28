@@ -5,7 +5,6 @@ import { TMDBMovieDetails } from '../../models/tmdb-movie-details.model';
 @Component({
   selector: 'app-manage-add-movie',
   templateUrl: './manage-add-movie.component.html',
-  styleUrls: ['./manage-add-movie.component.css'],
 })
 export class ManageAddMovieComponent implements OnInit {
   backdropImageUrl: string = '';

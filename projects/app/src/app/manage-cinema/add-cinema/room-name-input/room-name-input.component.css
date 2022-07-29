@@ -1,0 +1,7 @@
+sl-icon-button.add::part(base) {
+  color: var(--sl-color-success-200);
+}
+
+sl-icon-button.add:hover::part(base) {
+  color: var(--sl-color-success-500);
+}

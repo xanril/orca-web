@@ -5,17 +5,10 @@
     [name]="name"
     [placeholder]="name"
     [value]="initialValue"
-    [required]="isRequired"
+    required
     [ngClass]="{hidden: !isInputShown}"
     #roomInput
-    (sl-input)="inputValueChangeHandler($event)"
   ></sl-input>
-  <sl-icon-button
-    class="add"
-    name="plus-circle-fill"
-    (click)="addHandler()"
-    *ngIf="isInputShown && status === 'new'"
-  ></sl-icon-button>
   <sl-icon-button
     name="pencil-fill"
     (click)="editStartHandler()"

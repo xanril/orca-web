@@ -13,11 +13,10 @@ import { serialize } from '@shoelace-style/shoelace/dist/utilities/form.js';
 import { Subscription } from 'rxjs';
 import { AppState } from '../../store';
 import * as CinemaActions from '../store/cinema.actions';
-import { NewRoomInputStatus } from './new-room-input/new-room-input.component';
 
 @Component({
   selector: 'app-add-cinema',
-  templateUrl: './add-cinema.component.html'
+  templateUrl: './add-cinema.component.html',
 })
 export class AddCinemaComponent implements OnInit, OnDestroy {
   @ViewChild('targetForm') targetForm!: ElementRef;
@@ -43,33 +42,22 @@ export class AddCinemaComponent implements OnInit, OnDestroy {
     this.successSubscription?.unsubscribe();
   }
 
-  roomStatusChangedHandler(value: {
-    key: string;
-    name: string;
-    status: string;
-  }) {
+  submitRoomNameHandler(value: { key: string; name: string }) {
+    this.roomInputNames.push({ key: value.key, name: value.name });
+  }
 
+  removeRoomNameHandler(roomItemId: string) {
+    let roomIndex = this.roomInputNames.findIndex(
+      (item) => item.key == roomItemId
+    );
+    this.roomInputNames.splice(roomIndex, 1);
+  }
+
+  editRoomNameHandler(value: { key: string; name: string }) {
     let roomIndex = this.roomInputNames.findIndex(
       (item) => item.key == value.key
     );
-
-    switch(value.status) {
-      case NewRoomInputStatus.ADDED:
-        // add the room to the array.
-        this.roomInputNames.push({ key: value.key, name: value.name });
-      break;
-
-      case NewRoomInputStatus.EDIT_END:
-        // room name has been edited. update the array.
-        this.roomInputNames[roomIndex].name = value.name;
-        break;
-
-      case NewRoomInputStatus.REMOVED:
-        console.log("target index: " + roomIndex);
-        // room has been removed. remove it from array as well.
-        this.roomInputNames.splice(roomIndex, 1);
-      break;
-    }
+    this.roomInputNames[roomIndex].name = value.name;
   }
 
   @HostListener('submit', ['$event'])
@@ -86,13 +74,12 @@ export class AddCinemaComponent implements OnInit, OnDestroy {
     if (!cinemaName || !cinemaLocation || this.roomInputNames.length === 0) {
       return; // either info is null or empty?
     }
-    
+
     this.store.dispatch(
       CinemaActions.addCinema({
         name: cinemaName,
         location: cinemaLocation,
-        roomNames: this.roomInputNames.map((roomItem) =>
-        roomItem.name)
+        roomNames: this.roomInputNames.map((roomItem) => roomItem.name),
       })
     );
   }

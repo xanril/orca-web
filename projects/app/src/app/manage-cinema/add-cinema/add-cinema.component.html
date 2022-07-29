@@ -9,27 +9,25 @@
     <span class="text-xl">Rooms</span>
     <div class="flex flex-col max-w-md">
       <!-- initial room name field -->
-      <app-new-room-input
+      <app-room-name-input
         [id]="'room' + (roomInputNames.length + 1)"
         [name]="'room' + (roomInputNames.length + 1)"
         [placeholder]="'room' + (roomInputNames.length + 1)"
-        initialStatus="new"
         [isRequired]="roomInputNames.length === 0"
-        [willReturnToNewStatus]="true"
-        (onStatusChanged)="roomStatusChangedHandler($event)"
-      ></app-new-room-input>
+        (onSubmitName)="submitRoomNameHandler($event)"
+      ></app-room-name-input>
     </div>
     <div class="flex flex-col-reverse max-w-md">
       <!-- entered room name fields -->
-      <app-new-room-input
+      <app-room-name-item
         *ngFor="let item of roomInputNames; index as i"
         [id]="'room' + (i + 1)"
         [name]="'room' + (i + 1)"
         [initialValue]="item.name"
-        initialStatus="added"
         placeholder="Enter room name"
-        (onStatusChanged)="roomStatusChangedHandler($event)"
-      ></app-new-room-input>
+        (onEdit)="editRoomNameHandler($event)"
+        (onRemove)="removeRoomNameHandler($event)"
+      ></app-room-name-item>
     </div>
 
     <div class="flex flex-row pt-5">

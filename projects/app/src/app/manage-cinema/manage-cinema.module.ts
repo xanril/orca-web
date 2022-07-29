@@ -6,11 +6,12 @@ import { SharedUIModule } from '../shared-ui/shared-ui.module';
 import { AddCinemaComponent } from './add-cinema/add-cinema.component';
 import { EffectsModule } from '@ngrx/effects';
 import { CinemaEffects } from './store/cinema.effects';
-import { NewRoomInputComponent } from './add-cinema/new-room-input/new-room-input.component';
+import { RoomNameItemComponent } from './add-cinema/room-name-item/room-name-item.component';
 import { CinemaItemComponent } from './cinema-item/cinema-item.component';
+import { RoomNameInputComponent } from './add-cinema/room-name-input/room-name-input.component';
 
 @NgModule({
-  declarations: [ManageCinemaComponent, AddCinemaComponent, NewRoomInputComponent, CinemaItemComponent],
+  declarations: [ManageCinemaComponent, AddCinemaComponent, RoomNameItemComponent, CinemaItemComponent, RoomNameInputComponent],
   imports: [
     CommonModule,
     SharedUIModule,

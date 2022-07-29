@@ -2,12 +2,9 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostListener,
   Input,
-  OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 
@@ -25,7 +22,7 @@ export enum NewRoomInputStatus {
   templateUrl: './new-room-input.component.html',
   styleUrls: ['./new-room-input.component.css'],
 })
-export class NewRoomInputComponent implements OnInit, OnChanges {
+export class NewRoomInputComponent implements OnInit {
   @ViewChild('roomInput') roomInputRef!: ElementRef;
   @Input() id: string = '';
   @Input() name: string = '';
@@ -33,7 +30,7 @@ export class NewRoomInputComponent implements OnInit, OnChanges {
   @Input() initialValue: string = '';
   @Input() initialStatus: string = NewRoomInputStatus.NEW;
   @Input() willReturnToNewStatus: boolean = false;
-  @Input() useCustomValidity: boolean = true;
+  @Input() isRequired: boolean = true;
   @Output() onStatusChanged: EventEmitter<{
     key: string;
     name: string;
@@ -46,37 +43,24 @@ export class NewRoomInputComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('onInit');
     this.setStatus(this.initialStatus as NewRoomInputStatus);
     this.enteredText = this.initialValue;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (
-      changes['useCustomValidity'] &&
-      changes['useCustomValidity']!.currentValue === false
-    ) {
-      this.roomInputRef.nativeElement.setCustomValidity('');
-    }
-  }
-
-  @HostListener('sl-input', ['$event'])
-  onInputValueChange(event: Event) {
-    if (
-      this.useCustomValidity === false ||
-      event.target !== this.roomInputRef.nativeElement
-    ) {
-      this.roomInputRef.nativeElement.setCustomValidity('');
-      return;
-    }
-
+  inputValueChangeHandler(event: Event) {
     this.updateValidation();
   }
 
   updateValidation() {
+    if (!this.roomInputRef) {
+      // do not proceed if ref is null
+      return;
+    }
+
     if (
-      this.status === NewRoomInputStatus.NEW ||
-      this.status === NewRoomInputStatus.EDIT_START
+      !this.isRequired &&
+      (this.status === NewRoomInputStatus.NEW ||
+        this.status === NewRoomInputStatus.EDIT_START)
     ) {
       this.roomInputRef.nativeElement.setCustomValidity(
         'Please finalize this room name'
@@ -99,10 +83,13 @@ export class NewRoomInputComponent implements OnInit, OnChanges {
     if (this.willReturnToNewStatus) {
       this.setStatus(NewRoomInputStatus.NEW);
     }
+
+    this.updateValidation();
   }
 
   editStartHandler() {
     this.setStatus(NewRoomInputStatus.EDIT_START);
+    this.updateValidation();
     this.onStatusChanged.emit({
       key: this.id,
       name: this.enteredText,
@@ -112,6 +99,7 @@ export class NewRoomInputComponent implements OnInit, OnChanges {
 
   editCancelHandler() {
     this.setStatus(NewRoomInputStatus.EDIT_CANCELLED);
+    this.updateValidation();
     this.onStatusChanged.emit({
       key: this.id,
       name: this.enteredText,
@@ -121,6 +109,7 @@ export class NewRoomInputComponent implements OnInit, OnChanges {
 
   editCompleteHandler() {
     this.setStatus(NewRoomInputStatus.EDIT_END);
+    this.updateValidation();
     this.onStatusChanged.emit({
       key: this.id,
       name: this.enteredText,
@@ -154,7 +143,6 @@ export class NewRoomInputComponent implements OnInit, OnChanges {
 
       case NewRoomInputStatus.EDIT_START:
         this.isInputShown = true;
-        this.updateValidation();
         break;
 
       case NewRoomInputStatus.EDIT_END:

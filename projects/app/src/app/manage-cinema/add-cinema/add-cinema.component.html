@@ -14,7 +14,7 @@
         [name]="'room' + (roomInputNames.length + 1)"
         [placeholder]="'room' + (roomInputNames.length + 1)"
         initialStatus="new"
-        [useCustomValidity]="!(roomInputNames.length > 0)"
+        [isRequired]="roomInputNames.length === 0"
         [willReturnToNewStatus]="true"
         (onStatusChanged)="roomStatusChangedHandler($event)"
       ></app-new-room-input>

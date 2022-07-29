@@ -5,9 +5,10 @@
     [name]="name"
     [placeholder]="name"
     [value]="initialValue"
-    #roomInput
-    [required]="useCustomValidity"
+    [required]="isRequired"
     [ngClass]="{hidden: !isInputShown}"
+    #roomInput
+    (sl-input)="inputValueChangeHandler($event)"
   ></sl-input>
   <sl-icon-button
     class="add"

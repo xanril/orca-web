@@ -83,7 +83,7 @@ export class AddCinemaComponent implements OnInit, OnDestroy {
     const cinemaName: string = (data['name'] as string) ?? '';
     const cinemaLocation: string = (data['location'] as string) ?? '';
 
-    if (!cinemaName || !cinemaLocation) {
+    if (!cinemaName || !cinemaLocation || this.roomInputNames.length === 0) {
       return; // either info is null or empty?
     }
     

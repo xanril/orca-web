@@ -4,13 +4,8 @@ import { AddCinemaComponent } from './add-cinema/add-cinema.component';
 import { ManageCinemaComponent } from './manage-cinema.component';
 
 const manageCinemaRoutes: Routes = [
-  {
-    path: '',
-    children: [
-      { path: 'add', component: AddCinemaComponent },
-      { path: '', component: ManageCinemaComponent, pathMatch: 'full' },
-    ],
-  },
+  { path: 'add', component: AddCinemaComponent },
+  { path: '', component: ManageCinemaComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

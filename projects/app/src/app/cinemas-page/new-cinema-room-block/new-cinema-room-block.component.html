@@ -3,23 +3,22 @@
   #container
   [ngClass]="{ 'show-form': isFormShown, 'add-new-item': !isFormShown }"
 >
-  <!-- add cinema initial -->
+  <!-- add cinema room initial -->
   <div
     class="flex flex-row text-center items-center justify-center p-6"
     [ngClass]="{ hidden: isFormShown }"
     (click)="showFormHandler($event)"
   >
     <sl-icon name="plus-circle-fill" class="m-2"></sl-icon>
-    Add New Cinema
+    Add New Cinema Room
   </div>
 
-  <!-- add cinema form -->
+  <!-- add cinema room form -->
   <div class="p-6" [ngClass]="{ hidden: !isFormShown }">
-    <form #targetForm>
+    <form novalidate="false" #targetForm>
       <div class="flex flex-wrap items-end space-y-2">
         <div class="grow flex flex-row flex-wrap space-x-2">
           <sl-input name="name" label="Name" required></sl-input>
-          <sl-input name="location" label="Location" required></sl-input>
         </div>
         <div class="space-x-2">
           <sl-button

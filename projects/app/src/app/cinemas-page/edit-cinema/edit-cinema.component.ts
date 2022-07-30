@@ -18,7 +18,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-edit-cinema',
   templateUrl: './edit-cinema.component.html',
-  styleUrls: ['./edit-cinema.component.css'],
 })
 export class EditCinemaComponent implements OnInit, OnDestroy {
   @ViewChild('targetForm') targetFormRef!: ElementRef;
@@ -40,7 +39,7 @@ export class EditCinemaComponent implements OnInit, OnDestroy {
     this.editSuccessSubscription = this.actions$
       .pipe(ofType(CinemaActions.editCinemaSuccess))
       .subscribe((data) => {
-        this.navigateToCinemas();
+        alert("success!");
       });
   }
 

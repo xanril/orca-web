@@ -3,7 +3,7 @@ div.default-style {
     border-width: 1px;
 }
 
-/** with add-item class */
+/** with add-new-item class */
 
 div.add-new-item {
     @apply border-gray-500 border-dashed cursor-pointer

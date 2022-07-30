@@ -29,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SharedUIModule,
     CinemasPageRoutingModule,
     EffectsModule.forFeature([CinemaEffects]),

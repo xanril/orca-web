@@ -1,18 +1,26 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-cinema-room-block',
   templateUrl: './new-cinema-room-block.component.html',
-  styleUrls: ['./new-cinema-room-block.component.css']
+  styleUrls: ['./new-cinema-room-block.component.css'],
 })
 export class NewCinemaRoomBlockComponent implements OnInit {
-  @ViewChild('targetForm') targetFormRef!:ElementRef;
+  targetForm: FormGroup = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+  });
   isFormShown: boolean = false;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   showFormHandler(event: Event) {
     if (this.isFormShown) {
@@ -26,17 +34,12 @@ export class NewCinemaRoomBlockComponent implements OnInit {
     this.isFormShown = false;
   }
 
-  @HostListener('submit', ['$event'])
-  submitHandler(event: Event) {
-    event.preventDefault();
-
-    if (this.targetFormRef.nativeElement !== event.target) {
+  submitHandler() {
+    if (!this.targetForm.valid) {
       return;
     }
-
-    // const data = serialize(this.targetFormRef.nativeElement);
-    const data = { name: '' }
-    const cinemaRoomName: string = (data['name'] as string) ?? '';
+    
+    const cinemaRoomName: string = this.targetForm.controls['name'].value;
     // const cinemaLocation: string = (data['location'] as string) ?? '';
 
     // this.store.dispatch(

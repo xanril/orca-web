@@ -15,25 +15,25 @@
 
   <!-- add cinema room form -->
   <div class="p-6" [ngClass]="{ hidden: !isFormShown }">
-    <form novalidate="false" #targetForm>
+    <form [formGroup]="targetForm" (ngSubmit)="submitHandler()">
       <div class="flex flex-wrap items-end space-y-2">
         <div class="grow flex flex-row flex-wrap space-x-2">
-          <sl-input name="name" label="Name" required></sl-input>
+          <input
+            class="input input-bordered"
+            name="name"
+            placeholder="Room Name"
+            formControlName="name"
+          />
         </div>
         <div class="space-x-2">
-          <sl-button
-            class="flex-none"
-            type="submit"
-            variant="primary"
-            >Add</sl-button
-          >
-          <sl-button
-            class="flex-none"
+          <button class="btn btn-info flex-none" type="submit">Add</button>
+          <button
+            class="btn btn-error flex-none"
             type="button"
-            variant="danger"
             (click)="cancelHandler()"
-            >Cancel</sl-button
           >
+            Cancel
+          </button>
         </div>
       </div>
     </form>

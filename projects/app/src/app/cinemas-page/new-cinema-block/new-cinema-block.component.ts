@@ -1,4 +1,5 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -10,10 +11,13 @@ import * as CinemaActions from '../store/cinema.actions';
   styleUrls: ['./new-cinema-block.component.css']
 })
 export class NewCinemaBlockComponent implements OnInit {
-  @ViewChild('container') containerRef!: ElementRef;
   @ViewChild('targetForm') targetFormRef!: ElementRef;
   addSuccessSubscription?: Subscription;
   isFormShown: boolean = false;
+  targetForm: FormGroup = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    location: new FormControl('', [Validators.required])
+  });
   
   constructor(private store: Store, private actions$: Actions) { }
 
@@ -33,18 +37,14 @@ export class NewCinemaBlockComponent implements OnInit {
     this.isFormShown = true;
   }
 
-  @HostListener('submit', ['$event'])
-  submitHandler(event: Event) {
-    event.preventDefault();
+  submitHandler() {
 
-    if (this.targetFormRef.nativeElement !== event.target) {
+    if (!this.targetForm.valid) {
       return;
     }
 
-    // const data = serialize(this.targetFormRef.nativeElement);
-    const data = { name: '', location: '' }
-    const cinemaName: string = (data['name'] as string) ?? '';
-    const cinemaLocation: string = (data['location'] as string) ?? '';
+    const cinemaName: string = this.targetForm.controls['name'].value;
+    const cinemaLocation: string = this.targetForm.controls['location'].value;
 
     this.store.dispatch(
       CinemaActions.addCinema({
@@ -53,6 +53,8 @@ export class NewCinemaBlockComponent implements OnInit {
         roomNames: []
       })
     );
+
+    this.targetForm.reset();
   }
 
   cancelHandler() {

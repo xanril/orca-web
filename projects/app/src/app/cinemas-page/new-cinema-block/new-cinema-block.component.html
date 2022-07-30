@@ -1,6 +1,5 @@
 <div
   class="default-style w-full"
-  #container
   [ngClass]="{ 'show-form': isFormShown, 'add-new-item': !isFormShown }"
 >
   <!-- add cinema initial -->
@@ -9,32 +8,43 @@
     [ngClass]="{ hidden: isFormShown }"
     (click)="showFormHandler($event)"
   >
-    <sl-icon name="plus-circle-fill" class="m-2"></sl-icon>
     Add New Cinema
   </div>
 
   <!-- add cinema form -->
   <div class="p-6" [ngClass]="{ hidden: !isFormShown }">
-    <form #targetForm>
+    <form [formGroup]="targetForm" (ngSubmit)="submitHandler()">
       <div class="flex flex-wrap items-end space-y-2">
         <div class="grow flex flex-row flex-wrap space-x-2">
-          <sl-input name="name" label="Name" required></sl-input>
-          <sl-input name="location" label="Location" required></sl-input>
+          <input
+            class="input input-bordered"
+            name="name"
+            placeholder="Room Name"
+            formControlName="name"
+          />
+          <input
+            class="input input-bordered"
+            name="location"
+            placeholder="Location"
+            formControlName="location"
+          />
         </div>
         <div class="space-x-2">
-          <sl-button
-            class="flex-none"
+          <button
+            class="btn btn-info flex-none"
             type="submit"
             variant="primary"
-            >Add</sl-button
           >
-          <sl-button
-            class="flex-none"
+            Add
+          </button>
+          <button
+            class="btn btn-error flex-none"
             type="button"
             variant="danger"
             (click)="cancelHandler()"
-            >Cancel</sl-button
           >
+            Cancel
+          </button>
         </div>
       </div>
     </form>

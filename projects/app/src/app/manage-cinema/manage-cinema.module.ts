@@ -9,9 +9,10 @@ import { CinemaEffects } from './store/cinema.effects';
 import { RoomNameItemComponent } from './add-cinema/room-name-item/room-name-item.component';
 import { CinemaItemComponent } from './cinema-item/cinema-item.component';
 import { RoomNameInputComponent } from './add-cinema/room-name-input/room-name-input.component';
+import { NewCinemaBlockComponent } from './new-cinema-block/new-cinema-block.component';
 
 @NgModule({
-  declarations: [ManageCinemaComponent, AddCinemaComponent, RoomNameItemComponent, CinemaItemComponent, RoomNameInputComponent],
+  declarations: [ManageCinemaComponent, AddCinemaComponent, RoomNameItemComponent, CinemaItemComponent, RoomNameInputComponent, NewCinemaBlockComponent],
   imports: [
     CommonModule,
     SharedUIModule,

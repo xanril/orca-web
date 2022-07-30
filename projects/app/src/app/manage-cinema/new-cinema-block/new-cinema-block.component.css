@@ -1,0 +1,20 @@
+div.default-style {
+    @apply transition-all duration-300 text-gray-500 rounded-md;
+    border-width: 1px;
+}
+
+/** with add-cinema class */
+
+div.add-new-cinema {
+    @apply border-gray-500 border-dashed cursor-pointer
+}
+
+div.add-new-cinema:hover {
+    @apply border-sky-500 text-sky-500
+}
+
+/** with show-form class */
+
+div.show-form {
+    @apply border-sky-500 border-solid cursor-default
+}

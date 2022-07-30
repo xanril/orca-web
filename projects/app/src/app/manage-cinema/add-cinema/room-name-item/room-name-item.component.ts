@@ -59,7 +59,7 @@ export class RoomNameItemComponent implements OnInit {
     this.roomInputRef.nativeElement.setCustomValidity('');
     this.onEdit.emit({
       key: this.id,
-      name: this.enteredText
+      name: this.enteredText,
     });
   }
 
@@ -76,19 +76,13 @@ export class RoomNameItemComponent implements OnInit {
 
       case RoomItemStatus.EDIT_END:
         this.isInputShown = false;
-        let newEnteredText =
-          this.roomInputRef!.nativeElement.value.trim() ?? '';
-        if (
-          newEnteredText === null ||
-          newEnteredText === undefined ||
-          newEnteredText === ''
-        ) {
+        if (this.roomInputRef.nativeElement.value.trim() === '') {
           // new value is an empty string
           // we reassign the previous value before edit started.
-          this.roomInputRef!.nativeElement.value = this.enteredText;
+          this.roomInputRef.nativeElement.value = this.enteredText;
         } else {
           // new value is valid.
-          this.enteredText = this.roomInputRef!.nativeElement.value ?? '';
+          this.enteredText = this.roomInputRef.nativeElement.value ?? '';
         }
 
         break;

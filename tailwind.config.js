@@ -2,15 +2,13 @@
 module.exports = {
   content: ["./projects/**/*.{html,ts,css}"],
   theme: {
-    extend: {
-      transitionProperty: {
-        height: "height",
-      },
-    },
+    extend: {},
   },
   plugins: [
-    require("@tailwindcss/forms")({
-      strategy: "class", // only generate classes
-    }),
+    require("@tailwindcss/typography"),
+    require("daisyui"),
+    // require("@tailwindcss/forms")({
+    //   strategy: "class", // only generate classes
+    // }),
   ],
 };

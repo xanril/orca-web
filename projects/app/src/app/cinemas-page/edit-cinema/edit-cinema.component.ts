@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { serialize } from '@shoelace-style/shoelace/dist/utilities/form';
 import { Cinema } from '../../models/cinema.model';
 import * as cinemasFeature from '../store/cinema.reducer';
 import * as CinemaActions from '../store/cinema.actions';
@@ -55,7 +54,8 @@ export class EditCinemaComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const data = serialize(this.targetFormRef.nativeElement);
+    // const data = serialize(this.targetFormRef.nativeElement);
+    const data = { name: '', location: '' };
     const cinemaName: string = (data['name'] as string) ?? '';
     const cinemaLocation: string = (data['location'] as string) ?? '';
 

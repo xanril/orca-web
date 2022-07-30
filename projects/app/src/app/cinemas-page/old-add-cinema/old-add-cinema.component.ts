@@ -9,7 +9,6 @@ import {
 import { Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { serialize } from '@shoelace-style/shoelace/dist/utilities/form.js';
 import { Subscription } from 'rxjs';
 import { AppState } from '../../store';
 import * as CinemaActions from '../store/cinema.actions';
@@ -67,7 +66,8 @@ export class OldAddCinemaComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const data = serialize(this.targetForm.nativeElement);
+    // const data = serialize(this.targetForm.nativeElement);
+    const data = { name: '', location: '' }
     const cinemaName: string = (data['name'] as string) ?? '';
     const cinemaLocation: string = (data['location'] as string) ?? '';
 

@@ -1,5 +1,4 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { serialize } from '@shoelace-style/shoelace/dist/utilities/form';
 
 @Component({
   selector: 'app-new-cinema-room-block',
@@ -35,7 +34,8 @@ export class NewCinemaRoomBlockComponent implements OnInit {
       return;
     }
 
-    const data = serialize(this.targetFormRef.nativeElement);
+    // const data = serialize(this.targetFormRef.nativeElement);
+    const data = { name: '' }
     const cinemaRoomName: string = (data['name'] as string) ?? '';
     // const cinemaLocation: string = (data['location'] as string) ?? '';
 

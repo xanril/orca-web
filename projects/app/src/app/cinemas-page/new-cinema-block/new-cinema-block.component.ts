@@ -1,7 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { serialize } from '@shoelace-style/shoelace/dist/utilities/form';
 import { Subscription } from 'rxjs';
 import * as CinemaActions from '../store/cinema.actions';
 
@@ -42,7 +41,8 @@ export class NewCinemaBlockComponent implements OnInit {
       return;
     }
 
-    const data = serialize(this.targetFormRef.nativeElement);
+    // const data = serialize(this.targetFormRef.nativeElement);
+    const data = { name: '', location: '' }
     const cinemaName: string = (data['name'] as string) ?? '';
     const cinemaLocation: string = (data['location'] as string) ?? '';
 

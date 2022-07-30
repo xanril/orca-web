@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import "@shoelace-style/shoelace/dist/themes/dark.css";
 
-input.form-input {
+/* input.form-input {
   @apply px-3 py-1.5 text-inherit
         bg-neutral-900
         rounded border border-solid border-gray-700
@@ -11,4 +10,4 @@ input.form-input {
 
 input.ng-invalid.ng-touched:focus {
   @apply border-rose-500 ring-rose-500 ring-2 ring-opacity-50;
-}
+} */

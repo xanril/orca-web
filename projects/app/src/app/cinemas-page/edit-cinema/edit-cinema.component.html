@@ -1,0 +1,31 @@
+<span class="text-3xl">Edit Cinema</span>
+
+<div>
+  Cinema Details:
+  <form #targetForm>
+    <sl-input
+      name="name"
+      label="Name"
+      [value]="cinema?.name"
+      required
+    ></sl-input>
+    <sl-input
+      name="location"
+      label="Location"
+      [value]="cinema?.location"
+      required
+    ></sl-input>
+
+    <sl-button type="submit" variant="primary">Save</sl-button>
+  </form>
+</div>
+
+<div class="mt-10">
+  Cinema Rooms:
+  <!-- Display List of rooms -->
+  <ul class="space-y-4">
+    <li *ngFor="let item of cinema?.cinemaRooms">
+      <app-cinema-room-item [cinemaRoomItem]="item"></app-cinema-room-item>
+    </li>
+  </ul>
+</div>

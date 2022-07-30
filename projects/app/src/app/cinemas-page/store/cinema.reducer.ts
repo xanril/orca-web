@@ -20,6 +20,11 @@ const DUMMY_CINEMAS: Cinema[] = [
         name: 'Cinema 1',
         schedule: [],
       },
+      {
+        id: 1,
+        name: 'Cinema 2',
+        schedule: [],
+      },
     ],
   },
   {
@@ -36,7 +41,7 @@ const DUMMY_CINEMAS: Cinema[] = [
     ],
   },
   {
-    id: 0,
+    id: 2,
     name: 'SM Aura',
     location: 'Taguig',
     movies: [],
@@ -47,22 +52,12 @@ const DUMMY_CINEMAS: Cinema[] = [
         schedule: [],
       },
     ],
-  }
+  },
 ];
 
 export const initialState: State = {
   cinemas: DUMMY_CINEMAS,
 };
-
-// export const reducer = createReducer(
-//   initialState,
-//   on(CinemaActions.addCinemaSuccess, (state, action) => {
-//     return {
-//       ...state,
-//       cinemas: [...state.cinemas, action.cinema],
-//     };
-//   })
-// );
 
 export const cinemasFeature = createFeature({
   name: 'cinemas',
@@ -72,6 +67,21 @@ export const cinemasFeature = createFeature({
       return {
         ...state,
         cinemas: [...state.cinemas, action.cinema],
+      };
+    }),
+    on(CinemaActions.editCinemaSuccess, (state, action) => {
+      //get index
+      let targetIndex = state.cinemas.findIndex(
+        (m) => m.id === action.cinema.id
+      );
+
+      // assign new item
+      const newCinemas = [...state.cinemas];
+      newCinemas[targetIndex] = action.cinema;
+
+      return {
+        ...state,
+        cinemas: [...newCinemas],
       };
     })
   ),

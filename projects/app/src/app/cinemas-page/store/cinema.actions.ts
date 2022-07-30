@@ -15,3 +15,18 @@ export const addCinemaFailure = createAction(
   '[Cinema] Add Cinema Failure',
   props<{ error: any }>()
 );
+
+export const editCinema = createAction(
+  '[Cinema] Edit Cinema',
+  props<{ id: number, name: string, location: string }>()
+);
+
+export const editCinemaSuccess = createAction(
+  '[Cinema] Edit Cinema Success',
+  props<{ cinema: Cinema }>()
+);
+
+export const editCinemaFailure = createAction(
+  '[Cinema] Edit Cinema Failure',
+  props<{ error: any }>()
+);

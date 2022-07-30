@@ -16,7 +16,6 @@ export class CinemaEffects {
       ofType(CinemaActions.addCinema),
       withLatestFrom(this.store.select('cinemas')),
       map(([actionData, state]) => {
-
         // TODO: call Add Cinema API
 
         let cinemaRooms = actionData.roomNames.map<CinemaRoom>(
@@ -38,6 +37,29 @@ export class CinemaEffects {
         };
 
         return CinemaActions.addCinemaSuccess({ cinema: newCinema });
+      })
+    )
+  );
+
+  editCinema$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CinemaActions.editCinema),
+      withLatestFrom(this.store.select('cinemas')),
+      map(([actionData, state]) => {
+        // TODO: call Edit Cinema API
+
+        // get cinema item from state
+        const cinema = state.cinemas.find((m) => m.id === actionData.id);
+        const cinemaRooms = cinema?.cinemaRooms.slice() ?? [];
+
+        const editedCinema: Cinema = {
+          id: actionData.id,
+          name: actionData.name,
+          location: actionData.location,
+          cinemaRooms: cinemaRooms,
+          movies: [],
+        };
+        return CinemaActions.editCinemaSuccess({ cinema: editedCinema });
       })
     )
   );

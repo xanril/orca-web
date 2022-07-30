@@ -15,10 +15,10 @@ import { AppState } from '../../store';
 import * as CinemaActions from '../store/cinema.actions';
 
 @Component({
-  selector: 'app-add-cinema',
-  templateUrl: './add-cinema.component.html',
+  selector: 'app-old-add-cinema',
+  templateUrl: './old-add-cinema.component.html',
 })
-export class AddCinemaComponent implements OnInit, OnDestroy {
+export class OldAddCinemaComponent implements OnInit, OnDestroy {
   @ViewChild('targetForm') targetForm!: ElementRef;
   successSubscription?: Subscription;
   roomInputNames: { key: string; name: string }[] = [];

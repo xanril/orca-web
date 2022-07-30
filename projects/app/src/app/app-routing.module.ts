@@ -11,7 +11,7 @@ const appRoutes: Routes = [
     path: 'movies', loadChildren: () => import('./manage-movie/manage-movie.module').then(m => m.ManageMovieModule)
   },
   {
-    path: 'cinemas', loadChildren: () => import('./manage-cinema/manage-cinema.module').then(m => m.ManageCinemaModule)
+    path: 'cinemas', loadChildren: () => import('./cinemas-page/cinemas-page.module').then(m => m.CinemasPageModule)
   },
 ];
 

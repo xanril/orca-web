@@ -5,7 +5,8 @@ import { SearchMovieComponent } from './search-movie/search-movie.component';
 
 const manageMovieRoutes: Routes = [
   { path: 'search', component: SearchMovieComponent },
-  { path: '', component: ManageMovieComponent, pathMatch: 'full' },
+  { path: 'edit/:id', component: SearchMovieComponent },
+  { path: '', component: ManageMovieComponent },
 ];
 
 @NgModule({

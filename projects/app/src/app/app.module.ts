@@ -12,7 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { NavbarModule } from './navbar/navbar.module';
 import { AppRouting } from './app-routing.module';
-import { ManageCinemaModule } from './manage-cinema/manage-cinema.module';
+import { CinemasPageModule } from './cinemas-page/cinemas-page.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +27,7 @@ import { ManageCinemaModule } from './manage-cinema/manage-cinema.module';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     AppRouting,
     ManageMovieModule,
-    ManageCinemaModule,
+    CinemasPageModule,
     NavbarModule
   ],
   bootstrap: [AppComponent],

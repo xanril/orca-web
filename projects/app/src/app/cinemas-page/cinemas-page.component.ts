@@ -6,19 +6,21 @@ import * as cinemasFeature from './store/cinema.reducer';
 
 @Component({
   selector: 'app-manage-cinema',
-  templateUrl: './manage-cinema.component.html',
-  styleUrls: ['./manage-cinema.component.css']
+  templateUrl: './cinemas-page.component.html',
 })
-export class ManageCinemaComponent implements OnInit {
+export class CinemasPageComponent implements OnInit {
   cinemas: Cinema[] = [];
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private store: Store) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
-    this.store.select(cinemasFeature.selectCinemas)
-    .subscribe((cinemas) => {
+    this.store.select(cinemasFeature.selectCinemas).subscribe((cinemas) => {
       this.cinemas = cinemas;
-    })
+    });
   }
 
   addCinemaHandler(event: Event) {

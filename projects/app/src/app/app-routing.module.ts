@@ -8,7 +8,7 @@ const appRoutes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'movies', loadChildren: () => import('./manage-movie/manage-movie.module').then(m => m.ManageMovieModule)
+    path: 'movies', loadChildren: () => import('./movies-page/movies-page.module').then(m => m.MoviesPageModule)
   },
   {
     path: 'cinemas', loadChildren: () => import('./cinemas-page/cinemas-page.module').then(m => m.CinemasPageModule)

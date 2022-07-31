@@ -6,9 +6,9 @@ import { AppState } from '../store';
 
 @Component({
   selector: 'app-manage-movie',
-  templateUrl: './manage-movie.component.html',
+  templateUrl: './movies-page.component.html',
 })
-export class ManageMovieComponent implements OnInit {
+export class MoviesPageComponent implements OnInit {
   movies: Movie[] = [];
 
   constructor(

@@ -1,8 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { Movie } from '../../models/movie.model';
 import { SearchMovieResponse } from '../../models/search-movie-result.model';
-import * as AddMovieActions from './add-movie.actions';
-import * as SearchMovieActions from './search-movie.actions';
+import * as MoviesPageActions from './movies-page.actions';
 
 export const moviesFeatureKey = 'movies';
 
@@ -62,25 +61,25 @@ export const moviesFeature = createFeature({
   name: 'movies',
   reducer: createReducer(
     initialState,
-    on(SearchMovieActions.searchMovie, (state: State, action) => {
+    on(MoviesPageActions.searchMovie, (state: State, action) => {
       return {
         ...state,
         searchedMovieTitle: action.movieTitle,
       };
     }),
-    on(SearchMovieActions.searchMovieSuccess, (state: State, action) => {
+    on(MoviesPageActions.searchMovieSuccess, (state: State, action) => {
       return {
         ...state,
         searchMovieResponse: action.searchMovieResponse,
       };
     }),
-    on(AddMovieActions.addMovieSuccess, (state: State, action) => {
+    on(MoviesPageActions.addMovieSuccess, (state: State, action) => {
       return {
         ...state,
         movies: [...state.movies, action.movie],
       };
     }),
-    on(SearchMovieActions.searchMovieReset, (state: State, action) => {
+    on(MoviesPageActions.searchMovieReset, (state: State, action) => {
       return {
         ...state,
         searchMovieResponse: initialState.searchMovieResponse,

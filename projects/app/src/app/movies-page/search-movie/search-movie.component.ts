@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AppState } from '../../store';
 import { SearchMovieResult } from '../../models/search-movie-result.model';
-import { searchMovie, searchMovieReset } from '../store/search-movie.actions';
+import { searchMovie, searchMovieReset } from '../store/movies-page.actions';
 
 @Component({
   selector: 'app-search-movie',

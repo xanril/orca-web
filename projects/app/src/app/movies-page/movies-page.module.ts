@@ -5,9 +5,8 @@ import { MoviesPageComponent } from './movies-page.component';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
 import { SearchMovieItemComponent } from './search-movie-item/search-movie-item.component';
 import { CommonModule } from '@angular/common';
-import { ManageMovieEffects } from './store/search-movie.effects';
+import { MoviesPageEffects } from './store/movies-page.effects';
 import { EffectsModule } from '@ngrx/effects';
-import { AddMovieEffects } from './store/add-movie.effects';
 import { MoviesPageRoutingModule } from './movies-page-routing.module';
 import { SharedUIModule } from '../shared-ui/shared-ui.module';
 import { MovieItemComponent } from './movie-item/movie-item.component';
@@ -26,7 +25,7 @@ import { SearchMovieFormComponent } from './search-movie-form/search-movie-form.
     ReactiveFormsModule,
     CommonModule,
     SharedUIModule,
-    EffectsModule.forFeature([ManageMovieEffects, AddMovieEffects]),
+    EffectsModule.forFeature([MoviesPageEffects]),
     MoviesPageRoutingModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

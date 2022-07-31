@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { switchMap, map, catchError, of } from 'rxjs';
+import { switchMap, map, catchError, of, withLatestFrom } from 'rxjs';
+import { Movie } from '../../models/movie.model';
 import { SearchMovieResult } from '../../models/search-movie-result.model';
 import { TMDBService } from '../../shared/tmdb.service';
 import { AppState } from '../../store';
-import * as SearchMovieActions from './search-movie.actions';
+import * as MoviesPageActions from './movies-page.actions';
 
 @Injectable()
-export class ManageMovieEffects {
+export class MoviesPageEffects {
   constructor(
     private actions$: Actions,
     private tmdbService: TMDBService,
@@ -17,7 +18,7 @@ export class ManageMovieEffects {
 
   searchMovie$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(SearchMovieActions.searchMovie),
+      ofType(MoviesPageActions.searchMovie),
       switchMap((actionData) => {
         return this.tmdbService
           .searchMovie(actionData.movieTitle, actionData.page)
@@ -28,15 +29,37 @@ export class ManageMovieEffects {
                 response.results
               );
 
-              return SearchMovieActions.searchMovieSuccess({
+              return MoviesPageActions.searchMovieSuccess({
                 movieTitle: actionData.movieTitle,
                 searchMovieResponse: response,
               });
             }),
             catchError((error) => {
-              return of(SearchMovieActions.searchMovieFailed({ error }));
+              return of(MoviesPageActions.searchMovieFailed({ error }));
             })
           );
+      })
+    )
+  );
+
+  addMovie$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesPageActions.addMovie),
+      withLatestFrom(this.store.select('movies')),
+      map(([actionData, moviesState]) => {
+        const newMovie: Movie = {
+          id: moviesState.movies.length,
+          tmdbId: actionData.searchMovieResult.id!,
+          title: actionData.searchMovieResult.title!,
+          overview: actionData.searchMovieResult.overview,
+          posterUrl: actionData.searchMovieResult.poster_path,
+          backdropUrl: actionData.searchMovieResult.backdrop_path,
+          releaseDate: actionData.searchMovieResult.release_date?.toString()
+        };
+
+        return MoviesPageActions.addMovieSuccess({
+          movie: newMovie,
+        });
       })
     )
   );
@@ -59,4 +82,6 @@ export class ManageMovieEffects {
 
     return newResults;
   }
+
+
 }

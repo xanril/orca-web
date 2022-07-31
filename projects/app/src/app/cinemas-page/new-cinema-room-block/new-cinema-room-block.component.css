@@ -1,20 +1,20 @@
 div.default-style {
-    @apply transition-all bg-base-200 duration-300 rounded-md;
+    @apply transition-all bg-base-200 rounded-md;
     border-width: 1px;
 }
 
 /** with add-new-item class */
 
 div.add-new-item {
-    @apply border-gray-500 border-dashed text-gray-500 cursor-pointer
+    @apply border-gray-500 border-dashed text-base-content cursor-pointer
 }
 
 div.add-new-item:hover {
-    @apply border-sky-500 text-sky-500
+    @apply border-accent text-accent
 }
 
 /** with show-form class */
 
 div.show-form {
-    @apply border-sky-500 border-solid cursor-default
+    @apply border-accent border-solid cursor-default
 }

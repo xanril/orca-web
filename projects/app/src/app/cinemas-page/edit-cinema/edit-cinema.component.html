@@ -2,21 +2,23 @@
 
 <div>
   Cinema Details:
-  <form #targetForm>
-    <sl-input
+  <form [formGroup]="editCinemaForm">
+    <input
+      class="input input-bordered"
       name="name"
-      label="Name"
-      [value]="cinema?.name"
-      required
-    ></sl-input>
-    <sl-input
+      placeholder="Name"
+      formControlName="name"
+    />
+    <input
+      class="input input-bordered"
       name="location"
-      label="Location"
-      [value]="cinema?.location"
-      required
-    ></sl-input>
+      placeholder="Location"
+      formControlName="location"
+    />
 
-    <sl-button type="submit" variant="primary">Save</sl-button>
+    <button class="btn btn-primary" type="submit">
+      Save
+    </button>
   </form>
 </div>
 
@@ -32,6 +34,4 @@
       <app-cinema-room-item [cinemaRoomItem]="item"></app-cinema-room-item>
     </li>
   </ul>
-
-
 </div>

@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Cinema } from '../../models/cinema.model';
 import * as cinemasFeature from '../store/cinema.reducer';
@@ -13,16 +6,16 @@ import * as CinemaActions from '../store/cinema.actions';
 import { Subscription } from 'rxjs';
 import { Actions, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-cinema',
   templateUrl: './edit-cinema.component.html',
 })
 export class EditCinemaComponent implements OnInit, OnDestroy {
-  @ViewChild('targetForm') targetFormRef!: ElementRef;
   cinema?: Cinema;
-  nameValue: string = 'default name';
   editSuccessSubscription?: Subscription;
+  editCinemaForm!: FormGroup;
 
   constructor(
     private store: Store,
@@ -33,12 +26,13 @@ export class EditCinemaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.select(cinemasFeature.selectCinemas).subscribe((data) => {
       this.cinema = data[0];
+      this.initializeForm();
     });
 
     this.editSuccessSubscription = this.actions$
       .pipe(ofType(CinemaActions.editCinemaSuccess))
       .subscribe((data) => {
-        alert("success!");
+        alert('success!');
       });
   }
 
@@ -46,18 +40,21 @@ export class EditCinemaComponent implements OnInit, OnDestroy {
     this.editSuccessSubscription?.unsubscribe();
   }
 
-  @HostListener('submit', ['$event'])
-  submitHandler(event: Event) {
-    event.preventDefault();
+  initializeForm() {
+    this.editCinemaForm = new FormGroup({
+      name: new FormControl(this.cinema?.name, [Validators.required]),
+      location: new FormControl(this.cinema?.location, [Validators.required]),
+    });
+  }
 
-    if (this.targetFormRef.nativeElement !== event.target) {
+  submitHandler() {
+    if (!this.editCinemaForm.valid) {
       return;
     }
 
-    // const data = serialize(this.targetFormRef.nativeElement);
-    const data = { name: '', location: '' };
-    const cinemaName: string = (data['name'] as string) ?? '';
-    const cinemaLocation: string = (data['location'] as string) ?? '';
+    const cinemaName: string = this.editCinemaForm.controls['name'].value;
+    const cinemaLocation: string =
+      this.editCinemaForm.controls['location'].value;
 
     this.store.dispatch(
       CinemaActions.editCinema({

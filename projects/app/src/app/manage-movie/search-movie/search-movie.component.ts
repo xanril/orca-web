@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AppState } from '../../store';
@@ -16,9 +15,6 @@ export class SearchMovieComponent implements OnInit, OnDestroy {
   maxPage: number = 1;
   currentPage: number = 1;
   storeSubscription?: Subscription;
-  searchForm: FormGroup = new FormGroup({
-    movieTitle: new FormControl(null, [Validators.required]),
-  });
 
   constructor(private store: Store<AppState>) {}
 
@@ -26,7 +22,6 @@ export class SearchMovieComponent implements OnInit, OnDestroy {
     this.storeSubscription = this.store.select('movies').subscribe((state) => {
       this.searchResults = state.searchMovieResponse?.results;
       this.searchedTitle = state.searchedMovieTitle;
-      this.searchForm.controls['movieTitle'].setValue(this.searchedTitle);
       this.maxPage = state.searchMovieResponse?.total_pages ?? 1;
       this.currentPage = state.searchMovieResponse?.page ?? 1;
     });
@@ -37,19 +32,10 @@ export class SearchMovieComponent implements OnInit, OnDestroy {
     this.store.dispatch(searchMovieReset());
   }
 
-  onSearchMovie() {
-    this.store.dispatch(
-      searchMovie({
-        movieTitle: this.searchForm.value['movieTitle'],
-        page: 1,
-      })
-    );
-  }
-
   onPagedSearchMovie(targetPage: number) {
     this.store.dispatch(
       searchMovie({
-        movieTitle: this.searchedTitle ?? this.searchForm.value['movieTitle'],
+        movieTitle: this.searchedTitle ?? '',
         page: targetPage,
       })
     );

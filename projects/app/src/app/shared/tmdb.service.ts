@@ -33,7 +33,7 @@ export class TMDBService {
       return "";
     }
 
-    const posterSize = this.configuration?.images?.poster_sizes?.[1];
+    const posterSize = this.configuration?.images?.poster_sizes?.[3];
     return this.configuration?.images?.base_url! + posterSize + posterPath;
   }
 

@@ -83,6 +83,28 @@ export const cinemasFeature = createFeature({
         ...state,
         cinemas: [...newCinemas],
       };
+    }),
+    on(CinemaActions.addCinemaRoomSuccess, (state, action) => {
+      const targetIndex = state.cinemas.findIndex(
+        (m) => m.id === action.cinemaId
+      );
+
+      const newCinema: Cinema = {
+        ...state.cinemas[targetIndex],
+        cinemaRooms: [
+          ...state.cinemas[targetIndex].cinemaRooms,
+          action.cinemaRoom,
+        ],
+      };
+
+      // assign updated cinema
+      const newCinemas = [...state.cinemas];
+      newCinemas[targetIndex] = newCinema;
+
+      return {
+        ...state,
+        cinemas: [...newCinemas],
+      };
     })
   ),
 });

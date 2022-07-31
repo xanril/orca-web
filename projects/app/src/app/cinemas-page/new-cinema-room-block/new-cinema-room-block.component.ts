@@ -1,11 +1,9 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Actions, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { Cinema } from '../../models/cinema.model';
+import * as CinemaActions from '../store/cinema.actions';
 
 @Component({
   selector: 'app-new-cinema-room-block',
@@ -13,14 +11,22 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./new-cinema-room-block.component.css'],
 })
 export class NewCinemaRoomBlockComponent implements OnInit {
+  @Input() cinema!: Cinema;
   targetForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
   });
   isFormShown: boolean = false;
 
-  constructor() {}
+  constructor(private store: Store, private actions$: Actions) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.actions$
+      .pipe(ofType(CinemaActions.addCinemaRoomSuccess))
+      .subscribe(() => {
+        this.isFormShown = false;
+        this.targetForm.reset();
+      });
+  }
 
   showFormHandler(event: Event) {
     if (this.isFormShown) {
@@ -38,16 +44,23 @@ export class NewCinemaRoomBlockComponent implements OnInit {
     if (!this.targetForm.valid) {
       return;
     }
-    
-    const cinemaRoomName: string = this.targetForm.controls['name'].value;
-    // const cinemaLocation: string = (data['location'] as string) ?? '';
 
-    // this.store.dispatch(
-    //   CinemaActions.addCinema({
-    //     name: cinemaName,
-    //     location: cinemaLocation,
-    //     roomNames: []
-    //   })
-    // );
+    const cinemaRoomName: string = this.targetForm.controls['name'].value;
+
+    const isExistingName = this.cinema.cinemaRooms.find(
+      (m) => m.name === cinemaRoomName
+    );
+
+    if (isExistingName) {
+      console.log('room name already exists');
+      return;
+    }
+
+    this.store.dispatch(
+      CinemaActions.addCinemaRoom({
+        cinemaId: this.cinema.id,
+        roomName: cinemaRoomName,
+      })
+    );
   }
 }

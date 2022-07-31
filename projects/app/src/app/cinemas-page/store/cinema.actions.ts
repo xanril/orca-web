@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { CinemaRoom } from '../../models/cinema-room.model';
 import { Cinema } from '../../models/cinema.model';
 
 export const addCinema = createAction(
@@ -28,5 +29,20 @@ export const editCinemaSuccess = createAction(
 
 export const editCinemaFailure = createAction(
   '[Cinema] Edit Cinema Failure',
+  props<{ error: any }>()
+);
+
+export const addCinemaRoom = createAction(
+  '[Cinema] Add Cinema Room',
+  props<{ cinemaId: number, roomName: string }>()
+);
+
+export const addCinemaRoomSuccess = createAction(
+  '[Cinema] Add Cinema Room Success',
+  props<{ cinemaId: number, cinemaRoom: CinemaRoom }>()
+);
+
+export const addCinemaRoomFailure = createAction(
+  '[Cinema] Add Cinema Room Failure',
   props<{ error: any }>()
 );

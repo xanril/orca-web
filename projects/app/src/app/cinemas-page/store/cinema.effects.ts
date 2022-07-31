@@ -21,7 +21,7 @@ export class CinemaEffects {
         let cinemaRooms = actionData.roomNames.map<CinemaRoom>(
           (value, index) => {
             return {
-              id: state.cinemas.length + index,
+              id: index,
               name: value,
               schedule: [],
             };
@@ -51,15 +51,37 @@ export class CinemaEffects {
         // get cinema item from state
         const cinema = state.cinemas.find((m) => m.id === actionData.id);
         const cinemaRooms = cinema?.cinemaRooms.slice() ?? [];
+        const movies = cinema?.movies.slice() ?? [];
 
         const editedCinema: Cinema = {
           id: actionData.id,
           name: actionData.name,
           location: actionData.location,
           cinemaRooms: cinemaRooms,
-          movies: [],
+          movies: movies,
         };
         return CinemaActions.editCinemaSuccess({ cinema: editedCinema });
+      })
+    )
+  );
+
+  addCinemaRoom$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CinemaActions.addCinemaRoom),
+      withLatestFrom(this.store.select('cinemas')),
+      map(([actionData, state]) => {
+        // TODO: call Add CinemaRoom API
+
+        // get cinema item from state
+        const targetCinema = state.cinemas.find((m) => m.id === actionData.cinemaId);
+
+        const newCinemaRoom: CinemaRoom = {
+          id: targetCinema?.cinemaRooms.length ?? 0,
+          name: actionData.roomName,
+          schedule: []
+        };
+
+        return CinemaActions.addCinemaRoomSuccess({ cinemaId: 0, cinemaRoom: newCinemaRoom });
       })
     )
   );

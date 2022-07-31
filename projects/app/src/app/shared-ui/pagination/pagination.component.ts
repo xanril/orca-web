@@ -33,7 +33,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   initialize() {
-    this.isPreviousActive = this.currentPage > 0;
+    this.isPreviousActive = this.currentPage > 1;
     this.isNextActive = this.currentPage < this.maxPage;
 
     let startingCount: number = Math.max(
@@ -45,6 +45,7 @@ export class PaginationComponent implements OnInit, OnChanges {
       this.currentPage + this.windowCount
     );
 
+    this.displayedIndexes = [];
     for (let index = 0; index <= endCount - startingCount; index++) {
       this.displayedIndexes[index] = {
         pageNumber: startingCount + index,

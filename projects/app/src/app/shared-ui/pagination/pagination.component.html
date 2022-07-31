@@ -1,4 +1,32 @@
-<div class="flex justify-center">
+<div class="btn-group flex justify-center">
+  <button
+    class="btn"
+    type="button"
+    [ngClass]="{ 'btn-disabled': !isPreviousActive }"
+    (click)="onPreviousClick()"
+  >
+    Previous
+  </button>
+  <button
+    class="btn"
+    type="button"
+    [ngClass]="{ 'btn-active': item.isActive }"
+    *ngFor="let item of displayedIndexes"
+    (click)="!item.isActive && onPageClick(item.pageNumber)"
+  >
+    {{ item.pageNumber }}
+  </button>
+  <button
+    class="btn"
+    type="button"
+    [ngClass]="{ 'btn-disabled': !isNextActive }"
+    (click)="onNextClick()"
+  >
+    Next
+  </button>
+</div>
+
+<!-- <div class="flex justify-center">
   <ul class="flex space-x-2 list-none">
     <li>
       <sl-button
@@ -31,4 +59,4 @@
       </sl-button>
     </li>
   </ul>
-</div>
+</div> -->

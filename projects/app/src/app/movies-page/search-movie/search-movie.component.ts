@@ -10,7 +10,7 @@ import { searchMovie, searchMovieReset } from '../store/search-movie.actions';
   templateUrl: './search-movie.component.html',
 })
 export class SearchMovieComponent implements OnInit, OnDestroy {
-  searchResults?: SearchMovieResult[];
+  searchResults: SearchMovieResult[] = [];
   searchedTitle?: string;
   maxPage: number = 1;
   currentPage: number = 1;
@@ -20,7 +20,12 @@ export class SearchMovieComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.storeSubscription = this.store.select('movies').subscribe((state) => {
-      this.searchResults = state.searchMovieResponse?.results;
+
+      if (state.searchedMovieTitle === '') {
+        return;
+      }
+
+      this.searchResults = state.searchMovieResponse.results ?? [];
       this.searchedTitle = state.searchedMovieTitle;
       this.maxPage = state.searchMovieResponse?.total_pages ?? 1;
       this.currentPage = state.searchMovieResponse?.page ?? 1;

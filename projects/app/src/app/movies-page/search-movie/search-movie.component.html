@@ -12,12 +12,11 @@
 </div>
 
 <!-- Pages -->
-<div class="my-10">
+<div class="my-10" *ngIf="searchResults.length > 0">
   <app-pagination
     [maxPage]="maxPage"
     [currentPage]="currentPage"
     [windowCount]="2"
     (onPageItemClick)="onPagedSearchMovie($event)"
-    *ngIf="searchResults != undefined"
   ></app-pagination>
 </div>

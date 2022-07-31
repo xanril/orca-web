@@ -1,6 +1,6 @@
 <div class="grid w-6 h-6">
   <label class="swap swap-rotate">
-    <input type="checkbox" [checked]="isToggledOn" />
+    <input type="checkbox" [checked]="isToggledOn" (change)="toggleHandler($event)" />
     <svg
       class="swap-on fill-current w-fit h-fit"
       xmlns="http://www.w3.org/2000/svg"

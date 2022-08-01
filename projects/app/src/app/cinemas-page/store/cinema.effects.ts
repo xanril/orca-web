@@ -18,22 +18,10 @@ export class CinemaEffects {
       map(([actionData, state]) => {
         // TODO: call Add Cinema API
 
-        let cinemaRooms = actionData.roomNames.map<CinemaRoom>(
-          (value, index) => {
-            return {
-              id: index,
-              name: value,
-              schedule: [],
-            };
-          }
-        );
-
         const newCinema: Cinema = {
           id: state.cinemas.length,
           name: actionData.name,
-          location: actionData.location,
-          cinemaRooms: cinemaRooms,
-          movies: [],
+          location: actionData.location
         };
 
         return CinemaActions.addCinemaSuccess({ cinema: newCinema });
@@ -48,17 +36,10 @@ export class CinemaEffects {
       map(([actionData, state]) => {
         // TODO: call Edit Cinema API
 
-        // get cinema item from state
-        const cinema = state.cinemas.find((m) => m.id === actionData.id);
-        const cinemaRooms = cinema?.cinemaRooms.slice() ?? [];
-        const movies = cinema?.movies.slice() ?? [];
-
         const editedCinema: Cinema = {
           id: actionData.id,
           name: actionData.name,
           location: actionData.location,
-          cinemaRooms: cinemaRooms,
-          movies: movies,
         };
         return CinemaActions.editCinemaSuccess({ cinema: editedCinema });
       })
@@ -72,11 +53,9 @@ export class CinemaEffects {
       map(([actionData, state]) => {
         // TODO: call Add CinemaRoom API
 
-        // get cinema item from state
-        const targetCinema = state.cinemas.find((m) => m.id === actionData.cinemaId);
-
         const newCinemaRoom: CinemaRoom = {
-          id: targetCinema?.cinemaRooms.length ?? 0,
+          id: state.cinemaRooms.length,
+          cinemaId: actionData.cinemaId,
           name: actionData.roomName,
           schedule: []
         };

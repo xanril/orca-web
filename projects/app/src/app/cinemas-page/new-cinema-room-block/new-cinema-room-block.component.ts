@@ -1,21 +1,26 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { CinemaRoom } from '../../models/cinema-room.model';
 import { Cinema } from '../../models/cinema.model';
 import * as CinemaActions from '../store/cinema.actions';
+import * as CinemaSelectors from '../store/cinema.selectors';
 
 @Component({
   selector: 'app-new-cinema-room-block',
   templateUrl: './new-cinema-room-block.component.html',
   styleUrls: ['./new-cinema-room-block.component.css'],
 })
-export class NewCinemaRoomBlockComponent implements OnInit {
+export class NewCinemaRoomBlockComponent implements OnInit, OnDestroy {
   @Input() cinema!: Cinema;
+  isFormShown: boolean = false;
+  cinemaRooms: CinemaRoom[] = [];
+  selectRoomsSubscription?: Subscription;
   targetForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
   });
-  isFormShown: boolean = false;
 
   constructor(private store: Store, private actions$: Actions) {}
 
@@ -26,6 +31,16 @@ export class NewCinemaRoomBlockComponent implements OnInit {
         this.isFormShown = false;
         this.targetForm.reset();
       });
+
+    this.selectRoomsSubscription = this.store
+      .select(CinemaSelectors.selectVisibleRooms)
+      .subscribe((data) => {
+        this.cinemaRooms = data;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.selectRoomsSubscription?.unsubscribe();
   }
 
   showFormHandler(event: Event) {
@@ -47,7 +62,7 @@ export class NewCinemaRoomBlockComponent implements OnInit {
 
     const cinemaRoomName: string = this.targetForm.controls['name'].value;
 
-    const isExistingName = this.cinema.cinemaRooms.find(
+    const isExistingName = this.cinemaRooms.find(
       (m) => m.name === cinemaRoomName
     );
 

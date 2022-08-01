@@ -2,6 +2,11 @@ import { createAction, props } from '@ngrx/store';
 import { CinemaRoom } from '../../models/cinema-room.model';
 import { Cinema } from '../../models/cinema.model';
 
+export const setActiveCinema = createAction(
+  '[Cinema] Set Active Cinema',
+  props<{ cinema: Cinema }>()
+);
+
 export const addCinema = createAction(
   '[Cinema] Add Cinema',
   props<{ name: string, location: string, roomNames: string[] }>()

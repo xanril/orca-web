@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { switchMap, map, catchError, of, withLatestFrom } from 'rxjs';
 import { Movie } from '../../models/movie.model';
 import { SearchMovieResult } from '../../models/search-movie-result.model';
-import { TMDBService } from '../../shared/tmdb.service';
+import { TMDBService } from '../../services/tmdb.service';
 import { AppState } from '../../store';
 import * as MoviesPageActions from './movies-page.actions';
 

@@ -4,8 +4,8 @@ import { CinemasPageComponent } from './cinemas-page.component';
 import { EditCinemaComponent } from './edit-cinema/edit-cinema.component';
 
 const cinemasPageRoutes: Routes = [
-  { path: '', component: CinemasPageComponent },
   { path: 'edit/:id', component: EditCinemaComponent },
+  { path: '', component: CinemasPageComponent },
 ];
 
 @NgModule({

@@ -1,18 +1,33 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 const appRoutes: Routes = [
   {
+    path: 'home',
+    component: HomePageComponent,
+  },
+  {
+    path: 'movies',
+    loadChildren: () =>
+      import('./movies-page/movies-page.module').then(
+        (m) => m.MoviesPageModule
+      ),
+  },
+  {
+    path: 'cinemas',
+    loadChildren: () =>
+      import('./cinemas-page/cinemas-page.module').then(
+        (m) => m.CinemasPageModule
+      ),
+  },
+  {
     path: '',
-    redirectTo: '/cinemas',
+    redirectTo: '/home',
     pathMatch: 'full',
   },
-  {
-    path: 'movies', loadChildren: () => import('./movies-page/movies-page.module').then(m => m.MoviesPageModule)
-  },
-  {
-    path: 'cinemas', loadChildren: () => import('./cinemas-page/cinemas-page.module').then(m => m.CinemasPageModule)
-  },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

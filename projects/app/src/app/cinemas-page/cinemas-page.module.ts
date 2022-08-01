@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CinemasPageComponent } from './cinemas-page.component';
 import { CinemasPageRoutingModule } from './cinemas-page-routing.module';
@@ -29,6 +29,5 @@ import { ReactiveFormsModule } from '@angular/forms';
     EffectsModule.forFeature([CinemaEffects]),
   ],
   exports: [CinemasPageComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CinemasPageModule {}

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TMDBService } from '../../shared/tmdb.service';
+import { TMDBService } from '../../services/tmdb.service';
 import { SearchMovieResult } from '../../models/search-movie-result.model';
 import { AppState } from '../../store';
 import { Store } from '@ngrx/store';

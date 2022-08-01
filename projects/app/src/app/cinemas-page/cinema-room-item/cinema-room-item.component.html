@@ -8,4 +8,11 @@
       <button class="btn btn-outline btn-error" type="button">Delete</button>
     </div>
   </div>
+  <div>
+    <ul>
+      <li *ngFor="let item of cinemaRoomItem.schedule">
+        <app-cinema-room-schedule-item></app-cinema-room-schedule-item>
+      </li>
+    </ul>
+  </div>
 </div>

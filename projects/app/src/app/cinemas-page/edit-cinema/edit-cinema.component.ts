@@ -39,7 +39,7 @@ export class EditCinemaComponent implements OnInit, OnDestroy {
     this.selectRoomsSubscription = this.store
     .select(CinemaSelectors.selectVisibleRooms)
     .subscribe((data) => {
-      this.cinemaRooms = data;
+      this.cinemaRooms = data.slice();
     })
 
     this.editSuccessSubscription = this.actions$

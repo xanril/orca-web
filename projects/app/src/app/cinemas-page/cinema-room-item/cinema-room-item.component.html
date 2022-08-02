@@ -4,12 +4,14 @@
       {{ cinemaRoomItem.name }}
     </div>
     <div class="flex flex-row space-x-2">
-      <button class="btn btn-outline btn-primary" type="button">Manage</button>
+      <button class="btn btn-outline btn-primary" type="button" (click)="manageHandler()">Manage</button>
       <button class="btn btn-outline btn-error" type="button">Delete</button>
     </div>
   </div>
   <div>
-    <div class="stats stats-vertical shadow">
+    <div class="stats stats-horizontal shadow">
+
+      <!-- stats movie count -->
       <div class="stat place-items-center">
         <div class="stat-figure text-info">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -21,6 +23,7 @@
         <div class="stat-desc">across schedules</div>
       </div>
 
+      <!-- stats schedule count -->
       <div class="stat place-items-center">
         <div class="stat-figure text-secondary">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -28,7 +31,7 @@
           </svg>
         </div>
         <div class="stat-title">Schedules</div>
-        <div class="stat-value">{{ cinemaRoomItem.schedule.length }}</div>
+        <div class="stat-value">{{ roomSchedules.length }}</div>
         <div class="stat-desc">
           from {{ earliestScheduleDate | date: "MMM dd" }} -
           {{ lastScheduleDate | date: "MMM dd" }}

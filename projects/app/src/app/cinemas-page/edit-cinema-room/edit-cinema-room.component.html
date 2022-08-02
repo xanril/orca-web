@@ -1,0 +1,58 @@
+<span class="text-3xl">Edit Cinema Room</span>
+<div>
+  Cinema Room Details:
+  <form [formGroup]="editCinemaRoomForm">
+    <input
+      class="input input-bordered"
+      name="name"
+      placeholder="Name"
+      formControlName="name"
+    />
+
+    <button class="btn btn-primary" type="submit">Save</button>
+  </form>
+</div>
+
+<div class="my-5">
+  <ul class="steps steps-vertical">
+    <li
+      data-content=""
+      class="step step-neutral hover:step-accent transition-colors"
+      *ngFor="let item of roomSchedules"
+    >
+      <app-cinema-room-schedule-item></app-cinema-room-schedule-item>
+    </li>
+  </ul>
+</div>
+
+<div class="overflow-x-auto my-5">
+  <table class="table table-zebra w-full">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>Movie Title</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of roomSchedules; index as i">
+        <th>{{ i + 1 }}</th>
+        <td>{{ item.startTime | date: "MMM dd, yyyy" }}</td>
+        <td>{{ item.startTime | date: "shortTime" }}</td>
+        <td>Avengers: Endgame</td>
+        <td>
+          <div class="space-x-2">
+            <button type="button" class="btn btn-square btn-outline btn-primary">
+              E
+            </button>
+            <button type="button" class="btn btn-square btn-outline btn-error">
+              X
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

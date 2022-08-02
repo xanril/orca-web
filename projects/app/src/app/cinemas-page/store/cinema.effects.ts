@@ -21,7 +21,7 @@ export class CinemaEffects {
         const newCinema: Cinema = {
           id: state.cinemas.length,
           name: actionData.name,
-          location: actionData.location
+          location: actionData.location,
         };
 
         return CinemaActions.addCinemaSuccess({ cinema: newCinema });
@@ -57,10 +57,12 @@ export class CinemaEffects {
           id: state.cinemaRooms.length,
           cinemaId: actionData.cinemaId,
           name: actionData.roomName,
-          schedule: []
         };
 
-        return CinemaActions.addCinemaRoomSuccess({ cinemaId: 0, cinemaRoom: newCinemaRoom });
+        return CinemaActions.addCinemaRoomSuccess({
+          cinemaId: 0,
+          cinemaRoom: newCinemaRoom,
+        });
       })
     )
   );

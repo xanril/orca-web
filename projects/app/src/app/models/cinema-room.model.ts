@@ -4,5 +4,4 @@ export interface CinemaRoom {
   id: number;
   cinemaId: number;
   name: string;
-  schedule: CinemaRoomSchedule[];
 }

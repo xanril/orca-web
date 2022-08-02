@@ -1,5 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
 import { CinemaRoom } from '../../models/cinema-room.model';
+import * as CinemaActions from '../store/cinema.actions';
+import * as CinemaSelectors from '../store/cinema.selectors';
 
 @Component({
   selector: 'app-cinema-room-item',
@@ -7,25 +12,42 @@ import { CinemaRoom } from '../../models/cinema-room.model';
 })
 export class CinemaRoomItemComponent implements OnInit {
   @Input() cinemaRoomItem!: CinemaRoom;
+  roomSchedules: CinemaRoomSchedule[] = [];
   movieIdSet: Set<number> = new Set();
   earliestScheduleDate: Date = new Date(Date.now());
   lastScheduleDate: Date = new Date(Date.now());
 
-  constructor() {}
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
-    // count unique movies
-    this.movieIdSet = new Set(
-      this.cinemaRoomItem.schedule.map((item) => item.movieId)
+    this.store
+      .pipe(
+        CinemaSelectors.selectSchedulesForRoom(this.cinemaRoomItem.cinemaId)
+      )
+      .subscribe((schedules) => {
+        this.roomSchedules = schedules;
+
+        // count unique movies
+        this.movieIdSet = new Set(
+          this.roomSchedules.map((item) => item.movieId)
+        );
+
+        // determine first and last scheduled dates
+        if (this.roomSchedules.length > 0) {
+          this.earliestScheduleDate = this.roomSchedules[0].startTime;
+          this.lastScheduleDate =
+            this.roomSchedules[this.roomSchedules.length - 1].startTime;
+        }
+      });
+  }
+
+  manageHandler() {
+    this.store.dispatch(
+      CinemaActions.setActiveCinemaRoom({
+        cinemaRoom: this.cinemaRoomItem,
+      })
     );
 
-    // determine first and last scheduled dates
-    if (this.cinemaRoomItem.schedule.length > 0) {
-      this.earliestScheduleDate = this.cinemaRoomItem.schedule[0].startTime;
-      this.lastScheduleDate =
-        this.cinemaRoomItem.schedule[
-          this.cinemaRoomItem.schedule.length - 1
-        ].startTime;
-    }
+    this.router.navigate(['/cinemas/room/', this.cinemaRoomItem.id + '']);
   }
 }

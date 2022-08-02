@@ -7,6 +7,11 @@ export const setActiveCinema = createAction(
   props<{ cinema: Cinema }>()
 );
 
+export const setActiveCinemaRoom = createAction(
+  '[Cinema] Set Active Cinema Room',
+  props<{ cinemaRoom: CinemaRoom }>()
+);
+
 export const addCinema = createAction(
   '[Cinema] Add Cinema',
   props<{ name: string, location: string, roomNames: string[] }>()

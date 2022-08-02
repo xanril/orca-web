@@ -42,12 +42,6 @@ export class CinemaRoomItemComponent implements OnInit {
   }
 
   manageHandler() {
-    this.store.dispatch(
-      CinemaActions.setActiveCinemaRoom({
-        cinemaRoom: this.cinemaRoomItem,
-      })
-    );
-
     this.router.navigate(['/cinemas/room/', this.cinemaRoomItem.id + '']);
   }
 }

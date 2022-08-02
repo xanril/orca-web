@@ -6,7 +6,7 @@ import * as CinemaActions from '../store/cinema.actions';
 import * as CinemaSelectors from '../store/cinema.selectors';
 import { Subscription } from 'rxjs';
 import { Actions, ofType } from '@ngrx/effects';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CinemaRoom } from '../../models/cinema-room.model';
 
@@ -17,42 +17,47 @@ import { CinemaRoom } from '../../models/cinema-room.model';
 export class EditCinemaComponent implements OnInit, OnDestroy {
   cinema?: Cinema;
   cinemaRooms: CinemaRoom[] = [];
-  editSuccessSubscription?: Subscription;
-  selectCinemasSubscription?: Subscription;
-  selectRoomsSubscription?: Subscription;
+  subscriptionBag: Subscription = new Subscription();
   editCinemaForm!: FormGroup;
 
   constructor(
     private store: Store,
     private actions$: Actions,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.selectCinemasSubscription = this.store
-      .select(cinemasFeature.selectCinemas)
-      .subscribe((data) => {
-        this.cinema = data[0];
-        this.initializeForm();
-      });
+    const cinemaId = +this.route.snapshot.params['id'];
 
-    this.selectRoomsSubscription = this.store
-    .select(CinemaSelectors.selectVisibleRooms)
-    .subscribe((data) => {
-      this.cinemaRooms = data.slice();
-    })
+    this.subscriptionBag.add(
+      this.store
+        .pipe(CinemaSelectors.selectCinemaWithId(cinemaId))
+        .subscribe((data) => {
+          this.cinema = data;
+          this.initializeForm();
+        })
+    );
 
-    this.editSuccessSubscription = this.actions$
-      .pipe(ofType(CinemaActions.editCinemaSuccess))
-      .subscribe((data) => {
-        alert('success!');
-      });
+    this.subscriptionBag.add(
+      this.store
+        .pipe(CinemaSelectors.selectVisibleRooms(cinemaId))
+        .subscribe((data) => {
+          this.cinemaRooms = data.slice();
+        })
+    );
+
+    this.subscriptionBag.add(
+      this.actions$
+        .pipe(ofType(CinemaActions.editCinemaSuccess))
+        .subscribe((data) => {
+          alert('success!');
+        })
+    );
   }
 
   ngOnDestroy(): void {
-    this.selectCinemasSubscription?.unsubscribe();
-    this.selectRoomsSubscription?.unsubscribe();
-    this.editSuccessSubscription?.unsubscribe();
+    this.subscriptionBag.unsubscribe();
   }
 
   initializeForm() {

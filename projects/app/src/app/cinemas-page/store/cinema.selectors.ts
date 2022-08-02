@@ -1,17 +1,39 @@
-import { createSelector, select } from '@ngrx/store';
+import { select } from '@ngrx/store';
 import { map, pipe } from 'rxjs';
 import { cinemasFeature } from './cinema.reducer';
 
-export const selectVisibleRooms = createSelector(
-  cinemasFeature.selectActiveCinema,
-  cinemasFeature.selectCinemaRooms,
-  (activeCinema, cinemaRooms) => {
-    if (activeCinema) {
-      return cinemaRooms.filter((room) => room.cinemaId === activeCinema!.id);
-    }
-    return [];
-  }
-);
+export const selectCinemaWithId = (cinemaId: number) => {
+  return pipe(
+    select(cinemasFeature.selectCinemas),
+    map((cinemas) => {
+      const filteredItems = cinemas.filter((item) => item.id === cinemaId);
+      return filteredItems[0];
+    })
+  );
+};
+
+export const selectCinemaRoomWithId = (cinemaRoomId: number) => {
+  return pipe(
+    select(cinemasFeature.selectCinemaRooms),
+    map((cinemaRooms) => {
+      const filteredItems = cinemaRooms.filter(
+        (item) => item.id === cinemaRoomId
+      );
+      return filteredItems[0];
+    })
+  );
+};
+
+export const selectVisibleRooms = (cinemaId: number) => {
+  return pipe(
+    select(cinemasFeature.selectCinemaRooms),
+    map((cinemaRooms) => {
+      return cinemaRooms.filter((item) => {
+        return item.cinemaId === cinemaId;
+      });
+    })
+  );
+};
 
 export const selectSchedulesForRoom = (roomId: number) => {
   return pipe(

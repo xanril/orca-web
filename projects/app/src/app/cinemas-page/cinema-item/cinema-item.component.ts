@@ -21,10 +21,6 @@ export class CinemaItemComponent implements OnInit {
   }
 
   manageHandler() {
-    this.store.dispatch(CinemaActions.setActiveCinema({
-      cinema: this.cinemaItem
-    }));
-
     this.router.navigate(['edit', this.cinemaItem.id + ''], {
       relativeTo: this.activatedRoute,
     });

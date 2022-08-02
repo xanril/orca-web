@@ -9,8 +9,6 @@ export const cinemaFeatureKey = 'cinema';
 export interface State {
   cinemas: Cinema[];
   cinemaRooms: CinemaRoom[];
-  activeCinema: Cinema | null;
-  activeRoom: CinemaRoom | null;
   schedules: CinemaRoomSchedule[];
 }
 
@@ -89,8 +87,6 @@ export const initialState: State = {
   cinemas: DUMMY_CINEMAS,
   cinemaRooms: DUMMY_CINEMA_ROOMS,
   schedules: DUMMY_CINEMA_ROOM_SCHEDULES,
-  activeCinema: null,
-  activeRoom: null,
 };
 
 export const cinemasFeature = createFeature({
@@ -124,18 +120,6 @@ export const cinemasFeature = createFeature({
         cinemaRooms: [...state.cinemaRooms, action.cinemaRoom],
       };
     }),
-    on(CinemaActions.setActiveCinema, (state, action) => {
-      return {
-        ...state,
-        activeCinema: { ...action.cinema },
-      };
-    }),
-    on(CinemaActions.setActiveCinemaRoom, (state, action) => {
-      return {
-        ...state,
-        activeRoom: { ...action.cinemaRoom },
-      };
-    })
   ),
 });
 
@@ -145,6 +129,4 @@ export const {
   selectCinemasState, // feature selector
   selectCinemas, // selector for `cinemas` property
   selectCinemaRooms,
-  selectActiveCinema,
-  selectActiveRoom,
 } = cinemasFeature;

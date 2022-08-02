@@ -17,7 +17,7 @@ export class NewCinemaRoomBlockComponent implements OnInit, OnDestroy {
   @Input() cinema!: Cinema;
   isFormShown: boolean = false;
   cinemaRooms: CinemaRoom[] = [];
-  selectRoomsSubscription?: Subscription;
+  subscriptionBag: Subscription = new Subscription();
   targetForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
   });
@@ -25,22 +25,26 @@ export class NewCinemaRoomBlockComponent implements OnInit, OnDestroy {
   constructor(private store: Store, private actions$: Actions) {}
 
   ngOnInit(): void {
-    this.actions$
-      .pipe(ofType(CinemaActions.addCinemaRoomSuccess))
-      .subscribe(() => {
-        this.isFormShown = false;
-        this.targetForm.reset();
-      });
+    this.subscriptionBag.add(
+      this.actions$
+        .pipe(ofType(CinemaActions.addCinemaRoomSuccess))
+        .subscribe(() => {
+          this.isFormShown = false;
+          this.targetForm.reset();
+        })
+    );
 
-    this.selectRoomsSubscription = this.store
-      .select(CinemaSelectors.selectVisibleRooms)
-      .subscribe((data) => {
-        this.cinemaRooms = data;
-      });
+    this.subscriptionBag.add(
+      this.store
+        .pipe(CinemaSelectors.selectVisibleRooms(this.cinema.id))
+        .subscribe((data) => {
+          this.cinemaRooms = data;
+        })
+    );
   }
 
   ngOnDestroy(): void {
-    this.selectRoomsSubscription?.unsubscribe();
+    this.subscriptionBag.unsubscribe();
   }
 
   showFormHandler(event: Event) {

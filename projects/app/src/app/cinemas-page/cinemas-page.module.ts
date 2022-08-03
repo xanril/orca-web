@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CinemasPageComponent } from './cinemas-page.component';
 import { CinemasPageRoutingModule } from './cinemas-page-routing.module';
 import { SharedUIModule } from '../shared-ui/shared-ui.module';
-import { EffectsModule } from '@ngrx/effects';
-import { CinemaEffects } from './store/cinema.effects';
 import { CinemaItemComponent } from './cinema-item/cinema-item.component';
 import { NewCinemaBlockComponent } from './new-cinema-block/new-cinema-block.component';
 import { EditCinemaComponent } from './edit-cinema/edit-cinema.component';
@@ -30,7 +28,6 @@ import { EditCinemaRoomComponent } from './edit-cinema-room/edit-cinema-room.com
     ReactiveFormsModule,
     SharedUIModule,
     CinemasPageRoutingModule,
-    EffectsModule.forFeature([CinemaEffects]),
   ],
   exports: [CinemasPageComponent],
 })

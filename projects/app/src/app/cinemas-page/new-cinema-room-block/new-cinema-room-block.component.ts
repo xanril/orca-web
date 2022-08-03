@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { CinemaRoom } from '../../models/cinema-room.model';
 import { Cinema } from '../../models/cinema.model';
-import * as CinemaActions from '../store/cinema.actions';
-import * as CinemaSelectors from '../store/cinema.selectors';
+import * as CinemaActions from '../../store/cinemas/cinema.actions';
+import * as CinemaSelectors from '../../store/cinemas/cinema.selectors';
 
 @Component({
   selector: 'app-new-cinema-room-block',

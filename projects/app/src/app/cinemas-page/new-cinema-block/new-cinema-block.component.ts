@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import * as CinemaActions from '../store/cinema.actions';
+import * as CinemaActions from '../../store/cinemas/cinema.actions';
 
 @Component({
   selector: 'app-new-cinema-block',

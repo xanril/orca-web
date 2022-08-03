@@ -1,6 +1,6 @@
 import { select } from '@ngrx/store';
 import { map, pipe } from 'rxjs';
-import { cinemasFeature } from './cinema.reducer';
+import { cinemasFeature } from './cinemas.reducer';
 
 export const selectCinemaWithId = (cinemaId: number) => {
   return pipe(

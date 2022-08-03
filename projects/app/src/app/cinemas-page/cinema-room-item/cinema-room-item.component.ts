@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
 import { CinemaRoom } from '../../models/cinema-room.model';
-import * as CinemaActions from '../store/cinema.actions';
-import * as CinemaSelectors from '../store/cinema.selectors';
+import * as CinemaActions from '../../store/cinemas/cinema.actions';
+import * as CinemaSelectors from '../../store/cinemas/cinema.selectors';
 
 @Component({
   selector: 'app-cinema-room-item',

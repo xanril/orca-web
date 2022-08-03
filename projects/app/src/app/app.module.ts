@@ -13,6 +13,7 @@ import { NavbarModule } from './navbar/navbar.module';
 import { AppRouting } from './app-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
+import { CinemaEffects } from './store/cinemas/cinema.effects';
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent, PageNotFoundComponent],
@@ -23,7 +24,7 @@ import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.co
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([CinemaEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     AppRouting,
     NavbarModule

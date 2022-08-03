@@ -4,7 +4,7 @@ import { CinemaRoom } from '../../models/cinema-room.model';
 import { Cinema } from '../../models/cinema.model';
 import * as CinemaActions from './cinema.actions';
 
-export const cinemaFeatureKey = 'cinema';
+export const cinemaFeatureKey = 'cinemas';
 
 export interface State {
   cinemas: Cinema[];
@@ -90,7 +90,7 @@ export const initialState: State = {
 };
 
 export const cinemasFeature = createFeature({
-  name: 'cinemas',
+  name: cinemaFeatureKey,
   reducer: createReducer(
     initialState,
     on(CinemaActions.addCinemaSuccess, (state, action) => {

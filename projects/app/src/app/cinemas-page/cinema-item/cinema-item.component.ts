@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Cinema } from '../../models/cinema.model';
-import * as CinemaActions from '../store/cinema.actions';
+import * as CinemaActions from '../../store/cinemas/cinema.actions';
 
 @Component({
   selector: 'app-cinema-item',

@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { map, withLatestFrom } from 'rxjs';
 import { CinemaRoom } from '../../models/cinema-room.model';
 import { Cinema } from '../../models/cinema.model';
-import { AppState } from '../../store';
+import { AppState } from '..';
 import * as CinemaActions from './cinema.actions';
 
 @Injectable()

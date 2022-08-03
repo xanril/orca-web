@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
 import { CinemaRoom } from '../../models/cinema-room.model';
-import * as CinemaSelectors from '../store/cinema.selectors';
+import * as CinemaSelectors from '../../store/cinemas/cinema.selectors';
 
 @Component({
   selector: 'app-edit-cinema-room',

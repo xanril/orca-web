@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Cinema } from '../../models/cinema.model';
-import * as cinemasFeature from '../store/cinema.reducer';
-import * as CinemaActions from '../store/cinema.actions';
-import * as CinemaSelectors from '../store/cinema.selectors';
+import * as cinemasFeature from '../../store/cinemas/cinemas.reducer';
+import * as CinemaActions from '../../store/cinemas/cinema.actions';
+import * as CinemaSelectors from '../../store/cinemas/cinema.selectors';
 import { Subscription } from 'rxjs';
 import { Actions, ofType } from '@ngrx/effects';
 import { ActivatedRoute, Router } from '@angular/router';

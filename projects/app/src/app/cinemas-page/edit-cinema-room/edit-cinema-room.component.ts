@@ -25,13 +25,13 @@ export class EditCinemaRoomComponent implements OnInit, OnDestroy {
     const cinemaRoomId = +this.route.snapshot.params['id'];
 
     this.subscriptionBag.add(this.store
-      .pipe(CinemaSelectors.selectCinemaRoomWithId(cinemaRoomId))
+      .select(CinemaSelectors.selectCinemaRoomWithId(cinemaRoomId))
       .subscribe((room) => {
         this.cinemaRoom = room;
       }));
 
     this.subscriptionBag.add(this.store
-      .pipe(CinemaSelectors.selectSchedulesForRoom(this.cinemaRoom!.id))
+      .select(CinemaSelectors.selectSchedulesWithCinemaRoomId(this.cinemaRoom!.id))
       .subscribe((schedules) => {
         this.roomSchedules = schedules;
       }));

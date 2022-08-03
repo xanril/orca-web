@@ -32,16 +32,16 @@ export class EditCinemaComponent implements OnInit, OnDestroy {
 
     this.subscriptionBag.add(
       this.store
-        .pipe(CinemaSelectors.selectCinemaWithId(cinemaId))
-        .subscribe((data) => {
-          this.cinema = data;
+        .select(CinemaSelectors.selectCinemaWithId(cinemaId))
+        .subscribe((cinema) => {
+          this.cinema = cinema;
           this.initializeForm();
         })
     );
 
     this.subscriptionBag.add(
       this.store
-        .pipe(CinemaSelectors.selectVisibleRooms(cinemaId))
+        .select(CinemaSelectors.selectCinemaRoomsWithCinemaId(cinemaId))
         .subscribe((data) => {
           this.cinemaRooms = data.slice();
         })

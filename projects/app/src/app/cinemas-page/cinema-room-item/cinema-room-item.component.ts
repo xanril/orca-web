@@ -21,8 +21,8 @@ export class CinemaRoomItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.store
-      .pipe(
-        CinemaSelectors.selectSchedulesForRoom(this.cinemaRoomItem.cinemaId)
+      .select(
+        CinemaSelectors.selectSchedulesWithCinemaRoomId(this.cinemaRoomItem.cinemaId)
       )
       .subscribe((schedules) => {
         this.roomSchedules = schedules;

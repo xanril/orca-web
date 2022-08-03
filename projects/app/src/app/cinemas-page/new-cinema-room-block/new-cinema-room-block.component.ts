@@ -36,7 +36,7 @@ export class NewCinemaRoomBlockComponent implements OnInit, OnDestroy {
 
     this.subscriptionBag.add(
       this.store
-        .pipe(CinemaSelectors.selectVisibleRooms(this.cinema.id))
+        .select(CinemaSelectors.selectCinemaRoomsWithCinemaId(this.cinema.id))
         .subscribe((data) => {
           this.cinemaRooms = data;
         })

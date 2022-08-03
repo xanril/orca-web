@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { Movie } from '../../models/movie.model';
 import { SearchMovieResponse } from '../../models/search-movie-result.model';
-import * as MoviesPageActions from './movies-page.actions';
+import * as MoviesPageActions from './movies.actions';
 
 export const moviesFeatureKey = 'movies';
 

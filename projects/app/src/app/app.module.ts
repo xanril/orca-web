@@ -14,6 +14,7 @@ import { AppRouting } from './app-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
 import { CinemaEffects } from './store/cinemas/cinema.effects';
+import { MoviesEffects } from './store/movies/movies.effects';
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent, PageNotFoundComponent],
@@ -22,12 +23,15 @@ import { CinemaEffects } from './store/cinemas/cinema.effects';
     HttpClientModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers, {
-      metaReducers
+      metaReducers,
     }),
-    EffectsModule.forRoot([CinemaEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([MoviesEffects, CinemaEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
     AppRouting,
-    NavbarModule
+    NavbarModule,
   ],
   bootstrap: [AppComponent],
 })

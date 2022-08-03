@@ -1,6 +1,6 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-import * as moviesFeature from '../movies-page/store/movies-page.reducer';
+import * as moviesFeature from './movies/movies.reducer';
 import * as cinemasFeature from './cinemas/cinemas.reducer';
 
 export interface AppState {

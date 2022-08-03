@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import * as MoviesPageActions from '../store/movies-page.actions';
+import * as MoviesPageActions from '../../store/movies/movies.actions';
 
 @Component({
   selector: 'app-search-movie-form',

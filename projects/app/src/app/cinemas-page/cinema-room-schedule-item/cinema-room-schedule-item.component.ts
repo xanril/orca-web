@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
 import { Movie } from '../../models/movie.model';
-import { moviesFeature } from '../../movies-page/store/movies-page.reducer';
+import { moviesFeature } from '../../store/movies/movies.reducer';
 
 @Component({
   selector: 'app-cinema-room-schedule-item',

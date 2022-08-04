@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Cinema } from '../models/cinema.model';
-import * as cinemasFeature from '../store/cinemas/cinemas.reducer';
+import * as CinemasSelectors from '../store/cinemas/cinema.selectors';
 
 @Component({
   selector: 'app-manage-cinema',
@@ -18,7 +18,7 @@ export class CinemasPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.select(cinemasFeature.selectCinemas).subscribe((cinemas) => {
+    this.store.select(CinemasSelectors.selectCinemas).subscribe((cinemas) => {
       this.cinemas = cinemas;
     });
   }

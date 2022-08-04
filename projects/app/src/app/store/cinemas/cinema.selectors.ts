@@ -32,3 +32,9 @@ export const selectSchedulesWithCinemaRoomId = (roomId: number) => {
     });
   });
 };
+
+export const {
+  selectCinemas,
+  selectCinemaRooms,
+  selectSchedules
+} = cinemasFeature;

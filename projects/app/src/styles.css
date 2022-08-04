@@ -4,6 +4,10 @@
   align-items: unset;
 }
 
+.select:focus {
+  outline: none;
+}
+
 /* input.form-input {
   @apply px-3 py-1.5 text-inherit
         bg-base-100

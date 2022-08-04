@@ -11,6 +11,7 @@ import { NewCinemaRoomBlockComponent } from './new-cinema-room-block/new-cinema-
 import { ReactiveFormsModule } from '@angular/forms';
 import { CinemaRoomScheduleItemComponent } from './cinema-room-schedule-item/cinema-room-schedule-item.component';
 import { EditCinemaRoomComponent } from './edit-cinema-room/edit-cinema-room.component';
+import { AddCinemaRoomScheduleComponent } from './add-cinema-room-schedule/add-cinema-room-schedule.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EditCinemaRoomComponent } from './edit-cinema-room/edit-cinema-room.com
     NewCinemaRoomBlockComponent,
     CinemaRoomScheduleItemComponent,
     EditCinemaRoomComponent,
+    AddCinemaRoomScheduleComponent,
   ],
   imports: [
     CommonModule,

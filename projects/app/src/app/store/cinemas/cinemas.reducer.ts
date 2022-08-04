@@ -126,7 +126,4 @@ export const cinemasFeature = createFeature({
 export const {
   name, // feature name
   reducer, // feature reducer
-  selectCinemasState, // feature selector
-  selectCinemas, // selector for `cinemas` property
-  selectCinemaRooms,
 } = cinemasFeature;

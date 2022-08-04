@@ -1,12 +1,12 @@
 <span class="text-3xl">Add Cinema Room Schedule</span>
 
-<form>
+<form [formGroup]="newScheduleForm" (ngSubmit)="onSubmit()">
   <div class="form-control">
     <label class="input-group">
       <span>Cinema</span>
-      <select class="select select-no-outline select-bordered w-full max-w-xs">
-        <option disabled selected>Select Cinema</option>
-        <option *ngFor="let cinema of cinemas$ | async">
+      <select class="select select-bordered" formControlName="cinema">
+        <option value="" disabled selected>Select Cinema</option>
+        <option *ngFor="let cinema of cinemas$ | async" [value]="cinema.id">
           {{ cinema.name }}
         </option>
       </select>
@@ -16,9 +16,9 @@
   <div class="form-control">
     <label class="input-group">
       <span>Room</span>
-      <select class="select select-bordered w-full max-w-xs">
-        <option disabled selected>Select Room</option>
-        <option *ngFor="let room of cinemaRoom$ | async">
+      <select class="select select-bordered" formControlName="room">
+        <option value="" disabled selected>Select Room</option>
+        <option *ngFor="let room of cinemaRoom$ | async" [value]="room.id">
           {{ room.name }}
         </option>
       </select>
@@ -28,9 +28,9 @@
   <div class="form-control">
     <label class="input-group">
       <span>Movies</span>
-      <select class="select select-bordered w-full max-w-xs">
-        <option disabled selected>Select Movie</option>
-        <option *ngFor="let movie of movies$ | async">
+      <select class="select select-bordered" formControlName="movie">
+        <option value="" disabled selected>Select Movie</option>
+        <option *ngFor="let movie of movies$ | async" [value]="movie.id">
           {{ movie.title }}
         </option>
       </select>
@@ -40,9 +40,8 @@
   <div class="form-control">
     <label class="input-group">
       <span>Day of Week</span>
-      <select class="select select-bordered w-full max-w-xs">
-        <option disabled selected>Select Day of Week</option>
-        <option *ngFor="let day of daysOfWeek">
+      <select class="select select-bordered" formControlName="dayOfWeek">
+        <option *ngFor="let day of daysOfWeek; index as i" [value]="i">
           {{ day }}
         </option>
       </select>
@@ -52,29 +51,26 @@
   <div class="form-control">
     <label class="input-group">
       <span class="rounded-r-none rounded-b-none">Time</span>
-      <select class="select select-bordered rounded-none">
-        <option>00</option>
-        <option>01</option>
-        <option>02</option>
-        <option>03</option>
-        <option>04</option>
-        <option>05</option>
-        <option>06</option>
-        <option>07</option>
-        <option>08</option>
-        <option>09</option>
-        <option>10</option>
-        <option>11</option>
+      <select
+        class="select select-bordered rounded-none"
+        formControlName="timeHour"
+      >
+        <option *ngFor="let hour of timeHour; index as i" [value]="i">
+          {{ hour }}
+        </option>
       </select>
-      <select class="select select-bordered rounded-none">
-        <option>00</option>
-        <option>15</option>
-        <option>30</option>
-        <option>45</option>
+      <select
+        class="select select-bordered rounded-none"
+        formControlName="timeMinutes"
+      >
+        <option *ngFor="let minutes of timeMinutes; index as i" [value]="i">
+          {{ minutes }}
+        </option>
       </select>
-      <select class="select select-bordered">
-        <option selected>AM</option>
-        <option>PM</option>
+      <select class="select select-bordered" formControlName="timePeriod">
+        <option *ngFor="let period of timePeriod; index as i" [value]="i">
+          {{ period }}
+        </option>
       </select>
     </label>
   </div>
@@ -82,12 +78,20 @@
   <div class="form-control">
     <label class="input-group">
       <span>Ticket Price</span>
-      <select class="select select-bordered w-full max-w-xs">
+      <select class="select select-bordered" formControlName="ticketPrice">
         <option disabled selected>Select Ticket Price</option>
-        <option *ngFor="let price of ticketPrices">
+        <option *ngFor="let price of ticketPrices; index as i" [value]="i">
           {{ price }}
         </option>
       </select>
     </label>
   </div>
+
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="!newScheduleForm.valid"
+  >
+    Add Schedule
+  </button>
 </form>

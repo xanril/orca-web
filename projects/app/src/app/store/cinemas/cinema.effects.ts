@@ -6,6 +6,8 @@ import { CinemaRoom } from '../../models/cinema-room.model';
 import { Cinema } from '../../models/cinema.model';
 import { AppState } from '..';
 import * as CinemaActions from './cinema.actions';
+import { cinemasFeature } from './cinemas.reducer';
+import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
 
 @Injectable()
 export class CinemaEffects {
@@ -62,6 +64,30 @@ export class CinemaEffects {
         return CinemaActions.addCinemaRoomSuccess({
           cinemaId: 0,
           cinemaRoom: newCinemaRoom,
+        });
+      })
+    )
+  );
+
+  addCinemaRoomSchedule$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CinemaActions.addCinemaRoomSchedule),
+      withLatestFrom(this.store.select(cinemasFeature.selectSchedules)),
+      map(([actionData, state]) => {
+        // TODO: call Add CinemaRoomSchedule API
+
+        const newSchedule: CinemaRoomSchedule = {
+          id: state.length,
+          cinemaId: actionData.cinemaId,
+          cinemaRoomId: actionData.cinemaRoomId,
+          movieId: actionData.movieId,
+          seat: [],
+          startTime: actionData.startTime,
+          endTime: actionData.endTime,
+        };
+
+        return CinemaActions.addCinemaRoomScheduleSuccess({
+          newSchedule: newSchedule,
         });
       })
     )

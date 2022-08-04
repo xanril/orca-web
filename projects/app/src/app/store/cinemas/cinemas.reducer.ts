@@ -120,6 +120,12 @@ export const cinemasFeature = createFeature({
         cinemaRooms: [...state.cinemaRooms, action.cinemaRoom],
       };
     }),
+    on(CinemaActions.addCinemaRoomScheduleSuccess, (state, action) => {
+      return {
+        ...state,
+        schedules: [...state.schedules, action.newSchedule],
+      };
+    }),
   ),
 });
 

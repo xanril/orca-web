@@ -56,7 +56,7 @@ export class MoviesEffects {
           tagline: '',
           posterUrl: actionData.searchMovieResult.poster_path ?? '',
           backdropUrl: actionData.searchMovieResult.backdrop_path ?? '',
-          releaseDate: actionData.searchMovieResult.release_date?.toString() ?? new Date(Date.now()).toString()
+          releaseDate: actionData.releaseDate
         };
 
         return MoviesPageActions.addMovieSuccess({

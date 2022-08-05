@@ -2,7 +2,7 @@
   <div class="flex flex-row items-center">
     <div class="grow" (click)="onSelect()">
       <p class="text-lg">{{ movieItem.title }}</p>
-      <p class="text-sm">{{ movieItem.releaseDate }}</p>
+      <p class="text-sm">{{ movieItem.releaseDate | date:'mediumDate' }}</p>
     </div>
     <div class="flex-none">
       <button class="btn btn-outline btn-error btn-xs btn-circle">

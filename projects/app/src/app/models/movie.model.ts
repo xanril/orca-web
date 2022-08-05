@@ -7,5 +7,5 @@ export interface Movie {
   runtime: number;
   posterUrl: string;
   backdropUrl: string;
-  releaseDate: string;
+  releaseDate: Date;
 }

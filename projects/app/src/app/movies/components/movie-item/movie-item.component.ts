@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Movie } from '../../../models/movie.model';
 
 @Component({
@@ -10,13 +10,11 @@ import { Movie } from '../../../models/movie.model';
 export class MovieItemComponent implements OnInit {
   @Input() movieItem!: Movie;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
   onSelect() {
-    this.router.navigate([this.movieItem.id + ''], {
-      relativeTo: this.route,
-    });
+    this.router.navigate(['/movies/detail', this.movieItem.id + '']);
   }
 }

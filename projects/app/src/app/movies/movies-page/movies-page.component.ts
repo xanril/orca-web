@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Movie } from '../../models/movie.model';
-import { AppState } from '../../store';
 import * as MovieSelectors from '../../store/movies/movies.selectors';
 
 @Component({
@@ -13,10 +13,15 @@ export class MoviesListPageComponent implements OnInit {
   movies$: Observable<Movie[]> = new Observable<Movie[]>();
 
   constructor(
-    private store: Store<AppState>
+    private store: Store,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.movies$ = this.store.select(MovieSelectors.selectMovies);
+  }
+
+  searchClicked() {
+    this.router.navigate(['/movies/search']);
   }
 }

@@ -6,12 +6,12 @@ import { MoviesStartComponent } from './movies-start/movies-start.component';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
 
 const manageMovieRoutes: Routes = [
-  { path: 'search', component: SearchMovieComponent },
   {
     path: '',
     component: MoviesListPageComponent,
     children: [
-      { path: ':movieId', component: MovieDetailComponent },
+      { path: 'search', component: SearchMovieComponent },
+      { path: 'detail/:movieId', component: MovieDetailComponent },
       { path: 'edit/:movieId', component: SearchMovieComponent },
       { path: '', component: MoviesStartComponent, pathMatch: 'full' },
     ],

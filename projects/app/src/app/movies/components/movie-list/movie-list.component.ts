@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Movie } from '../../../models/movie.model';
 
 @Component({
@@ -7,9 +7,14 @@ import { Movie } from '../../../models/movie.model';
 })
 export class MovieListComponent implements OnInit {
   @Input() movies: Movie[] | null = [];
+  @Output() onSearch: EventEmitter<void> = new EventEmitter<void>();
   
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  searchClick() {
+    this.onSearch.emit();
   }
 }

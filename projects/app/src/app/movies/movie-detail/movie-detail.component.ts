@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, map, switchMap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Movie } from '../../models/movie.model';
 import { TMDBService } from '../../services/tmdb.service';
@@ -15,7 +15,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   backdropImageUrl: string = '';
   posterImageUrl: string = '';
   movie!: Movie;
-  
+
   constructor(
     private store: Store,
     private route: ActivatedRoute,
@@ -23,14 +23,25 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const movieId = +this.route.snapshot.params['movieId'];
-    this.store
-      .select(MoviesSelectors.selectMovieWithId(movieId))
-      .pipe(takeUntil(this.unsubscribe$))
+    // const movieId = +this.route.snapshot.params['movieId'];
+    this.route.params
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        map((params) => {
+          return +params['movieId'];
+        }),
+        switchMap((movieId) => {
+          return this.store.select(MoviesSelectors.selectMovieWithId(movieId));
+        })
+      )
       .subscribe((movie) => {
         this.movie = movie;
-        this.backdropImageUrl = this.tmdbService.composeBackdropUrl(movie.backdropUrl);
-        this.posterImageUrl = this.tmdbService.composePosterUrl(movie.posterUrl)
+        this.backdropImageUrl = this.tmdbService.composeBackdropUrl(
+          movie.backdropUrl
+        );
+        this.posterImageUrl = this.tmdbService.composePosterUrl(
+          movie.posterUrl
+        );
       });
   }
 
@@ -38,5 +49,4 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
 }

@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Movie } from '../models/movie.model';
-import { AppState } from '../store';
+import { Observable } from 'rxjs';
+import { Movie } from '../../models/movie.model';
+import { AppState } from '../../store';
+import * as MovieSelectors from '../../store/movies/movies.selectors';
 
 @Component({
-  selector: 'app-manage-movie',
+  selector: 'app-movies-list-page',
   templateUrl: './movies-page.component.html',
 })
-export class MoviesPageComponent implements OnInit {
-  movies: Movie[] = [];
+export class MoviesListPageComponent implements OnInit {
+  movies$: Observable<Movie[]> = new Observable<Movie[]>();
 
   constructor(
     private router: Router,
@@ -18,9 +20,7 @@ export class MoviesPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.select('movies').subscribe((data) => {
-      this.movies = data.movies;
-    });
+    this.movies$ = this.store.select(MovieSelectors.selectMovies);
   }
 
   onSearch() {

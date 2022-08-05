@@ -11,8 +11,8 @@ const appRoutes: Routes = [
   {
     path: 'movies',
     loadChildren: () =>
-      import('./movies-page/movies-page.module').then(
-        (m) => m.MoviesPageModule
+      import('./movies/movies.module').then(
+        (m) => m.MoviesModule
       ),
   },
   {

@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TMDBService } from '../../services/tmdb.service';
-import { SearchMovieResult } from '../../models/search-movie-result.model';
-import { AppState } from '../../store';
+import { TMDBService } from '../../../services/tmdb.service';
+import { SearchMovieResult } from '../../../models/search-movie-result.model';
+import { AppState } from '../../../store';
 import { Store } from '@ngrx/store';
-import * as MoviesPageActions from '../../store/movies/movies.actions';
+import * as MoviesPageActions from '../../../store/movies/movies.actions';
 
 @Component({
   selector: 'app-search-movie-item',

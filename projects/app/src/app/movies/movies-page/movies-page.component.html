@@ -1,0 +1,7 @@
+<h1 class="text-3xl">Manage Movie</h1>
+
+<div class="w-full py-10">
+  <button class="btn btn-primary" (click)="onSearch()">Search Movie</button>
+</div>
+
+<app-movie-list [movies]="movies$ | async"></app-movie-list>

@@ -1,0 +1,8 @@
+<ul>
+  <li *ngIf="movies != null && movies.length > 0">
+    <app-movie-item
+      *ngFor="let item of movies"
+      [movieItem]="item"
+    ></app-movie-item>
+  </li>
+</ul>

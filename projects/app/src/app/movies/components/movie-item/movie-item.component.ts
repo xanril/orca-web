@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Movie } from '../../models/movie.model';
-import { TMDBService } from '../../services/tmdb.service';
+import { Movie } from '../../../models/movie.model';
+import { TMDBService } from '../../../services/tmdb.service';
 
 @Component({
   selector: 'app-movie-item',

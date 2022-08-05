@@ -5,7 +5,6 @@ import { Observable, Subscription } from 'rxjs';
 import { CinemaRoom } from '../../models/cinema-room.model';
 import { Cinema } from '../../models/cinema.model';
 import { Movie } from '../../models/movie.model';
-import { TICKET_PRICES } from '../../models/ticket-prices.model';
 import * as CinemaSelectors from '../../store/cinemas/cinema.selectors';
 import * as MoviesSelectors from '../../store/movies/movies.selectors';
 import * as CinemaActions from '../../store/cinemas/cinema.actions';
@@ -54,10 +53,6 @@ export class AddCinemaRoomScheduleComponent implements OnInit, OnDestroy {
         .select(MoviesSelectors.selectMovieWithId(0))
         .subscribe((movie) => (this.movie = movie))
     );
-
-    this.ticketPrices = Object.keys(TICKET_PRICES)
-      .filter((value) => isNaN(+value) === false)
-      .map((item) => +item);
 
     this.initializeForm();
   }

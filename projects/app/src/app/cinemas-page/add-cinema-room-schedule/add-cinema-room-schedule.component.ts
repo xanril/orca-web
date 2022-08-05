@@ -8,6 +8,7 @@ import { Movie } from '../../models/movie.model';
 import { TICKET_PRICES } from '../../models/ticket-prices.model';
 import * as CinemaSelectors from '../../store/cinemas/cinema.selectors';
 import * as MoviesSelectors from '../../store/movies/movies.selectors';
+import * as CinemaActions from '../../store/cinemas/cinema.actions';
 
 @Component({
   selector: 'app-add-cinema-room-schedule',
@@ -17,6 +18,7 @@ export class AddCinemaRoomScheduleComponent implements OnInit, OnDestroy {
   cinemas$: Observable<Cinema[]> = new Observable<Cinema[]>();
   cinemaRoom$: Observable<CinemaRoom[]> = new Observable<CinemaRoom[]>();
   movies$: Observable<Movie[]> = new Observable<Movie[]>();
+  movie!: Movie;
   ticketPrices: number[] = [];
   daysOfWeek: string[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
   timeHour: string[] = [
@@ -47,6 +49,12 @@ export class AddCinemaRoomScheduleComponent implements OnInit, OnDestroy {
     );
     this.movies$ = this.store.select(MoviesSelectors.selectMovies);
 
+    this.subscriptionBag.add(
+      this.store
+        .select(MoviesSelectors.selectMovieWithId(0))
+        .subscribe((movie) => (this.movie = movie))
+    );
+
     this.ticketPrices = Object.keys(TICKET_PRICES)
       .filter((value) => isNaN(+value) === false)
       .map((item) => +item);
@@ -70,35 +78,57 @@ export class AddCinemaRoomScheduleComponent implements OnInit, OnDestroy {
       timeHour: new FormControl('0', [Validators.required]),
       timeMinutes: new FormControl('0', [Validators.required]),
       timePeriod: new FormControl('0', [Validators.required]),
-      ticketPrice: new FormControl('0', [Validators.required]),
+      ticketPrice: new FormControl('', [
+        Validators.required,
+        Validators.min(1),
+        Validators.pattern(/^[1-9]+[0-9]*$/),
+      ]),
     });
 
     this.subscriptionBag.add(
-      this.newScheduleForm
-        .get('cinema')
-        ?.valueChanges.subscribe((newValue) => {
+      this.newScheduleForm.get('cinema')?.valueChanges.subscribe((newValue) => {
+        const newCinemaId = +newValue;
+        this.cinemaRoom$ = this.store.select(
+          CinemaSelectors.selectCinemaRoomsWithCinemaId(newCinemaId)
+        );
 
-          const newCinemaId = +newValue;
-          this.cinemaRoom$ = this.store.select(
-            CinemaSelectors.selectCinemaRoomsWithCinemaId(newCinemaId)
-          );
-
-          this.newScheduleForm.get('room')?.setValue('');
-        })
+        this.newScheduleForm.get('room')?.setValue('');
+      })
     );
   }
 
   onSubmit() {
-    console.log('cinema: ' + this.newScheduleForm.get('cinema')?.valid);
-    console.log('room: ' + this.newScheduleForm.get('room')?.valid);
-    console.log('movie: ' + this.newScheduleForm.get('movie')?.valid);
-    console.log('dayOfWeek: ' + this.newScheduleForm.get('dayOfWeek')?.valid);
-    console.log('timeHour: ' + this.newScheduleForm.get('timeHour')?.valid);
-    console.log('timeMinutes: ' + this.newScheduleForm.get('timeMinutes')?.valid);
-    console.log('timePeriod: ' + this.newScheduleForm.get('timePeriod')?.valid);
-    console.log('ticketPrice: ' + this.newScheduleForm.get('ticketPrice')?.valid);
-    
-    console.log('form: ' + this.newScheduleForm.valid);
-    console.log(this.newScheduleForm);
+    const cinemaId = this.newScheduleForm.get('cinema')?.value;
+    const roomId = this.newScheduleForm.get('room')?.value;
+    const movieId = this.newScheduleForm.get('movie')?.value;
+    const dayOfWeek = this.newScheduleForm.get('dayOfWeek')?.value;
+    const ticketPrice = this.newScheduleForm.get('ticketPrice')?.value;
+
+    const timeHour = this.newScheduleForm.get('timeHour')?.value;
+    const timeMinutes = this.newScheduleForm.get('timeMinutes')?.value;
+    const timePeriod = this.newScheduleForm.get('timePeriod')?.value;
+
+    const startTime = new Date(
+      2022,
+      0,
+      0,
+      timePeriod! === '1' ? +timeHour + 12 : +timeHour,
+      +timeMinutes
+    );
+
+    const movieRuntimeMs = this.movie.runtime! * 60 * 1000; // mins x (secs per min) x 1000 (milliseconds)
+    const endTime = new Date(startTime.getTime() + movieRuntimeMs);
+
+    this.store.dispatch(
+      CinemaActions.addCinemaRoomSchedule({
+        cinemaId: cinemaId,
+        cinemaRoomId: roomId,
+        movieId: movieId,
+        dayOfWeek: dayOfWeek,
+        startTime: startTime,
+        endTime: endTime,
+        ticketPrice: ticketPrice,
+      })
+    );
   }
 }

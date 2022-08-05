@@ -15,8 +15,10 @@ export class CinemaRoomScheduleItemComponent implements OnInit {
     cinemaRoomId: 0,
     movieId: 0,
     seat: [],
+    dayOfWeek: 0,
     startTime: new Date(2022, 9, 17, 11, 15, 0),
     endTime: new Date(2022, 9, 17, 14, 15, 0),
+    ticketPrice: 200,
   };
   movieItem?: Movie;
   movieTitle: string = '';

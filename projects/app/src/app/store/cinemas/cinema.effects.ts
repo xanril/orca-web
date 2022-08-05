@@ -82,8 +82,10 @@ export class CinemaEffects {
           cinemaRoomId: actionData.cinemaRoomId,
           movieId: actionData.movieId,
           seat: [],
+          dayOfWeek: actionData.dayOfWeek,
           startTime: actionData.startTime,
           endTime: actionData.endTime,
+          ticketPrice: actionData.ticketPrice,
         };
 
         return CinemaActions.addCinemaRoomScheduleSuccess({

@@ -78,12 +78,13 @@
   <div class="form-control">
     <label class="input-group">
       <span>Ticket Price</span>
-      <select class="select select-bordered" formControlName="ticketPrice">
+      <input class="input input-bordered" formControlName="ticketPrice" placeholder="200">
+      <!-- <select class="select select-bordered" formControlName="ticketPrice">
         <option disabled selected>Select Ticket Price</option>
         <option *ngFor="let price of ticketPrices; index as i" [value]="i">
           {{ price }}
         </option>
-      </select>
+      </select> -->
     </label>
   </div>
 

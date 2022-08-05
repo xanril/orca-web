@@ -6,6 +6,8 @@ export interface CinemaRoomSchedule {
   cinemaRoomId: number;
   movieId: number;
   seat: CinemaRoomSeat[];
+  dayOfWeek: number;
   startTime: Date;
   endTime: Date;
+  ticketPrice: number;
 }

@@ -51,10 +51,12 @@ export class MoviesEffects {
           id: moviesState.movies.length,
           tmdbId: actionData.searchMovieResult.id!,
           title: actionData.searchMovieResult.title!,
-          overview: actionData.searchMovieResult.overview,
-          posterUrl: actionData.searchMovieResult.poster_path,
-          backdropUrl: actionData.searchMovieResult.backdrop_path,
-          releaseDate: actionData.searchMovieResult.release_date?.toString()
+          overview: actionData.searchMovieResult.overview!,
+          runtime: 60,
+          tagline: '',
+          posterUrl: actionData.searchMovieResult.poster_path ?? '',
+          backdropUrl: actionData.searchMovieResult.backdrop_path ?? '',
+          releaseDate: actionData.searchMovieResult.release_date?.toString() ?? new Date(Date.now()).toString()
         };
 
         return MoviesPageActions.addMovieSuccess({

@@ -4,7 +4,8 @@
   align-items: unset;
 }
 
-.input-group .select:focus {
+.input-group .select:focus,
+.input-group .input:focus {
   outline: none;
 }
 

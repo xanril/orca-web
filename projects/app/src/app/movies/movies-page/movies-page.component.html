@@ -1,7 +1,12 @@
-<h1 class="text-3xl">Manage Movie</h1>
+<h1 class="text-3xl">Manage Movies</h1>
 
-<div class="w-full py-10">
-  <button class="btn btn-primary" (click)="onSearch()">Search Movie</button>
+<div class="w-full flex flex-row space-x-2 mt-10">
+  <div class="w-5/12">
+    <app-movie-list [movies]="movies$ | async"></app-movie-list>
+  </div>
+  <div class="w-7/12">
+    <div class="w-full">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
-
-<app-movie-list [movies]="movies$ | async"></app-movie-list>

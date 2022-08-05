@@ -1,20 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../../../models/movie.model';
-import { TMDBService } from '../../../services/tmdb.service';
 
 @Component({
   selector: 'app-movie-item',
   templateUrl: './movie-item.component.html',
+  styleUrls: ['./movie-item.component.css'],
 })
 export class MovieItemComponent implements OnInit {
   @Input() movieItem!: Movie;
-  posterImageUrl!: string;
 
-  constructor(private tmdbService: TMDBService) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
-  ngOnInit(): void {
-    this.posterImageUrl = this.tmdbService.composePosterUrl(
-      this.movieItem.posterUrl!
-    );
+  ngOnInit(): void {}
+
+  onSelect() {
+    this.router.navigate([this.movieItem.id + ''], {
+      relativeTo: this.route,
+    });
   }
 }

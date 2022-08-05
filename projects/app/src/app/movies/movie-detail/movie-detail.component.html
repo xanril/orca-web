@@ -1,6 +1,5 @@
 <div class="container mx-auto bg-neutral-900 rounded-t-2xl overflow-y-hidden">
   
-  <!-- http://image.tmdb.org/t/p/w1280/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg bg-[url({{ backdropImageUrl }})] -->
   <div class="h-96 bg-no-repeat bg-fixed bg-center bg-cover" style="background:fixed top no-repeat url({{backdropImageUrl}})">
     <div class="h-96 bg-gradient-to-t from-neutral-900 via-transparent items-end">
     </div>
@@ -10,18 +9,17 @@
   <div class="top-96 mx-12 -mt-56 flex items-end space-x-5">
     <img class="rounded-md w-48 h-72 object-cover" src="{{ posterImageUrl }}" />
     <div class="basis-full text-center pb-12">
-      <span class="text-neutral-400 text-3xl italic">"{{ tmdbMovieDetails?.tagline }}"</span>
+      <span class="text-neutral-400 text-3xl italic">"{{ movie.tagline }}"</span>
     </div>
   </div>
 
   <!-- Title and other Movie Details -->
   <div class="mx-12">
-    <span class="text-5xl block text-center mb-12">{{ tmdbMovieDetails?.title }}</span>
+    <span class="text-5xl block text-center mb-12">{{ movie.title }}</span>
 
     <div class="bg-black block -mx-12 px-12 py-5 text-center">
-      Status: {{ tmdbMovieDetails?.status }} 
-      Runtime: {{ tmdbMovieDetails?.runtime }} <br />
-      Release Date: {{ tmdbMovieDetails?.release_date }} <br /> 
+      Runtime: {{ movie.runtime }} <br />
+      Release Date: {{ movie.releaseDate }} <br /> 
       <div class="items-center space-x-2">
         Genre: hello hello hello
       </div>
@@ -30,13 +28,7 @@
 
     <br />
     <span class="text-xl italic block">Overview:</span>
-    {{ tmdbMovieDetails?.overview }} <br />
-    
-    <div class="text-center my-12">
-      <button class="w-2/4" variant="success">
-        <span class="uppercase">Add Movie</span>
-      </button>
-    </div>
+    {{ movie.overview }} <br />
 
   </div>
 

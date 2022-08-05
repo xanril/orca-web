@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ManageAddMovieComponent } from './manage-add-movie/manage-add-movie.component';
+import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import { MoviesListPageComponent } from './movies-page/movies-page.component';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
 import { SearchMovieItemComponent } from './components/search-movie-item/search-movie-item.component';
@@ -12,16 +12,18 @@ import { SharedUIModule } from '../shared-ui/shared-ui.module';
 import { MovieItemComponent } from './components/movie-item/movie-item.component';
 import { SearchMovieFormComponent } from './components/search-movie-form/search-movie-form.component';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
+import { MoviesStartComponent } from './movies-start/movies-start.component';
 
 @NgModule({
   declarations: [
     MoviesListPageComponent,
-    ManageAddMovieComponent,
+    MovieDetailComponent,
     SearchMovieComponent,
     SearchMovieItemComponent,
     MovieItemComponent,
     SearchMovieFormComponent,
     MovieListComponent,
+    MoviesStartComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -32,7 +34,7 @@ import { MovieListComponent } from './components/movie-list/movie-list.component
   ],
   exports: [
     MoviesListPageComponent,
-    ManageAddMovieComponent,
+    MovieDetailComponent,
     SearchMovieComponent,
     SearchMovieItemComponent,
   ],

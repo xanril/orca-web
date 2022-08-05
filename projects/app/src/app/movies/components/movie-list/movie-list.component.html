@@ -1,8 +1,7 @@
-<ul>
-  <li *ngIf="movies != null && movies.length > 0">
+<ul class="menu w-full shadow-none">
+  <li *ngFor="let item of movies; index as i">
     <app-movie-item
-      *ngFor="let item of movies"
-      [movieItem]="item"
+    [movieItem]="item"
     ></app-movie-item>
   </li>
 </ul>

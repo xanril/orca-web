@@ -8,7 +8,6 @@ import * as MoviesActions from '../../../store/movies/movies.actions';
 @Component({
   selector: 'app-movie-item',
   templateUrl: './movie-item.component.html',
-  styleUrls: ['./movie-item.component.css'],
 })
 export class MovieItemComponent implements OnInit {
   @Input() movieItem!: Movie;

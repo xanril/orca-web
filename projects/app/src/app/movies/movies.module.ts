@@ -15,6 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import { moviesPageFeature } from './store/movies-page.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { MoviesPageApiEffects } from './store/movies-page.effects';
+import { MovieEditComponent } from './movie-edit/movie-edit.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MoviesPageApiEffects } from './store/movies-page.effects';
     SearchMovieFormComponent,
     MovieListComponent,
     MoviesStartComponent,
+    MovieEditComponent,
   ],
   imports: [
     ReactiveFormsModule,

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil, map, switchMap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Movie } from '../../models/movie.model';
@@ -18,6 +18,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
+    private router: Router,
     private route: ActivatedRoute,
     private tmdbService: TMDBService
   ) {}
@@ -43,6 +44,10 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
           movie.posterUrl
         );
       });
+  }
+
+  editHandler() {
+    this.router.navigate(['/movies/edit', this.movie.id + '']);
   }
 
   ngOnDestroy(): void {

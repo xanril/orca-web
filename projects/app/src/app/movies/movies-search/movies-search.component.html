@@ -1,0 +1,20 @@
+<app-search-movie-form (onSearch)="searchHandler($event)"></app-search-movie-form>
+
+<!-- Display Results -->
+<div
+  class="max-w-5xl mx-auto flex flex-col space-y-3"
+  *ngIf="(searchResponse$ | async)?.results"
+>
+  <app-search-movie-item *ngFor="let item of (searchResponse$ | async)?.results" [resultItem]="item">
+  </app-search-movie-item>
+</div>
+
+<!-- Pages -->
+<div class="my-10" *ngIf="(searchResponse$ | async)?.results?.length">
+  <app-pagination
+    [maxPage]="(searchResponse$ | async)?.total_pages ?? 1"
+    [currentPage]="(searchResponse$ | async)?.page ?? 1"
+    [windowCount]="2"
+    (onPageItemClick)="onPagedSearchMovie($event)"
+  ></app-pagination>
+</div>

@@ -1,33 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import * as MoviesPageActions from '../../../store/movies/movies.actions';
 
 @Component({
   selector: 'app-search-movie-form',
   templateUrl: './search-movie-form.component.html',
-  styleUrls: ['./search-movie-form.component.css']
+  styleUrls: ['./search-movie-form.component.css'],
 })
 export class SearchMovieFormComponent implements OnInit {
+  @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
   searchMovieForm: FormGroup = new FormGroup({
-    queryTitle: new FormControl('', [Validators.required])
-  })
+    queryTitle: new FormControl('', [Validators.required]),
+  });
 
-  constructor(private store: Store) { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  searchMovieHandler() {
-    if (!this.searchMovieForm.valid) {
-      return;
-    }
-
-    // this.store.dispatch(
-    //   MoviesPageActions.searchMovie({
-    //     movieTitle: this.searchMovieForm.value['queryTitle'],
-    //     page: 1,
-    //   })
-    // );
+  submitHandler() {
+    const movieQuery = this.searchMovieForm.get('queryTitle')?.value;
+    this.onSearch.emit(movieQuery);
   }
 }

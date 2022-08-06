@@ -1,5 +1,8 @@
+import { createSelector } from "@ngrx/store";
 import { moviesPageFeature } from "./movies-page.reducer";
 
 export const {
-    selectActiveMovieId
+    selectActiveMovieId,
+    selectSearchResponse,
+    selectSearchMovieQuery
 } = moviesPageFeature

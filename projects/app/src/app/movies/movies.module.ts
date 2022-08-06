@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import { MoviesListPageComponent } from './movies-page/movies-page.component';
-import { SearchMovieComponent } from './search-movie/search-movie.component';
+import { MoviesSearchComponent } from './movies-search/movies-search.component';
 import { SearchMovieItemComponent } from './components/search-movie-item/search-movie-item.component';
 import { CommonModule } from '@angular/common';
 import { MoviesPageRoutingModule } from './movies-page-routing.module';
@@ -20,7 +20,7 @@ import { MoviesPageApiEffects } from './store/movies-page.effects';
   declarations: [
     MoviesListPageComponent,
     MovieDetailComponent,
-    SearchMovieComponent,
+    MoviesSearchComponent,
     SearchMovieItemComponent,
     MovieItemComponent,
     SearchMovieFormComponent,
@@ -40,7 +40,7 @@ import { MoviesPageApiEffects } from './store/movies-page.effects';
   exports: [
     MoviesListPageComponent,
     MovieDetailComponent,
-    SearchMovieComponent,
+    MoviesSearchComponent,
     SearchMovieItemComponent,
     MovieItemComponent,
     SearchMovieFormComponent,

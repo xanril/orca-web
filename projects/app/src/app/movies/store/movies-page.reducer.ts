@@ -4,16 +4,14 @@ import * as MoviesPageActions from './movies-page.actions';
 
 export interface State {
   activeMovieId: number;
-  tmdbMovieId: number;
   searchResponse: SearchMovieResponse | null;
-  searchTitle: string;
+  searchMovieQuery: string;
 }
 
 export const initialState: State = {
   activeMovieId: -1,
-  tmdbMovieId: -1,
   searchResponse: null,
-  searchTitle: '',
+  searchMovieQuery: '',
 };
 
 export const moviesPageFeature = createFeature({
@@ -26,10 +24,23 @@ export const moviesPageFeature = createFeature({
         activeMovieId: action.movieId,
       };
     }),
-    on(MoviesPageActions.searchMovie, (state: State, action) => {
+    on(MoviesPageActions.setSearchMovieQuery, (state: State, action) => {
       return {
         ...state,
-        searchTitle: action.movieTitle,
+        searchMovieQuery: action.movieQuery,
+      };
+    }),
+    on(MoviesPageActions.resetActiveMovie, (state: State, action) => {
+      return {
+        ...state,
+        activeMovieId: -1
+      };
+    }),
+    on(MoviesPageActions.resetSearch, (state: State, action) => {
+      return {
+        ...state,
+        searchMovieQuery: '',
+        searchResponse: null
       };
     }),
     on(MoviesPageActions.searchMovieSuccess, (state: State, action) => {

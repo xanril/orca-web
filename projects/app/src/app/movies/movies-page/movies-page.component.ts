@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Movie } from '../../models/movie.model';
 import * as MovieSelectors from '../../store/movies/movies.selectors';
 import * as MoviesPageSelectors from '../store/movies-page.selectors';
-
+import * as MoviesPageActions from '../store/movies-page.actions';
 @Component({
   selector: 'app-movies-list-page',
   templateUrl: './movies-page.component.html',
@@ -25,6 +25,7 @@ export class MoviesListPageComponent implements OnInit {
   }
 
   searchClicked() {
+    this.store.dispatch(MoviesPageActions.resetActiveMovie());
     this.router.navigate(['/movies/search']);
   }
 }

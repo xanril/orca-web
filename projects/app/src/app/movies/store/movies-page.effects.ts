@@ -1,28 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { switchMap, map, catchError, of } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { switchMap, map, catchError, of, withLatestFrom } from 'rxjs';
 import { TMDBService } from '../../services/tmdb.service';
 import * as MoviesPageActions from './movies-page.actions';
+import * as MoviesPageSelectors from './movies-page.selectors';
 
 @Injectable()
 export class MoviesPageApiEffects {
-  constructor(private actions$: Actions, private tmdbService: TMDBService) {}
+  constructor(private actions$: Actions, private tmdbService: TMDBService, private store: Store) {}
 
   searchMovie$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MoviesPageActions.searchMovie),
-      switchMap((actionData) => {
+      withLatestFrom(this.store.select(MoviesPageSelectors.selectSearchMovieQuery)),
+      switchMap(([actionData, movieQuery]) => {
         return this.tmdbService
-          .searchMovie(actionData.movieTitle, actionData.page)
+          .searchMovie(movieQuery, actionData.page)
           .pipe(
             map((response) => {
-              // check if result items are already added to movie collection
-              // response.results = this.checkIfMovieResultExists(
-              //   response.results
-              // );
-
               return MoviesPageActions.searchMovieSuccess({
-                movieTitle: actionData.movieTitle,
+                movieTitle: movieQuery,
                 searchMovieResponse: response,
               });
             }),

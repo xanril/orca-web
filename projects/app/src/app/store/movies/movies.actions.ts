@@ -4,16 +4,6 @@ import { SearchMovieResult } from '../../models/search-movie-result.model';
 
 export const searchMovieReset = createAction('[Movies] Search Reset');
 
-export const addMovie = createAction(
-  '[Movies] Add Movie',
-  props<{ searchMovieResult: SearchMovieResult; releaseDate: Date }>()
-);
-
-export const addMovieSuccess = createAction(
-  '[Movies] Add Movie Success',
-  props<{ movie: Movie }>()
-);
-
 export const loadMovies = createAction('[Movies / API] Load Movies');
 
 export const loadMoviesSuccess = createAction(
@@ -27,3 +17,34 @@ export const loadMoviesError = createAction(
   '[Movies / API] Load Movies Error',
   props<{ error: any }>()
 );
+
+export const addMovie = createAction(
+  '[Movies / API] Add Movie',
+  props<{ searchMovieResult: SearchMovieResult; releaseDate: Date }>()
+);
+
+export const addMovieSuccess = createAction(
+  '[Movies / API] Add Movie Success',
+  props<{ movie: Movie }>()
+);
+
+export const addMoviesError = createAction(
+  '[Movies / API] Add Movie Error',
+  props<{ error: any }>()
+);
+
+export const deleteMovie = createAction(
+  '[Movies / API] Delete Movie',
+  props<{ id: number }>()
+);
+
+export const deleteMovieSuccess = createAction(
+  '[Movies / API] Delete Movie Success',
+  props<{ id: number }>()
+);
+
+export const deleteMoviesError = createAction(
+  '[Movies / API] Delete Movie Error',
+  props<{ error: any }>()
+);
+

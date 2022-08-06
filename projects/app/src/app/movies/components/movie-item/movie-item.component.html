@@ -1,11 +1,11 @@
 <div class="w-full">
   <div class="flex flex-row items-center">
-    <div class="grow" (click)="onClick()">
+    <div class="grow" (click)="clickHandler()">
       <p class="text-lg">{{ movieItem.title }}</p>
       <p class="text-sm">{{ movieItem.releaseDate | date:'mediumDate' }}</p>
     </div>
     <div class="flex-none">
-      <button class="btn btn-outline btn-error btn-xs btn-circle">
+      <button class="btn btn-outline btn-error btn-xs btn-circle" (click)="deleteHandler()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-4 w-4"

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Movie } from '../../../models/movie.model';
 import * as MoviesPageActions from '../../store/movies-page.actions';
+import * as MoviesActions from '../../../store/movies/movies.actions';
 
 @Component({
   selector: 'app-movie-item',
@@ -16,7 +17,7 @@ export class MovieItemComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onClick() {
+  clickHandler() {
     this.store.dispatch(
       MoviesPageActions.setActiveMovie({
         movieId: this.movieItem.id,
@@ -24,5 +25,11 @@ export class MovieItemComponent implements OnInit {
     );
 
     this.router.navigate(['/movies/detail', this.movieItem.id + '']);
+  }
+
+  deleteHandler() {
+    this.store.dispatch(MoviesActions.deleteMovie({
+      id: this.movieItem.id
+    }));
   }
 }

@@ -16,18 +16,29 @@ export const moviesFeature = createFeature({
   name: 'movies',
   reducer: createReducer(
     initialState,
-    
-    on(MoviesPageActions.addMovieSuccess, (state: State, action) => {
-      return {
-        ...state,
-        movies: [...state.movies, action.movie],
-      };
-    }),
     on(MoviesPageActions.loadMoviesSuccess, (state: State, actions) => {
       return {
         ...state,
-        movies: [...actions.movies]
-      }
+        movies: [...actions.movies],
+      };
+    }),
+    on(MoviesPageActions.addMovieSuccess, (state: State, action) => {
+      // TODO: remove when backend is integrated
+      const newMovie: Movie = {
+        ...action.movie,
+        id: state.movies.length,
+      };
+
+      return {
+        ...state,
+        movies: [...state.movies, newMovie],
+      };
+    }),
+    on(MoviesPageActions.deleteMovieSuccess, (state: State, action) => {
+      return {
+        ...state,
+        movies: state.movies.filter((item) => item.id !== action.id),
+      };
     })
   ),
 });

@@ -3,7 +3,7 @@ import { TMDBService } from '../../../services/tmdb.service';
 import { SearchMovieResult } from '../../../models/search-movie-result.model';
 import { AppState } from '../../../store';
 import { Store } from '@ngrx/store';
-import * as MoviesPageActions from '../../../store/movies/movies.actions';
+import * as MoviesActions from '../../../store/movies/movies.actions';
 
 @Component({
   selector: 'app-search-movie-item',
@@ -26,7 +26,7 @@ export class SearchMovieItemComponent implements OnInit {
   }
 
   onAddMovie() {
-    this.store.dispatch(MoviesPageActions.addMovie({
+    this.store.dispatch(MoviesActions.addMovie({
       searchMovieResult: this.resultItem,
       releaseDate: new Date(Date.now())
     }))

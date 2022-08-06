@@ -14,6 +14,7 @@ const DUMMY_MOVIES: Movie[] = [
       posterUrl: '/or06FN3Dka5tukK1e9sl16pB3iy.jpg',
       backdropUrl: '/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg',
       releaseDate: new Date(2019, 5, 24), //'2019-04-24',
+      genre: []
     },
     {
       id: 1,
@@ -26,6 +27,7 @@ const DUMMY_MOVIES: Movie[] = [
       posterUrl: '/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg',
       backdropUrl: '/kaIfm5ryEOwYg8mLbq8HkPuM1Fo.jpg',
       releaseDate: new Date(2017, 10, 24), //'2017-10-24',
+      genre: []
     },
     {
       id: 2,
@@ -38,6 +40,7 @@ const DUMMY_MOVIES: Movie[] = [
       posterUrl: '/8IB2e4r4oVhHnANbnm7O3Tj6tF8.jpg',
       backdropUrl: '/ztZ4vw151mw04Bg6rqJLQGBAmvn.jpg',
       releaseDate: new Date(2010, 7, 15), //'2010-07-15',
+      genre: []
     },
   ];
 
@@ -47,5 +50,13 @@ export class MoviesService {
 
   getMovies() {
     return of(DUMMY_MOVIES);
+  }
+
+  addMovie(movie: Movie) {
+    return of(movie);
+  }
+
+  deleteMovie(id: number) {
+    return of(id);
   }
 }

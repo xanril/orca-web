@@ -8,4 +8,5 @@ export interface Movie {
   posterUrl: string;
   backdropUrl: string;
   releaseDate: Date;
+  genre: string[];
 }

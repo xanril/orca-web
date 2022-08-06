@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Movie } from '../../models/movie.model';
 import * as MovieSelectors from '../../store/movies/movies.selectors';
+import * as MoviesPageSelectors from '../store/movies-page.selectors';
 
 @Component({
   selector: 'app-movies-list-page',
@@ -11,6 +12,7 @@ import * as MovieSelectors from '../../store/movies/movies.selectors';
 })
 export class MoviesListPageComponent implements OnInit {
   movies$: Observable<Movie[]> = new Observable<Movie[]>();
+  activeMovieId$: Observable<number> = new Observable<number>();
 
   constructor(
     private store: Store,
@@ -19,6 +21,7 @@ export class MoviesListPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.movies$ = this.store.select(MovieSelectors.selectMovies);
+    this.activeMovieId$ = this.store.select(MoviesPageSelectors.selectActiveMovieId);
   }
 
   searchClicked() {

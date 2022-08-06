@@ -23,11 +23,11 @@ export class SearchMovieFormComponent implements OnInit {
       return;
     }
 
-    this.store.dispatch(
-      MoviesPageActions.searchMovie({
-        movieTitle: this.searchMovieForm.value['queryTitle'],
-        page: 1,
-      })
-    );
+    // this.store.dispatch(
+    //   MoviesPageActions.searchMovie({
+    //     movieTitle: this.searchMovieForm.value['queryTitle'],
+    //     page: 1,
+    //   })
+    // );
   }
 }

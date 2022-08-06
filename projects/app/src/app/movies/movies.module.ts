@@ -5,14 +5,16 @@ import { MoviesListPageComponent } from './movies-page/movies-page.component';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
 import { SearchMovieItemComponent } from './components/search-movie-item/search-movie-item.component';
 import { CommonModule } from '@angular/common';
-import { MoviesEffects } from '../store/movies/movies.effects';
-import { EffectsModule } from '@ngrx/effects';
 import { MoviesPageRoutingModule } from './movies-page-routing.module';
 import { SharedUIModule } from '../shared-ui/shared-ui.module';
 import { MovieItemComponent } from './components/movie-item/movie-item.component';
 import { SearchMovieFormComponent } from './components/search-movie-form/search-movie-form.component';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { MoviesStartComponent } from './movies-start/movies-start.component';
+import { StoreModule } from '@ngrx/store';
+import { moviesPageFeature } from './store/movies-page.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { MoviesPageApiEffects } from './store/movies-page.effects';
 
 @NgModule({
   declarations: [
@@ -29,14 +31,21 @@ import { MoviesStartComponent } from './movies-start/movies-start.component';
     ReactiveFormsModule,
     CommonModule,
     SharedUIModule,
-    EffectsModule.forFeature([MoviesEffects]),
-    MoviesPageRoutingModule
+    MoviesPageRoutingModule,
+    StoreModule.forFeature(
+      moviesPageFeature
+    ),
+    EffectsModule.forFeature([MoviesPageApiEffects]),
   ],
   exports: [
     MoviesListPageComponent,
     MovieDetailComponent,
     SearchMovieComponent,
     SearchMovieItemComponent,
+    MovieItemComponent,
+    SearchMovieFormComponent,
+    MovieListComponent,
+    MoviesStartComponent,
   ],
 })
 export class MoviesModule {}

@@ -1,15 +1,11 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { Movie } from '../../models/movie.model';
-import { SearchMovieResponse } from '../../models/search-movie-result.model';
 import * as MoviesPageActions from './movies.actions';
 
 export const moviesFeatureKey = 'movies';
 
 export interface State {
-  tmdbMovieId: number;
-  searchMovieResponse: SearchMovieResponse;
   movies: Movie[];
-  searchedMovieTitle: string;
 }
 
 const DUMMY_MOVIES: Movie[] = [
@@ -52,54 +48,32 @@ const DUMMY_MOVIES: Movie[] = [
 ];
 
 export const initialState: State = {
-  tmdbMovieId: -1,
-  searchMovieResponse: {
-    page: 1,
-    results: [],
-    total_pages: 1,
-    total_results: 1,
-  },
   movies: DUMMY_MOVIES,
-  searchedMovieTitle: '',
 };
 
 export const moviesFeature = createFeature({
   name: 'movies',
   reducer: createReducer(
     initialState,
-    on(MoviesPageActions.searchMovie, (state: State, action) => {
-      return {
-        ...state,
-        searchedMovieTitle: action.movieTitle,
-      };
-    }),
-    on(MoviesPageActions.searchMovieSuccess, (state: State, action) => {
-      return {
-        ...state,
-        searchMovieResponse: action.searchMovieResponse,
-      };
-    }),
+    
     on(MoviesPageActions.addMovieSuccess, (state: State, action) => {
       return {
         ...state,
         movies: [...state.movies, action.movie],
       };
     }),
-    on(MoviesPageActions.searchMovieReset, (state: State, action) => {
-      return {
-        ...state,
-        searchMovieResponse: initialState.searchMovieResponse,
-        searchedMovieTitle: '',
-      };
-    })
+    // on(MoviesPageActions.searchMovieReset, (state: State, action) => {
+    //   return {
+    //     ...state,
+    //     searchMovieResponse: initialState.searchMovieResponse,
+    //     searchedMovieTitle: '',
+    //   };
+    // })
   ),
 });
 
 export const {
   name, // feature name
   reducer, // feature reducer
-  selectTmdbMovieId,
-  selectSearchMovieResponse,
   selectMovies,
-  selectSearchedMovieTitle,
 } = moviesFeature;

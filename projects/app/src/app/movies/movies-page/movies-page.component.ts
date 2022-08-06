@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import * as MoviesPageActions from '../store/movies-page.actions';
   selector: 'app-movies-list-page',
   templateUrl: './movies-page.component.html',
 })
-export class MoviesListPageComponent implements OnInit {
+export class MoviesListPageComponent implements OnInit, OnDestroy {
   movies$: Observable<Movie[]> = new Observable<Movie[]>();
   activeMovieId$: Observable<number> = new Observable<number>();
 
@@ -22,6 +22,10 @@ export class MoviesListPageComponent implements OnInit {
   ngOnInit(): void {
     this.movies$ = this.store.select(MovieSelectors.selectMovies);
     this.activeMovieId$ = this.store.select(MoviesPageSelectors.selectActiveMovieId);
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(MoviesPageActions.resetActiveMovie());
   }
 
   searchClicked() {

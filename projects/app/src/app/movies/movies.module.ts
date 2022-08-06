@@ -16,6 +16,7 @@ import { moviesPageFeature } from './store/movies-page.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { MoviesPageApiEffects } from './store/movies-page.effects';
 import { MovieEditComponent } from './movie-edit/movie-edit.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MovieEditComponent } from './movie-edit/movie-edit.component';
   imports: [
     ReactiveFormsModule,
     CommonModule,
+    HttpClientModule,
     SharedUIModule,
     MoviesPageRoutingModule,
     StoreModule.forFeature(

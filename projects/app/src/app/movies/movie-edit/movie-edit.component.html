@@ -1,1 +1,16 @@
-<p>movie-edit works!</p>
+{{ movie | json }}
+
+<form>
+  <div class="form-control">
+    <label class="input-group">
+      <span>Title</span>
+      <input class="input input-bordered">
+      <!-- <select class="select select-bordered" formControlName="cinema">
+        <option value="" disabled selected>Select Cinema</option>
+        <option *ngFor="let cinema of cinemas$ | async" [value]="cinema.id">
+          {{ cinema.name }}
+        </option>
+      </select> -->
+    </label>
+  </div>
+</form>

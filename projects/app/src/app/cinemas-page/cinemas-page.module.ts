@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CinemasPageComponent } from './cinemas-page.component';
 import { CinemasPageRoutingModule } from './cinemas-page-routing.module';
-import { SharedUIModule } from '../shared-ui/shared-ui.module';
+import { SharedModule } from '../shared/shared-ui.module';
 import { CinemaItemComponent } from './cinema-item/cinema-item.component';
 import { NewCinemaBlockComponent } from './new-cinema-block/new-cinema-block.component';
 import { EditCinemaComponent } from './edit-cinema/edit-cinema.component';
@@ -28,7 +28,7 @@ import { AddCinemaRoomScheduleComponent } from './add-cinema-room-schedule/add-c
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    SharedUIModule,
+    SharedModule,
     CinemasPageRoutingModule,
   ],
   exports: [CinemasPageComponent],

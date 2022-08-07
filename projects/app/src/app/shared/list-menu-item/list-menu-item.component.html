@@ -1,8 +1,8 @@
 <div class="w-full">
   <div class="flex flex-row items-center">
     <div class="grow" (click)="clickHandler()">
-      <p class="text-lg">{{ movieItem.title }}</p>
-      <p class="text-sm">{{ movieItem.releaseDate | date: "mediumDate" }}</p>
+      <p class="text-lg">{{ title }}</p>
+      <p class="text-sm" *ngIf="subtitle !== null">{{ subtitle }}</p>
     </div>
     <div class="flex-none">
       <button

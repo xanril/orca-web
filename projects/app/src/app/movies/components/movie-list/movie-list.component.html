@@ -3,9 +3,13 @@
 <ul class="menu w-full shadow-none">
   <li class="my-1"
   *ngFor="let movie of movies; index as i">
-    <app-movie-item class="rounded-md"
-      [movieItem]="movie"
+    <app-list-menu-item class="rounded-md"
+      [itemId]="movie.id"
+      [title]="movie.title"
+      [subtitle]="movie.releaseDate | date: 'mediumDate'"
+      (onClick)="itemClickHandler($event)"
+      (onDelete)="itemDeleteHandler($event)"
       [ngClass]="{ active: i === activeMovieId }"
-    ></app-movie-item>
+    ></app-list-menu-item>
   </li>
 </ul>

@@ -6,8 +6,7 @@ import { MoviesSearchComponent } from './movies-search/movies-search.component';
 import { SearchMovieItemComponent } from './components/search-movie-item/search-movie-item.component';
 import { CommonModule } from '@angular/common';
 import { MoviesPageRoutingModule } from './movies-page-routing.module';
-import { SharedUIModule } from '../shared-ui/shared-ui.module';
-import { MovieItemComponent } from './components/movie-item/movie-item.component';
+import { SharedModule } from '../shared/shared-ui.module';
 import { SearchMovieFormComponent } from './components/search-movie-form/search-movie-form.component';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { MoviesStartComponent } from './movies-start/movies-start.component';
@@ -21,12 +20,11 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     MoviesListPageComponent,
+    MovieListComponent,
     MovieDetailComponent,
     MoviesSearchComponent,
     SearchMovieItemComponent,
-    MovieItemComponent,
     SearchMovieFormComponent,
-    MovieListComponent,
     MoviesStartComponent,
     MovieEditComponent,
   ],
@@ -34,7 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
-    SharedUIModule,
+    SharedModule,
     MoviesPageRoutingModule,
     StoreModule.forFeature(
       moviesPageFeature
@@ -46,7 +44,6 @@ import { HttpClientModule } from '@angular/common/http';
     MovieDetailComponent,
     MoviesSearchComponent,
     SearchMovieItemComponent,
-    MovieItemComponent,
     SearchMovieFormComponent,
     MovieListComponent,
     MoviesStartComponent,

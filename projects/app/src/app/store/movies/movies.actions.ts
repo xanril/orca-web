@@ -20,7 +20,7 @@ export const loadMoviesError = createAction(
 
 export const addMovie = createAction(
   '[Movies / API] Add Movie',
-  props<{ searchMovieResult: SearchMovieResult; releaseDate: Date }>()
+  props<{ searchMovieResult: SearchMovieResult; }>()
 );
 
 export const addMovieSuccess = createAction(

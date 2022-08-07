@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, merge, Observable } from 'rxjs';
 import { Movie } from '../../models/movie.model';
@@ -31,10 +31,15 @@ export class MovieEditComponent implements OnInit {
   dayOptions: number[] = [];
   dayOptions$: Observable<number[]> = new Observable<number[]>();
 
-  constructor(private route: ActivatedRoute, private store: Store) {}
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.movie = this.route.snapshot.data['movie'];
+    console.log("movie edit" + this.movie);
 
     // convert release date to individual items.
     const releaseYear = this.movie.releaseDate.getUTCFullYear();
@@ -103,5 +108,9 @@ export class MovieEditComponent implements OnInit {
     this.store.dispatch(
       MoviesActions.updateMovie({ updatedMovie: updatedMovie })
     );
+  }
+
+  cancelHandler() {
+    this.router.navigate(['/movies/detail', this.movie.id]);
   }
 }

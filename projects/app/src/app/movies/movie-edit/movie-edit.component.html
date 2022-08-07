@@ -1,5 +1,4 @@
 <form [formGroup]="movieForm" (ngSubmit)="submitHandler()">
-
   <div class="form-control">
     <label class="input-group">
       <span>Title</span>
@@ -10,21 +9,27 @@
   <div class="form-control">
     <label class="input-group">
       <span class="rounded-r-none rounded-b-none">Release Date</span>
-      <select class="select select-bordered rounded-none" formControlName="releaseMonth">
-        <option *ngFor="let item of monthOptions; index as i"
-          [value]="i">
+      <select
+        class="select select-bordered rounded-none"
+        formControlName="releaseMonth"
+      >
+        <option *ngFor="let item of monthOptions; index as i" [value]="i">
           {{ item }}
         </option>
       </select>
-      <select class="select select-bordered rounded-none" formControlName="releaseDay">
-        <option *ngFor="let item of dayOptions$ | async; index as i"
-          [value]="i">
+      <select
+        class="select select-bordered rounded-none"
+        formControlName="releaseDay"
+      >
+        <option
+          *ngFor="let item of dayOptions$ | async; index as i"
+          [value]="i"
+        >
           {{ item }}
         </option>
       </select>
       <select class="select select-bordered" formControlName="releaseYear">
-        <option *ngFor="let item of yearOptions; index as i"
-          [value]="item">
+        <option *ngFor="let item of yearOptions; index as i" [value]="item">
           {{ item }}
         </option>
       </select>
@@ -41,13 +46,16 @@
   <div class="form-control">
     <label class="input-group">
       <span>Backdrop</span>
-      <input class="input input-bordered" formControlName="backdropUrl" />
+      <input
+        class="input input-bordered w-full"
+        formControlName="backdropUrl"
+      />
     </label>
   </div>
   <div class="form-control">
     <label class="input-group">
       <span>Poster</span>
-      <input class="input input-bordered" formControlName="posterUrl" />
+      <input class="input input-bordered w-full" formControlName="posterUrl" />
     </label>
   </div>
 
@@ -56,7 +64,7 @@
       <span>Tagline</span>
     </label>
     <textarea
-      class="textarea textarea-bordered"
+      class="textarea textarea-bordered w-full"
       formControlName="tagline"
     ></textarea>
   </div>
@@ -66,12 +74,15 @@
       <span>Overview</span>
     </label>
     <textarea
-      class="textarea textarea-bordered"
+      class="textarea textarea-bordered w-full"
       formControlName="overview"
     ></textarea>
   </div>
 
-  <button type="button" class="btn btn-error">Cancel</button>
-  <button type="submit" class="btn btn-success" [disabled]="!movieForm.valid">Save</button>
-  
+  <div class="flex flex-row w-full mt-10 space-x-2">
+    <button type="button" class="btn btn-error w-1/2" (click)="cancelHandler()">Cancel</button>
+    <button type="submit" class="btn btn-success w-1/2" [disabled]="!movieForm.valid">
+      Save
+    </button>
+  </div>
 </form>

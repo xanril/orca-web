@@ -27,8 +27,7 @@ export class SearchMovieItemComponent implements OnInit {
 
   onAddMovie() {
     this.store.dispatch(MoviesActions.addMovie({
-      searchMovieResult: this.resultItem,
-      releaseDate: new Date(Date.now())
+      searchMovieResult: this.resultItem
     }))
 
     this.isMovieAdded = true;

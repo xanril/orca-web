@@ -50,7 +50,7 @@ export class MoviesEffects {
               runtime: tmdbMovieDetails.runtime ?? 0,
               posterUrl: actionData.searchMovieResult.poster_path,
               backdropUrl: actionData.searchMovieResult.backdrop_path,
-              releaseDate: actionData.releaseDate,
+              releaseDate: new Date(tmdbMovieDetails.release_date),
               genre:
                 tmdbMovieDetails.genres?.map((item) => item.name ?? '') ?? [],
             };

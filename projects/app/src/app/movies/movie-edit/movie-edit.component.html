@@ -1,16 +1,77 @@
-{{ movie | json }}
+<form [formGroup]="movieForm" (ngSubmit)="submitHandler()">
 
-<form>
   <div class="form-control">
     <label class="input-group">
       <span>Title</span>
-      <input class="input input-bordered">
-      <!-- <select class="select select-bordered" formControlName="cinema">
-        <option value="" disabled selected>Select Cinema</option>
-        <option *ngFor="let cinema of cinemas$ | async" [value]="cinema.id">
-          {{ cinema.name }}
-        </option>
-      </select> -->
+      <input class="input input-bordered" formControlName="title" />
     </label>
   </div>
+
+  <div class="form-control">
+    <label class="input-group">
+      <span class="rounded-r-none rounded-b-none">Release Date</span>
+      <select class="select select-bordered rounded-none" formControlName="releaseMonth">
+        <option *ngFor="let item of monthOptions; index as i"
+          [value]="i">
+          {{ item }}
+        </option>
+      </select>
+      <select class="select select-bordered rounded-none" formControlName="releaseDay">
+        <option *ngFor="let item of dayOptions$ | async; index as i"
+          [value]="i">
+          {{ item }}
+        </option>
+      </select>
+      <select class="select select-bordered" formControlName="releaseYear">
+        <option *ngFor="let item of yearOptions; index as i"
+          [value]="item">
+          {{ item }}
+        </option>
+      </select>
+    </label>
+  </div>
+
+  <div class="form-control">
+    <label class="input-group">
+      <span>Runtime (Mins)</span>
+      <input class="input input-bordered" formControlName="runtime" />
+    </label>
+  </div>
+
+  <div class="form-control">
+    <label class="input-group">
+      <span>Backdrop</span>
+      <input class="input input-bordered" formControlName="backdropUrl" />
+    </label>
+  </div>
+  <div class="form-control">
+    <label class="input-group">
+      <span>Poster</span>
+      <input class="input input-bordered" formControlName="posterUrl" />
+    </label>
+  </div>
+
+  <div class="form-control">
+    <label class="label">
+      <span>Tagline</span>
+    </label>
+    <textarea
+      class="textarea textarea-bordered"
+      formControlName="tagline"
+    ></textarea>
+  </div>
+
+  <div class="form-control">
+    <label class="label">
+      <span>Overview</span>
+    </label>
+    <textarea
+      class="textarea textarea-bordered"
+      formControlName="overview"
+    ></textarea>
+  </div>
+
+  <button type="button" class="btn btn-error">Cancel</button>
+  <button type="submit" class="btn btn-success" [disabled]="!movieForm.valid">Save</button>
+  
 </form>

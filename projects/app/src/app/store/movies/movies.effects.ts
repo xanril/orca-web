@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { switchMap, map, catchError, of, merge, mergeWith } from 'rxjs';
+import { switchMap, map, catchError, of, merge, mergeWith, tap } from 'rxjs';
 import { Movie } from '../../models/movie.model';
 import { MoviesService } from '../../services/movies.service';
 import { TMDBService } from '../../services/tmdb.service';
@@ -11,10 +12,11 @@ export class MoviesEffects {
   constructor(
     private actions$: Actions,
     private moviesService: MoviesService,
-    private tmdbService: TMDBService
+    private tmdbService: TMDBService,
+    private router: Router
   ) {}
 
-  loadMoviesFromApi$ = createEffect(() =>
+  loadMovies$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MoviesActions.loadMovies),
       switchMap(() => {
@@ -86,5 +88,33 @@ export class MoviesEffects {
         );
       })
     )
+  );
+
+  updateMovie$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MoviesActions.updateMovie),
+      switchMap((actionData) =>
+        this.moviesService.updateMovie(actionData.updatedMovie).pipe(
+          map((data) =>
+            MoviesActions.updateMovieSuccess({ updatedMovie: data })
+          ),
+          catchError((error) => of(MoviesActions.updateMoviesError({ error })))
+        )
+      )
+    );
+  });
+
+  updateMovieSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(MoviesActions.updateMovieSuccess),
+        tap((actionData) =>
+          this.router.navigate(['/movies/detail', actionData.updatedMovie.id])
+        )
+      );
+    },
+    {
+      dispatch: false,
+    }
   );
 }

@@ -48,3 +48,18 @@ export const deleteMoviesError = createAction(
   props<{ error: any }>()
 );
 
+export const updateMovie = createAction(
+  '[Movies / API] Update Movie',
+  props<{ updatedMovie: Movie }>()
+);
+
+export const updateMovieSuccess = createAction(
+  '[Movies / API] Update Movie Success',
+  props<{ updatedMovie: Movie }>()
+);
+
+export const updateMoviesError = createAction(
+  '[Movies / API] Update Movie Error',
+  props<{ error: any }>()
+);
+

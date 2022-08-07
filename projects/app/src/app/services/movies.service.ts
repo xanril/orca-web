@@ -59,4 +59,8 @@ export class MoviesService {
   deleteMovie(id: number) {
     return of(id);
   }
+
+  updateMovie(updatedMovie: Movie) {
+    return of(updatedMovie);
+  }
 }

@@ -39,6 +39,15 @@ export const moviesFeature = createFeature({
         ...state,
         movies: state.movies.filter((item) => item.id !== action.id),
       };
+    }),
+    on(MoviesPageActions.updateMovieSuccess, (state: State, action) => {
+      const newMovies = [...state.movies];
+      newMovies[action.updatedMovie.id] = action.updatedMovie;
+
+      return {
+        ...state,
+        movies: [...newMovies],
+      };
     })
   ),
 });

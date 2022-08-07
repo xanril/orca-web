@@ -1,13 +1,13 @@
 <form [formGroup]="searchMovieForm" (ngSubmit)="submitHandler()">
   <div class="form-control">
-    <div class="input-group">
+    <div class="input-group input-group-lg">
       <input
         type="text"
         placeholder="Search…"
-        class="input input-bordered grow"
+        class="input input-lg input-bordered grow"
         formControlName="queryTitle"
       />
-      <button class="btn" [disabled]="!searchMovieForm.valid" type="submit">
+      <button class="btn btn-lg" [disabled]="!searchMovieForm.valid" type="submit">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6"

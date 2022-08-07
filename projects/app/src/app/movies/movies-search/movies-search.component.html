@@ -1,11 +1,16 @@
-<app-search-movie-form (onSearch)="searchHandler($event)"></app-search-movie-form>
+<app-search-movie-form class="w-3/5"
+  (onSearch)="searchHandler($event)"
+></app-search-movie-form>
 
 <!-- Display Results -->
 <div
-  class="max-w-5xl mx-auto flex flex-col space-y-3"
+  class="max-w-5xl mx-auto flex flex-row flex-wrap mt-5"
   *ngIf="(searchResponse$ | async)?.results"
 >
-  <app-search-movie-item *ngFor="let item of (searchResponse$ | async)?.results" [resultItem]="item">
+  <app-search-movie-item class="m-2 mt-8"
+    *ngFor="let item of (searchResponse$ | async)?.results"
+    [resultItem]="item"
+  >
   </app-search-movie-item>
 </div>
 

@@ -43,7 +43,7 @@ export class TMDBService {
       return "";
     }
 
-    const imageSize = 'w1280';
+    const imageSize = 'w780';
     return this.configuration?.images?.base_url! + imageSize + backdropPath;
   }
 

@@ -18,8 +18,8 @@ const appRoutes: Routes = [
   {
     path: 'cinemas',
     loadChildren: () =>
-      import('./cinemas-page/cinemas-page.module').then(
-        (m) => m.CinemasPageModule
+      import('./cinemas/cinemas.module').then(
+        (m) => m.CinemasModule
       ),
   },
   {

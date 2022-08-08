@@ -12,6 +12,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CinemaRoomScheduleItemComponent } from './cinema-room-schedule-item/cinema-room-schedule-item.component';
 import { EditCinemaRoomComponent } from './edit-cinema-room/edit-cinema-room.component';
 import { AddCinemaRoomScheduleComponent } from './add-cinema-room-schedule/add-cinema-room-schedule.component';
+import { CinemaListComponent } from './components/cinema-list/cinema-list.component';
+import { CinemasStartComponent } from './cinemas-start/cinemas-start.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromCinemasPage from './store/cinemas-page.reducer';
 
 @NgModule({
   declarations: [
@@ -24,12 +28,17 @@ import { AddCinemaRoomScheduleComponent } from './add-cinema-room-schedule/add-c
     CinemaRoomScheduleItemComponent,
     EditCinemaRoomComponent,
     AddCinemaRoomScheduleComponent,
+    CinemaListComponent,
+    CinemasStartComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
     CinemasPageRoutingModule,
+    StoreModule.forFeature(
+      fromCinemasPage.cinemasPageFeature
+    ),
   ],
   exports: [CinemasPageComponent],
 })

@@ -1,0 +1,13 @@
+<button class="btn btn-block" (click)="addCinemaHandler()">New Cinema</button>
+<div class="divider"></div>
+<ul class="menu w-full shadow-none">
+  <li class="my-1"
+  *ngFor="let cinema of cinemas; index as i">
+    <app-list-menu-item class="rounded-md"
+      [itemId]="cinema.id"
+      [title]="cinema.name"
+      (onClick)="itemClickHandler($event)"
+      (onDelete)="itemDeleteHandler($event)"
+    ></app-list-menu-item>
+  </li>
+</ul>

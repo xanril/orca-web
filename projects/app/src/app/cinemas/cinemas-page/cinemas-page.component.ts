@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Cinema } from '../../models/cinema.model';
 import * as CinemasSelectors from '../../store/cinemas/cinema.selectors';
 
@@ -9,7 +10,7 @@ import * as CinemasSelectors from '../../store/cinemas/cinema.selectors';
   templateUrl: './cinemas-page.component.html',
 })
 export class CinemasPageComponent implements OnInit {
-  cinemas: Cinema[] = [];
+  cinemas$: Observable<Cinema[]> = new Observable<Cinema[]>();
 
   constructor(
     private router: Router,
@@ -18,12 +19,10 @@ export class CinemasPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.select(CinemasSelectors.selectCinemas).subscribe((cinemas) => {
-      this.cinemas = cinemas;
-    });
+    this.cinemas$ = this.store.select(CinemasSelectors.selectCinemas);
   }
 
-  addCinemaHandler(event: Event) {
-    this.router.navigate(['add'], { relativeTo: this.activatedRoute });
+  addCinemaHandler() {
+    //this.router.navigate(['add'], { relativeTo: this.activatedRoute });
   }
 }

@@ -65,67 +65,67 @@ export class CinemaEffects {
     )
   );
 
-  editCinema$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(CinemasActions.editCinema),
-      withLatestFrom(this.store.select('cinemas')),
-      map(([actionData, state]) => {
-        // TODO: call Edit Cinema API
+  // editCinema$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(CinemasActions.editCinema),
+  //     withLatestFrom(this.store.select('cinemas')),
+  //     map(([actionData, state]) => {
+  //       // TODO: call Edit Cinema API
 
-        const editedCinema: Cinema = {
-          id: actionData.id,
-          name: actionData.name,
-          location: actionData.location,
-        };
-        return CinemasActions.editCinemaSuccess({ cinema: editedCinema });
-      })
-    )
-  );
+  //       const editedCinema: Cinema = {
+  //         id: actionData.id,
+  //         name: actionData.name,
+  //         location: actionData.location,
+  //       };
+  //       return CinemasActions.editCinemaSuccess({ cinema: editedCinema });
+  //     })
+  //   )
+  // );
 
-  addCinemaRoom$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(CinemasActions.addCinemaRoom),
-      withLatestFrom(this.store.select('cinemas')),
-      map(([actionData, state]) => {
-        // TODO: call Add CinemaRoom API
+  // addCinemaRoom$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(CinemasActions.addCinemaRoom),
+  //     withLatestFrom(this.store.select('cinemas')),
+  //     map(([actionData, state]) => {
+  //       // TODO: call Add CinemaRoom API
 
-        const newCinemaRoom: CinemaRoom = {
-          id: state.cinemaRooms.length,
-          cinemaId: actionData.cinemaId,
-          name: actionData.roomName,
-        };
+  //       const newCinemaRoom: CinemaRoom = {
+  //         id: state.cinemaRooms.length,
+  //         cinemaId: actionData.cinemaId,
+  //         name: actionData.roomName,
+  //       };
 
-        return CinemasActions.addCinemaRoomSuccess({
-          cinemaId: 0,
-          cinemaRoom: newCinemaRoom,
-        });
-      })
-    )
-  );
+  //       return CinemasActions.addCinemaRoomSuccess({
+  //         cinemaId: 0,
+  //         cinemaRoom: newCinemaRoom,
+  //       });
+  //     })
+  //   )
+  // );
 
-  addCinemaRoomSchedule$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(CinemasActions.addCinemaRoomSchedule),
-      withLatestFrom(this.store.select(cinemasFeature.selectSchedules)),
-      map(([actionData, state]) => {
-        // TODO: call Add CinemaRoomSchedule API
+  // addCinemaRoomSchedule$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(CinemasActions.addCinemaRoomSchedule),
+  //     withLatestFrom(this.store.select(cinemasFeature.selectSchedules)),
+  //     map(([actionData, state]) => {
+  //       // TODO: call Add CinemaRoomSchedule API
 
-        const newSchedule: CinemaRoomSchedule = {
-          id: state.length,
-          cinemaId: actionData.cinemaId,
-          cinemaRoomId: actionData.cinemaRoomId,
-          movieId: actionData.movieId,
-          seat: [],
-          dayOfWeek: actionData.dayOfWeek,
-          startTime: actionData.startTime,
-          endTime: actionData.endTime,
-          ticketPrice: actionData.ticketPrice,
-        };
+  //       const newSchedule: CinemaRoomSchedule = {
+  //         id: state.length,
+  //         cinemaId: actionData.cinemaId,
+  //         cinemaRoomId: actionData.cinemaRoomId,
+  //         movieId: actionData.movieId,
+  //         seat: [],
+  //         dayOfWeek: actionData.dayOfWeek,
+  //         startTime: actionData.startTime,
+  //         endTime: actionData.endTime,
+  //         ticketPrice: actionData.ticketPrice,
+  //       };
 
-        return CinemasActions.addCinemaRoomScheduleSuccess({
-          newSchedule: newSchedule,
-        });
-      })
-    )
-  );
+  //       return CinemasActions.addCinemaRoomScheduleSuccess({
+  //         newSchedule: newSchedule,
+  //       });
+  //     })
+  //   )
+  // );
 }

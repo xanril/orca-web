@@ -4,14 +4,14 @@ import { cinemasAdapter, cinemasFeature } from './cinemas.reducer';
 const { selectTotal, selectAll } = cinemasAdapter.getSelectors();
 
 export const selectAllCinemas = createSelector(
-  cinemasFeature.selectCinemasState,
+  cinemasFeature.selectCinemasDataState,
   (state) => {
     return selectAll(state);
   }
 );
 
 export const selectTotalCinemasCount = createSelector(
-  cinemasFeature.selectCinemasState,
+  cinemasFeature.selectCinemasDataState,
   (state) => {
     return selectTotal(state);
   }

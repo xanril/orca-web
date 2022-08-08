@@ -2,7 +2,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { Movie } from '../../models/movie.model';
 import * as MoviesPageActions from './movies.actions';
 
-export const moviesFeatureKey = 'movies';
+export const moviesFeatureKey = 'moviesData';
 
 export interface State {
   movies: Movie[];
@@ -13,7 +13,7 @@ export const initialState: State = {
 };
 
 export const moviesFeature = createFeature({
-  name: 'movies',
+  name: moviesFeatureKey,
   reducer: createReducer(
     initialState,
     on(MoviesPageActions.loadMoviesSuccess, (state: State, actions) => {

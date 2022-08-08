@@ -5,7 +5,7 @@ import { CinemaRoom } from '../../models/cinema-room.model';
 import { Cinema } from '../../models/cinema.model';
 import * as CinemaActions from './cinema.actions';
 
-export const cinemaFeatureKey = 'cinemas';
+export const cinemaFeatureKey = 'cinemasData';
 
 export const cinemasAdapter: EntityAdapter<Cinema> =
   createEntityAdapter<Cinema>();

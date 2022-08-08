@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { CinemaRoom } from '../../models/cinema-room.model';
+import { Room } from '../../models/room.model';
 import { Cinema } from '../../models/cinema.model';
 import { Movie } from '../../models/movie.model';
 import * as CinemaSelectors from '../../store/cinemas/cinema.selectors';
@@ -15,7 +15,7 @@ import * as CinemaActions from '../../store/cinemas/cinema.actions';
 })
 export class AddCinemaRoomScheduleComponent implements OnInit, OnDestroy {
   cinemas$: Observable<Cinema[]> = new Observable<Cinema[]>();
-  cinemaRoom$: Observable<CinemaRoom[]> = new Observable<CinemaRoom[]>();
+  cinemaRoom$: Observable<Room[]> = new Observable<Room[]>();
   movies$: Observable<Movie[]> = new Observable<Movie[]>();
   movie!: Movie;
   ticketPrices: number[] = [];
@@ -43,9 +43,9 @@ export class AddCinemaRoomScheduleComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cinemas$ = this.store.select(CinemaSelectors.selectAllCinemas);
-    this.cinemaRoom$ = this.store.select(
-      CinemaSelectors.selectCinemaRoomsWithCinemaId(0)
-    );
+    // this.cinemaRoom$ = this.store.select(
+    //   CinemaSelectors.selectCinemaRoomsWithCinemaId(0)
+    // );
     this.movies$ = this.store.select(MoviesSelectors.selectMovies);
 
     this.subscriptionBag.add(
@@ -83,9 +83,9 @@ export class AddCinemaRoomScheduleComponent implements OnInit, OnDestroy {
     this.subscriptionBag.add(
       this.newScheduleForm.get('cinema')?.valueChanges.subscribe((newValue) => {
         const newCinemaId = +newValue;
-        this.cinemaRoom$ = this.store.select(
-          CinemaSelectors.selectCinemaRoomsWithCinemaId(newCinemaId)
-        );
+        // this.cinemaRoom$ = this.store.select(
+        //   CinemaSelectors.selectCinemaRoomsWithCinemaId(newCinemaId)
+        // );
 
         this.newScheduleForm.get('room')?.setValue('');
       })

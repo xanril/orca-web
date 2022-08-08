@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CinemaRoom } from '../../models/cinema-room.model';
+import { Room } from '../../models/room.model';
 import { Cinema } from '../../models/cinema.model';
 import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
 
@@ -67,7 +67,7 @@ export const addCinemaRoom = createAction(
 
 export const addCinemaRoomSuccess = createAction(
   '[Cinema] Add Cinema Room Success',
-  props<{ cinemaId: number; cinemaRoom: CinemaRoom }>()
+  props<{ cinemaId: number; cinemaRoom: Room }>()
 );
 
 export const addCinemaRoomFailure = createAction(

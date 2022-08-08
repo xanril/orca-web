@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import { Actions, ofType } from '@ngrx/effects';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CinemaRoom } from '../../models/cinema-room.model';
+import { Room } from '../../models/room.model';
 
 @Component({
   selector: 'app-edit-cinema',
@@ -16,7 +16,7 @@ import { CinemaRoom } from '../../models/cinema-room.model';
 })
 export class EditCinemaComponent implements OnInit, OnDestroy {
   cinema?: Cinema;
-  cinemaRooms: CinemaRoom[] = [];
+  cinemaRooms: Room[] = [];
   subscriptionBag: Subscription = new Subscription();
   editCinemaForm!: FormGroup;
 
@@ -39,13 +39,13 @@ export class EditCinemaComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.subscriptionBag.add(
-      this.store
-        .select(CinemaSelectors.selectCinemaRoomsWithCinemaId(cinemaId))
-        .subscribe((data) => {
-          this.cinemaRooms = data.slice();
-        })
-    );
+    // this.subscriptionBag.add(
+    //   this.store
+    //     .select(CinemaSelectors.selectCinemaRoomsWithCinemaId(cinemaId))
+    //     .subscribe((data) => {
+    //       this.cinemaRooms = data.slice();
+    //     })
+    // );
 
     this.subscriptionBag.add(
       this.actions$

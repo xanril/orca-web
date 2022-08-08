@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map, withLatestFrom, switchMap, catchError, of } from 'rxjs';
-import { CinemaRoom } from '../../models/cinema-room.model';
+import { Room } from '../../models/room.model';
 import { Cinema } from '../../models/cinema.model';
 import { AppState } from '..';
 import { cinemasFeature } from './cinemas.reducer';

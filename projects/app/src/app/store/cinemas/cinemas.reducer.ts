@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, createFeature, on } from '@ngrx/store';
 import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
-import { CinemaRoom } from '../../models/cinema-room.model';
+import { Room } from '../../models/room.model';
 import { Cinema } from '../../models/cinema.model';
 import * as CinemaActions from './cinema.actions';
 
@@ -11,32 +11,8 @@ export const cinemasAdapter: EntityAdapter<Cinema> =
   createEntityAdapter<Cinema>();
 
 export interface State extends EntityState<Cinema> {
-  cinemaRooms: CinemaRoom[];
   schedules: CinemaRoomSchedule[];
 }
-
-const DUMMY_CINEMA_ROOMS: CinemaRoom[] = [
-  {
-    id: 0,
-    cinemaId: 0,
-    name: 'Cinema 1',
-  },
-  {
-    id: 1,
-    cinemaId: 0,
-    name: 'Cinema 2',
-  },
-  {
-    id: 2,
-    cinemaId: 1,
-    name: 'Cinema 1',
-  },
-  {
-    id: 3,
-    cinemaId: 2,
-    name: 'Cinema 1',
-  },
-];
 
 const DUMMY_CINEMA_ROOM_SCHEDULES: CinemaRoomSchedule[] = [
   {
@@ -78,7 +54,6 @@ export const cinemasFeature = createFeature({
   name: cinemaFeatureKey,
   reducer: createReducer(
     cinemasAdapter.getInitialState({
-      cinemaRooms: DUMMY_CINEMA_ROOMS,
       schedules: DUMMY_CINEMA_ROOM_SCHEDULES,
     }),
     on(CinemaActions.loadCinemasSuccess, (state, action) => {

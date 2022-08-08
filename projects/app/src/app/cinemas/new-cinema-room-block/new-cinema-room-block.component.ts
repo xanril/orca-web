@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { CinemaRoom } from '../../models/cinema-room.model';
+import { Room } from '../../models/room.model';
 import { Cinema } from '../../models/cinema.model';
 import * as CinemaActions from '../../store/cinemas/cinema.actions';
 import * as CinemaSelectors from '../../store/cinemas/cinema.selectors';
@@ -16,7 +16,7 @@ import * as CinemaSelectors from '../../store/cinemas/cinema.selectors';
 export class NewCinemaRoomBlockComponent implements OnInit, OnDestroy {
   @Input() cinema!: Cinema;
   isFormShown: boolean = false;
-  cinemaRooms: CinemaRoom[] = [];
+  cinemaRooms: Room[] = [];
   subscriptionBag: Subscription = new Subscription();
   targetForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -34,13 +34,13 @@ export class NewCinemaRoomBlockComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.subscriptionBag.add(
-      this.store
-        .select(CinemaSelectors.selectCinemaRoomsWithCinemaId(this.cinema.id))
-        .subscribe((data) => {
-          this.cinemaRooms = data;
-        })
-    );
+    // this.subscriptionBag.add(
+    //   this.store
+    //     .select(CinemaSelectors.selectCinemaRoomsWithCinemaId(this.cinema.id))
+    //     .subscribe((data) => {
+    //       this.cinemaRooms = data;
+    //     })
+    // );
   }
 
   ngOnDestroy(): void {

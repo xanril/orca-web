@@ -1,2 +1,6 @@
-Cinema Name: {{ cinema?.name }} <br/>
-Location: {{ cinema?.location }}
+Cinema Name: {{ (cinema$ | async)?.name }} <br/>
+Location: {{ (cinema$ | async)?.location }}
+
+<span *ngFor="let room of (rooms$ | async)">
+    Room: {{ room.name }}
+</span>

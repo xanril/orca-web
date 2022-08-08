@@ -33,15 +33,15 @@ export class RoomsService {
     return of(DUMMY_CINEMA_ROOMS);
   }
 
-  addCinema(room: Room) {
+  addRoom(room: Room) {
     return of(room);
   }
 
-  deleteCinema(id: number) {
+  deleteRoom(id: number) {
     return of(id);
   }
 
-  updateCinema(updatedRoom: Room) {
+  updateRoom(updatedRoom: Room) {
     return of(updatedRoom);
   }
 }

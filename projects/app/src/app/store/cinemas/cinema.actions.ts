@@ -3,33 +3,60 @@ import { CinemaRoom } from '../../models/cinema-room.model';
 import { Cinema } from '../../models/cinema.model';
 import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
 
+export const loadCinemas = createAction('[Cinema API] Load Cinemas');
+
+export const loadCinemasSuccess = createAction(
+  '[Cinema API] Load Cinemas Success',
+  props<{ cinemas: Cinema[] }>()
+);
+
+export const loadCinemasFailure = createAction(
+  '[Cinema API] Load Cinemas Failure',
+  props<{ error: any }>()
+);
+
 export const addCinema = createAction(
-  '[Cinema] Add Cinema',
+  '[Cinema API] Add Cinema',
   props<{ name: string; location: string; roomNames: string[] }>()
 );
 
 export const addCinemaSuccess = createAction(
-  '[Cinema] Add Cinema Success',
+  '[Cinema API] Add Cinema Success',
   props<{ cinema: Cinema }>()
 );
 
 export const addCinemaFailure = createAction(
-  '[Cinema] Add Cinema Failure',
+  '[Cinema API] Add Cinema Failure',
   props<{ error: any }>()
 );
 
 export const editCinema = createAction(
-  '[Cinema] Edit Cinema',
+  '[Cinema API] Edit Cinema',
   props<{ id: number; name: string; location: string }>()
 );
 
 export const editCinemaSuccess = createAction(
-  '[Cinema] Edit Cinema Success',
+  '[Cinema API] Edit Cinema Success',
   props<{ cinema: Cinema }>()
 );
 
 export const editCinemaFailure = createAction(
-  '[Cinema] Edit Cinema Failure',
+  '[Cinema API] Edit Cinema Failure',
+  props<{ error: any }>()
+);
+
+export const deleteCinema = createAction(
+  '[Cinema API] Delete Cinema',
+  props<{ cinemaId: number; }>()
+);
+
+export const deleteCinemaSuccess = createAction(
+  '[Cinema API] Delete Cinema Success',
+  props<{ cinemaId: number }>()
+);
+
+export const deleteCinemaFailure = createAction(
+  '[Cinema API] Delete Cinema Failure',
   props<{ error: any }>()
 );
 

@@ -8,6 +8,7 @@
       [title]="cinema.name"
       (onClick)="itemClickHandler($event)"
       (onDelete)="itemDeleteHandler($event)"
+      [ngClass]="{active: cinema.id == activeCinemaId}"
     ></app-list-menu-item>
   </li>
 </ul>

@@ -6,29 +6,13 @@ import * as CinemaActions from './cinema.actions';
 
 export const cinemaFeatureKey = 'cinemas';
 
+
+
 export interface State {
   cinemas: Cinema[];
   cinemaRooms: CinemaRoom[];
   schedules: CinemaRoomSchedule[];
 }
-
-const DUMMY_CINEMAS: Cinema[] = [
-  {
-    id: 0,
-    name: 'Ayala Malls - Glorietta',
-    location: 'Makati',
-  },
-  {
-    id: 1,
-    name: 'Ayala Malls - Greenbelt',
-    location: 'Makati',
-  },
-  {
-    id: 2,
-    name: 'SM Aura',
-    location: 'Taguig',
-  },
-];
 
 const DUMMY_CINEMA_ROOMS: CinemaRoom[] = [
   {
@@ -90,7 +74,7 @@ const DUMMY_CINEMA_ROOM_SCHEDULES: CinemaRoomSchedule[] = [
 ];
 
 export const initialState: State = {
-  cinemas: DUMMY_CINEMAS,
+  cinemas: [],
   cinemaRooms: DUMMY_CINEMA_ROOMS,
   schedules: DUMMY_CINEMA_ROOM_SCHEDULES,
 };
@@ -99,6 +83,18 @@ export const cinemasFeature = createFeature({
   name: cinemaFeatureKey,
   reducer: createReducer(
     initialState,
+    on(CinemaActions.loadCinemasSuccess, (state, action) => {
+      return {
+        ...state,
+        cinemas: [...action.cinemas],
+      };
+    }),
+    on(CinemaActions.deleteCinemaSuccess, (state, action) => {
+      return {
+        ...state,
+        cinemas: state.cinemas.filter((item) => item.id !== action.cinemaId),
+      };
+    }),
     on(CinemaActions.addCinemaSuccess, (state, action) => {
       return {
         ...state,

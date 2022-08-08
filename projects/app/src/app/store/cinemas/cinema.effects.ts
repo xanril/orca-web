@@ -1,21 +1,54 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, withLatestFrom } from 'rxjs';
+import { map, withLatestFrom, switchMap, catchError, of } from 'rxjs';
 import { CinemaRoom } from '../../models/cinema-room.model';
 import { Cinema } from '../../models/cinema.model';
 import { AppState } from '..';
-import * as CinemaActions from './cinema.actions';
 import { cinemasFeature } from './cinemas.reducer';
 import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
+import { CinemasService } from '../../services/cinemas.service';
+import * as CinemasActions from './cinema.actions';
 
 @Injectable()
 export class CinemaEffects {
-  constructor(private actions$: Actions, private store: Store<AppState>) {}
+  constructor(
+    private actions$: Actions,
+    private cinemasService: CinemasService,
+    private store: Store<AppState>
+  ) {}
+
+  loadCinemas$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CinemasActions.loadCinemas),
+      switchMap(() =>
+        this.cinemasService.getCinemas().pipe(
+          map((data) => CinemasActions.loadCinemasSuccess({ cinemas: data })),
+          catchError((error) =>
+            of(CinemasActions.loadCinemasFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
+  deleteCinema$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CinemasActions.deleteCinema),
+      switchMap((actionData) =>
+        this.cinemasService.deleteCinema(actionData.cinemaId).pipe(
+          map((data) => CinemasActions.deleteCinemaSuccess({ cinemaId: data })),
+          catchError((error) =>
+            of(CinemasActions.deleteCinemaFailure({ error }))
+          )
+        )
+      )
+    );
+  });
 
   addCinema$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CinemaActions.addCinema),
+      ofType(CinemasActions.addCinema),
       withLatestFrom(this.store.select('cinemas')),
       map(([actionData, state]) => {
         // TODO: call Add Cinema API
@@ -26,14 +59,14 @@ export class CinemaEffects {
           location: actionData.location,
         };
 
-        return CinemaActions.addCinemaSuccess({ cinema: newCinema });
+        return CinemasActions.addCinemaSuccess({ cinema: newCinema });
       })
     )
   );
 
   editCinema$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CinemaActions.editCinema),
+      ofType(CinemasActions.editCinema),
       withLatestFrom(this.store.select('cinemas')),
       map(([actionData, state]) => {
         // TODO: call Edit Cinema API
@@ -43,14 +76,14 @@ export class CinemaEffects {
           name: actionData.name,
           location: actionData.location,
         };
-        return CinemaActions.editCinemaSuccess({ cinema: editedCinema });
+        return CinemasActions.editCinemaSuccess({ cinema: editedCinema });
       })
     )
   );
 
   addCinemaRoom$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CinemaActions.addCinemaRoom),
+      ofType(CinemasActions.addCinemaRoom),
       withLatestFrom(this.store.select('cinemas')),
       map(([actionData, state]) => {
         // TODO: call Add CinemaRoom API
@@ -61,7 +94,7 @@ export class CinemaEffects {
           name: actionData.roomName,
         };
 
-        return CinemaActions.addCinemaRoomSuccess({
+        return CinemasActions.addCinemaRoomSuccess({
           cinemaId: 0,
           cinemaRoom: newCinemaRoom,
         });
@@ -71,7 +104,7 @@ export class CinemaEffects {
 
   addCinemaRoomSchedule$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CinemaActions.addCinemaRoomSchedule),
+      ofType(CinemasActions.addCinemaRoomSchedule),
       withLatestFrom(this.store.select(cinemasFeature.selectSchedules)),
       map(([actionData, state]) => {
         // TODO: call Add CinemaRoomSchedule API
@@ -88,7 +121,7 @@ export class CinemaEffects {
           ticketPrice: actionData.ticketPrice,
         };
 
-        return CinemaActions.addCinemaRoomScheduleSuccess({
+        return CinemasActions.addCinemaRoomScheduleSuccess({
           newSchedule: newSchedule,
         });
       })

@@ -2,7 +2,11 @@
 
 <div class="w-full flex flex-row space-x-2 mt-10">
   <div class="w-5/12">
-    <app-cinema-list [cinemas]="cinemas$ | async" (onAddCinemaClick)="addCinemaHandler()"></app-cinema-list>
+    <app-cinema-list
+      [cinemas]="cinemas$ | async"
+      [activeCinemaId]="activeCinemaId$ | async"
+      (onAddCinemaClick)="addCinemaHandler()"
+    ></app-cinema-list>
   </div>
   <div class="w-7/12">
     <div class="w-full">
@@ -10,13 +14,3 @@
     </div>
   </div>
 </div>
-
-<!-- <div class="flex flex-col my-5 space-y-4">
-  <app-new-cinema-block></app-new-cinema-block>
-
-  <ul class="space-y-4">
-    <li *ngFor="let item of cinemas">
-      <app-cinema-item [cinemaItem]="item"></app-cinema-item>
-    </li>
-  </ul>
-</div> -->

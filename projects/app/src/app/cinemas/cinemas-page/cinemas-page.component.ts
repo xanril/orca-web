@@ -21,7 +21,7 @@ export class CinemasPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cinemas$ = this.store.select(CinemasSelectors.selectCinemas);
+    this.cinemas$ = this.store.select(CinemasSelectors.selectAllCinemas);
     this.activeCinemaId$ = this.store.select(CinemasPageSelectors.selectActiveCinemaId);
   }
 

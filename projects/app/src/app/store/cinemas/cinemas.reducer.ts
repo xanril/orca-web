@@ -1,3 +1,4 @@
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, createFeature, on } from '@ngrx/store';
 import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
 import { CinemaRoom } from '../../models/cinema-room.model';
@@ -6,10 +7,10 @@ import * as CinemaActions from './cinema.actions';
 
 export const cinemaFeatureKey = 'cinemas';
 
+export const cinemasAdapter: EntityAdapter<Cinema> =
+  createEntityAdapter<Cinema>();
 
-
-export interface State {
-  cinemas: Cinema[];
+export interface State extends EntityState<Cinema> {
   cinemaRooms: CinemaRoom[];
   schedules: CinemaRoomSchedule[];
 }
@@ -73,61 +74,49 @@ const DUMMY_CINEMA_ROOM_SCHEDULES: CinemaRoomSchedule[] = [
   },
 ];
 
-export const initialState: State = {
-  cinemas: [],
-  cinemaRooms: DUMMY_CINEMA_ROOMS,
-  schedules: DUMMY_CINEMA_ROOM_SCHEDULES,
-};
-
 export const cinemasFeature = createFeature({
   name: cinemaFeatureKey,
   reducer: createReducer(
-    initialState,
+    cinemasAdapter.getInitialState({
+      cinemaRooms: DUMMY_CINEMA_ROOMS,
+      schedules: DUMMY_CINEMA_ROOM_SCHEDULES,
+    }),
     on(CinemaActions.loadCinemasSuccess, (state, action) => {
-      return {
-        ...state,
-        cinemas: [...action.cinemas],
-      };
+      return cinemasAdapter.addMany(action.cinemas, state);
     }),
     on(CinemaActions.deleteCinemaSuccess, (state, action) => {
-      return {
-        ...state,
-        cinemas: state.cinemas.filter((item) => item.id !== action.cinemaId),
-      };
+      return cinemasAdapter.removeOne(action.cinemaId, state);
     }),
     on(CinemaActions.addCinemaSuccess, (state, action) => {
-      return {
-        ...state,
-        cinemas: [...state.cinemas, action.cinema],
-      };
+      return cinemasAdapter.addOne(action.cinema, state);
     }),
-    on(CinemaActions.editCinemaSuccess, (state, action) => {
-      //get index
-      let targetIndex = state.cinemas.findIndex(
-        (m) => m.id === action.cinema.id
-      );
+    // on(CinemaActions.editCinemaSuccess, (state, action) => {
+    //   //get index
+    //   let targetIndex = state.cinemas.findIndex(
+    //     (m) => m.id === action.cinema.id
+    //   );
 
-      // assign new item
-      const newCinemas = [...state.cinemas];
-      newCinemas[targetIndex] = action.cinema;
+    //   // assign new item
+    //   const newCinemas = [...state.cinemas];
+    //   newCinemas[targetIndex] = action.cinema;
 
-      return {
-        ...state,
-        cinemas: [...newCinemas],
-      };
-    }),
-    on(CinemaActions.addCinemaRoomSuccess, (state, action) => {
-      return {
-        ...state,
-        cinemaRooms: [...state.cinemaRooms, action.cinemaRoom],
-      };
-    }),
-    on(CinemaActions.addCinemaRoomScheduleSuccess, (state, action) => {
-      return {
-        ...state,
-        schedules: [...state.schedules, action.newSchedule],
-      };
-    })
+    //   return {
+    //     ...state,
+    //     cinemas: [...newCinemas],
+    //   };
+    // }),
+    // on(CinemaActions.addCinemaRoomSuccess, (state, action) => {
+    //   return {
+    //     ...state,
+    //     cinemaRooms: [...state.cinemaRooms, action.cinemaRoom],
+    //   };
+    // }),
+    // on(CinemaActions.addCinemaRoomScheduleSuccess, (state, action) => {
+    //   return {
+    //     ...state,
+    //     schedules: [...state.schedules, action.newSchedule],
+    //   };
+    // })
   ),
 });
 

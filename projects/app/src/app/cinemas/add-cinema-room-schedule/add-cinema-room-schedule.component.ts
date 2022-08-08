@@ -42,7 +42,7 @@ export class AddCinemaRoomScheduleComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.cinemas$ = this.store.select(CinemaSelectors.selectCinemas);
+    this.cinemas$ = this.store.select(CinemaSelectors.selectAllCinemas);
     this.cinemaRoom$ = this.store.select(
       CinemaSelectors.selectCinemaRoomsWithCinemaId(0)
     );

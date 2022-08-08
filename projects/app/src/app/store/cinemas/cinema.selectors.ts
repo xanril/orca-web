@@ -1,10 +1,25 @@
 import { createSelector } from '@ngrx/store';
-import { cinemasFeature } from './cinemas.reducer';
+import { cinemasAdapter, cinemasFeature } from './cinemas.reducer';
+
+const { selectTotal, selectAll } = cinemasAdapter.getSelectors();
+
+export const selectAllCinemas = createSelector(
+  cinemasFeature.selectCinemasState,
+  (state) => {
+    return selectAll(state);
+  }
+);
+
+export const selectTotalCinemasCount = createSelector(
+  cinemasFeature.selectCinemasState,
+  (state) => {
+    return selectTotal(state);
+  }
+);
 
 export const selectCinemaWithId = (cinemaId: number) => {
-  return createSelector(cinemasFeature.selectCinemas, (cinemas) => {
-    const filteredItems = cinemas.filter((item) => item.id === cinemaId);
-    return filteredItems[0];
+  return createSelector(cinemasFeature.selectEntities, (cinemaEntities) => {
+    return cinemaEntities[cinemaId];
   });
 };
 
@@ -33,8 +48,4 @@ export const selectSchedulesWithCinemaRoomId = (roomId: number) => {
   });
 };
 
-export const {
-  selectCinemas,
-  selectCinemaRooms,
-  selectSchedules
-} = cinemasFeature;
+export const { selectCinemaRooms, selectSchedules } = cinemasFeature;

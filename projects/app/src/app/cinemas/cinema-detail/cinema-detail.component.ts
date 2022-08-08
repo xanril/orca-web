@@ -11,7 +11,7 @@ import * as CinemasSelectors from '../../store/cinemas/cinema.selectors';
 })
 export class CinemaDetailComponent implements OnInit {
   unsubscribe$: Subject<void> = new Subject<void>();
-  cinema!: Cinema;
+  cinema?: Cinema;
   
   constructor(private store: Store, private route: ActivatedRoute) { }
 

@@ -9,6 +9,7 @@ import { cinemasFeature } from './cinemas.reducer';
 import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
 import { CinemasService } from '../../services/cinemas.service';
 import * as CinemasActions from './cinema.actions';
+import * as CinemasSelectors from './cinema.selectors';
 
 @Injectable()
 export class CinemaEffects {
@@ -49,12 +50,12 @@ export class CinemaEffects {
   addCinema$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CinemasActions.addCinema),
-      withLatestFrom(this.store.select('cinemas')),
-      map(([actionData, state]) => {
+      withLatestFrom(this.store.select(CinemasSelectors.selectTotalCinemasCount)),
+      map(([actionData, totalCount]) => {
         // TODO: call Add Cinema API
 
         const newCinema: Cinema = {
-          id: state.cinemas.length,
+          id: totalCount,
           name: actionData.name,
           location: actionData.location,
         };

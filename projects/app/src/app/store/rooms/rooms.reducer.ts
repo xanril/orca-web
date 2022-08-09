@@ -15,7 +15,10 @@ export const roomsFeature = createFeature({
     roomsAdapter.getInitialState(),
     on(RoomsActions.loadRoomsSuccess, (state, action) => {
       return roomsAdapter.addMany(action.rooms, state);
-    })
+    }),
+    on(RoomsActions.editRoomSuccess, (state, action) => {
+      return roomsAdapter.upsertOne(action.room, state);
+    }),
   ),
 });
 

@@ -24,7 +24,11 @@ export class CinemaRoomItemComponent implements OnInit {
     this.roomForm.get('name')?.setValue(this.room.name);
   }
 
-  deleteHandler() {}
+  deleteHandler() {
+    this.store.dispatch(RoomsActions.deleteRoom({
+      roomId: this.room.id
+    }));
+  }
 
   doneEditingHandler() {
     this.store.dispatch(

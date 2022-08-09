@@ -19,6 +19,9 @@ export const roomsFeature = createFeature({
     on(RoomsActions.editRoomSuccess, (state, action) => {
       return roomsAdapter.upsertOne(action.room, state);
     }),
+    on(RoomsActions.deleteRoomSuccess, (state, action) => {
+      return roomsAdapter.removeOne(action.roomId + '', state);
+    }),
   ),
 });
 

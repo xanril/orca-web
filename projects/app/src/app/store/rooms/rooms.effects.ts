@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { catchError, map, mergeMap, concatMap, of } from 'rxjs';
 import { RoomsService } from '../../services/rooms.service';
 import * as RoomsActions from './rooms.actions';
 
@@ -29,6 +29,17 @@ export class RoomsEffects {
           catchError((error) => of(RoomsActions.editRoomFailure({ error })))
         )
       )
+    );
+  });
+
+  deleteRoom$ = createEffect(() => {
+    return this.actions$.pipe(
+        ofType(RoomsActions.deleteRoom),
+        concatMap((actionData) =>
+          this.roomsService.deleteRoom(actionData.roomId).pipe(
+            map(data => RoomsActions.deleteRoomSuccess({ roomId: data })),
+            catchError(error => of(RoomsActions.deleteRoomFailure({ error }))))
+          ),
     );
   });
 }

@@ -19,11 +19,26 @@ export const editRoom = createAction(
 );
 
 export const editRoomSuccess = createAction(
-  '[Rooms API] EditRoom Success',
+  '[Rooms API] Edit Room Success',
   props<{ room: Room }>()
 );
 
 export const editRoomFailure = createAction(
   '[Rooms API] Edit Room Failure',
+  props<{ error: any }>()
+);
+
+export const deleteRoom = createAction(
+  '[Rooms API] Delete Room',
+  props<{ roomId: number }>()
+);
+
+export const deleteRoomSuccess = createAction(
+  '[Rooms API] Delete Room Success',
+  props<{ roomId: number }>()
+);
+
+export const deleteRoomFailure = createAction(
+  '[Rooms API] Delete Room Failure',
   props<{ error: any }>()
 );

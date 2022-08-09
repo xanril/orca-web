@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
-import { Room } from '../../models/room.model';
-import * as CinemaActions from '../../store/cinemas/cinema.actions';
-import * as CinemaSelectors from '../../store/cinemas/cinema.selectors';
+import { CinemaRoomSchedule } from '../../../models/cinema-room-schedule.model';
+import { Room } from '../../../models/room.model';
+import * as CinemaActions from '../../../store/cinemas/cinema.actions';
+import * as CinemaSelectors from '../../../store/cinemas/cinema.selectors';
 
 @Component({
   selector: 'app-cinema-room-item',
-  templateUrl: './cinema-room-item.component.html',
+  templateUrl: './cinema-room-item.component.html'
 })
 export class CinemaRoomItemComponent implements OnInit {
   @Input() cinemaRoomItem!: Room;

@@ -1,6 +1,35 @@
-Cinema Name: {{ (cinema$ | async)?.name }} <br/>
+Cinema Name: {{ (cinema$ | async)?.name }} <br />
 Location: {{ (cinema$ | async)?.location }}
 
-<span *ngFor="let room of (rooms$ | async)">
-    Room: {{ room.name }}
-</span>
+<!-- <div>
+  <app-cinema-room-item
+    *ngFor="let room of rooms$ | async"
+    [cinemaRoomItem]="room"
+  ></app-cinema-room-item>
+</div> -->
+
+<div class="overflow-x-auto">
+  <table class="table w-full">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="w-full">Name</th>
+        <th class="max-w-fit px-2"></th>
+        <th class="max-w-fit px-2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let room of rooms$ | async; index as i">
+        <th>{{ i + 1 }}</th>
+        <td>{{ room.name }}</td>
+        <td class="px-2"><button class="btn btn-primary btn-outline btn-square">E</button></td>
+        <td class="px-2"><button class="btn btn-error btn-outline btn-square">X</button></td>
+      </tr>
+      <!-- <tr>
+        <td colspan="4" class="bg-rose-500">
+          hello
+        </td>
+      </tr> -->
+    </tbody>
+  </table>
+</div>

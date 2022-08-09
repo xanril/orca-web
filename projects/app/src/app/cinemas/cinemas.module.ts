@@ -5,7 +5,7 @@ import { CinemasPageRoutingModule } from './cinemas-routing.module';
 import { SharedModule } from '../shared/shared-ui.module';
 import { NewCinemaBlockComponent } from './new-cinema-block/new-cinema-block.component';
 import { EditCinemaComponent } from './edit-cinema/edit-cinema.component';
-import { CinemaRoomItemComponent } from './cinema-room-item/cinema-room-item.component';
+import { CinemaRoomItemComponent } from './components/room-item/cinema-room-item.component';
 import { NewCinemaRoomBlockComponent } from './new-cinema-room-block/new-cinema-room-block.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CinemaRoomScheduleItemComponent } from './cinema-room-schedule-item/cinema-room-schedule-item.component';

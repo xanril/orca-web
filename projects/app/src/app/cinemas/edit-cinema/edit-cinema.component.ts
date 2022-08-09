@@ -26,7 +26,7 @@ export class EditCinemaComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-
+ 
   ngOnInit(): void {
     const cinemaId = +this.route.snapshot.params['id'];
 

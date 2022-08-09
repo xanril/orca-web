@@ -27,7 +27,7 @@ export class CinemaDetailComponent implements OnInit {
         }))
       .subscribe((cinemaId) => {
         this.cinema$ = this.store.select(CinemasSelectors.selectCinemaWithId(cinemaId));
-        this.rooms$ = this.store.select(RoomsSelectors.selectAllRooms);
+        this.rooms$ = this.store.select(RoomsSelectors.selectRoomsWithCinemaId(cinemaId));
       });
   }
 }

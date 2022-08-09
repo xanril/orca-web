@@ -1,7 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, createFeature, on } from '@ngrx/store';
 import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
-import { Room } from '../../models/room.model';
 import { Cinema } from '../../models/cinema.model';
 import * as CinemaActions from './cinema.actions';
 
@@ -65,33 +64,6 @@ export const cinemasFeature = createFeature({
     on(CinemaActions.addCinemaSuccess, (state, action) => {
       return cinemasAdapter.addOne(action.cinema, state);
     }),
-    // on(CinemaActions.editCinemaSuccess, (state, action) => {
-    //   //get index
-    //   let targetIndex = state.cinemas.findIndex(
-    //     (m) => m.id === action.cinema.id
-    //   );
-
-    //   // assign new item
-    //   const newCinemas = [...state.cinemas];
-    //   newCinemas[targetIndex] = action.cinema;
-
-    //   return {
-    //     ...state,
-    //     cinemas: [...newCinemas],
-    //   };
-    // }),
-    // on(CinemaActions.addCinemaRoomSuccess, (state, action) => {
-    //   return {
-    //     ...state,
-    //     cinemaRooms: [...state.cinemaRooms, action.cinemaRoom],
-    //   };
-    // }),
-    // on(CinemaActions.addCinemaRoomScheduleSuccess, (state, action) => {
-    //   return {
-    //     ...state,
-    //     schedules: [...state.schedules, action.newSchedule],
-    //   };
-    // })
   ),
 });
 

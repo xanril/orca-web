@@ -18,7 +18,11 @@ Location: {{ (cinema$ | async)?.location }}
       </tr>
       <tr>
         <td colspan="2">
-          <app-add-room-item [cinemaId]="(cinema$ | async)?.id"></app-add-room-item>
+          <app-add-new-item
+            addLabel="Add New Room"
+            placeholder="Room Name"
+            (onSubmit)="newRoomSubmitHandler($event)"
+          ></app-add-new-item>
         </td>
       </tr>
     </tbody>

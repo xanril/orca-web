@@ -50,14 +50,15 @@ export class CinemaEffects {
   addCinema$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CinemasActions.addCinema),
-      withLatestFrom(this.store.select(CinemasSelectors.selectTotalCinemasCount)),
+      withLatestFrom(
+        this.store.select(CinemasSelectors.selectTotalCinemasCount)
+      ),
       map(([actionData, totalCount]) => {
         // TODO: call Add Cinema API
 
         const newCinema: Cinema = {
+          ...actionData.cinema,
           id: totalCount,
-          name: actionData.name,
-          location: actionData.location,
         };
 
         return CinemasActions.addCinemaSuccess({ cinema: newCinema });

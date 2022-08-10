@@ -17,7 +17,7 @@ export const loadCinemasFailure = createAction(
 
 export const addCinema = createAction(
   '[Cinema API] Add Cinema',
-  props<{ name: string; location: string; roomNames: string[] }>()
+  props<{ cinema: Cinema }>()
 );
 
 export const addCinemaSuccess = createAction(

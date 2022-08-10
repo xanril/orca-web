@@ -8,7 +8,7 @@ import * as RoomsActions from '../../../store/rooms/rooms.actions';
   selector: 'app-room-item',
   templateUrl: './room-item.component.html',
 })
-export class CinemaRoomItemComponent implements OnInit {
+export class RoomItemComponent implements OnInit {
   @Input() room!: Room;
   isEditing: boolean = false;
   roomForm: FormGroup = new FormGroup({

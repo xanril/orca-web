@@ -3,13 +3,10 @@ import { CommonModule } from '@angular/common';
 import { CinemasPageComponent } from './cinemas-page/cinemas-page.component';
 import { CinemasPageRoutingModule } from './cinemas-routing.module';
 import { SharedModule } from '../shared/shared-ui.module';
-import { NewCinemaBlockComponent } from './new-cinema-block/new-cinema-block.component';
-import { EditCinemaComponent } from './edit-cinema/edit-cinema.component';
-import { CinemaRoomItemComponent } from './components/room-item/room-item.component';
+import { RoomItemComponent } from './components/room-item/room-item.component';
 import { AddRoomItemComponent } from './components/add-room-item/add-room-item.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CinemaRoomScheduleItemComponent } from './cinema-room-schedule-item/cinema-room-schedule-item.component';
-import { EditCinemaRoomComponent } from './edit-cinema-room/edit-cinema-room.component';
 import { AddCinemaRoomScheduleComponent } from './add-cinema-room-schedule/add-cinema-room-schedule.component';
 import { CinemaListComponent } from './components/cinema-list/cinema-list.component';
 import { CinemasStartComponent } from './cinemas-start/cinemas-start.component';
@@ -20,12 +17,9 @@ import { CinemaDetailComponent } from './cinema-detail/cinema-detail.component';
 @NgModule({
   declarations: [
     CinemasPageComponent,
-    NewCinemaBlockComponent,
-    EditCinemaComponent,
-    CinemaRoomItemComponent,
+    RoomItemComponent,
     AddRoomItemComponent,
     CinemaRoomScheduleItemComponent,
-    EditCinemaRoomComponent,
     AddCinemaRoomScheduleComponent,
     CinemaListComponent,
     CinemasStartComponent,

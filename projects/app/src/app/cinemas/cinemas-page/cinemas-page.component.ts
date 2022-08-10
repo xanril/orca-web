@@ -11,7 +11,7 @@ import * as CinemasPageSelectors from '../store/cinemas-page.selectors';
 })
 export class CinemasPageComponent implements OnInit {
   cinemas$: Observable<Cinema[]> = new Observable<Cinema[]>();
-  activeCinemaId$: Observable<number> = new Observable<number>();
+  activeCinemaId$ = new Observable<number | null>();
 
   constructor(
     private store: Store

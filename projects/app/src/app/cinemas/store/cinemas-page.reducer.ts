@@ -2,11 +2,11 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import * as CinemasPageActions from './cinemas-page.actions';
 
 export interface State {
-  activeCinemaId: number;
+  activeCinemaId: number | null;
 }
 
 const initialState: State = {
-  activeCinemaId: -1,
+  activeCinemaId: null,
 };
 
 export const cinemasPageFeature = createFeature({
@@ -15,6 +15,9 @@ export const cinemasPageFeature = createFeature({
     initialState,
     on(CinemasPageActions.setActiveCinema, (state, action) => {
       return { ...state, activeCinemaId: action.cinemaId };
+    }),
+    on(CinemasPageActions.resetActiveCinemaId, (state, action) => {
+      return { ...state, activeCinemaId: null };
     })
   ),
 });

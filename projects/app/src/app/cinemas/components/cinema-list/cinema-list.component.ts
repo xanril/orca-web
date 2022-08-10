@@ -12,7 +12,7 @@ import * as CinemasActions from '../../../store/cinemas/cinema.actions';
 export class CinemaListComponent implements OnInit {
   @Input() cinemas: Cinema[] | null = [];
   @Input() activeCinemaId: number | null = -1;
-  
+
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {}
@@ -28,15 +28,22 @@ export class CinemaListComponent implements OnInit {
         cinemaId: id,
       })
     );
+
+    if (id === this.activeCinemaId) {
+      this.store.dispatch(CinemasPageActions.resetActiveCinemaId());
+      this.router.navigate(['/cinemas']);
+    }
   }
 
   addCinemaHandler(name: string) {
-    this.store.dispatch(CinemasActions.addCinema({
-      cinema: {
-        id: -1,
-        location: '',
-        name: name
-      }
-    }))
+    this.store.dispatch(
+      CinemasActions.addCinema({
+        cinema: {
+          id: -1,
+          location: '',
+          name: name,
+        },
+      })
+    );
   }
 }

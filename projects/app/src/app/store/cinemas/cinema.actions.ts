@@ -32,7 +32,7 @@ export const addCinemaFailure = createAction(
 
 export const editCinema = createAction(
   '[Cinema API] Edit Cinema',
-  props<{ id: number; name: string; location: string }>()
+  props<{ cinema: Cinema }>()
 );
 
 export const editCinemaSuccess = createAction(

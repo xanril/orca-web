@@ -1,6 +1,6 @@
-Cinema Name: {{ (cinema$ | async)?.name }} <br />
-Location: {{ (cinema$ | async)?.location }}
+<app-cinema-edit-form [cinema]="cinema$ | async"></app-cinema-edit-form>
 
+<div class="text-2xl m-5">Cinema Rooms</div>
 <div class="overflow-x-auto">
   <table class="table w-full">
     <thead>

@@ -13,6 +13,7 @@ import { CinemasStartComponent } from './cinemas-start/cinemas-start.component';
 import { StoreModule } from '@ngrx/store';
 import * as fromCinemasPage from './store/cinemas-page.reducer';
 import { CinemaDetailComponent } from './cinema-detail/cinema-detail.component';
+import { CinemaEditFormComponent } from './components/cinema-edit-form/cinema-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CinemaDetailComponent } from './cinema-detail/cinema-detail.component';
     CinemaListComponent,
     CinemasStartComponent,
     CinemaDetailComponent,
+    CinemaEditFormComponent,
   ],
   imports: [
     CommonModule,

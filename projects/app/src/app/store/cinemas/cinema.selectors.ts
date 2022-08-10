@@ -1,7 +1,8 @@
 import { createSelector } from '@ngrx/store';
+import { Cinema } from '../../models/cinema.model';
 import { cinemasAdapter, cinemasFeature } from './cinemas.reducer';
 
-const { selectTotal, selectAll } = cinemasAdapter.getSelectors();
+const { selectTotal, selectAll, } = cinemasAdapter.getSelectors();
 
 export const selectAllCinemas = createSelector(
   cinemasFeature.selectCinemasDataState,
@@ -19,7 +20,7 @@ export const selectTotalCinemasCount = createSelector(
 
 export const selectCinemaWithId = (cinemaId: number) => {
   return createSelector(cinemasFeature.selectEntities, (cinemaEntities) => {
-    return cinemaEntities[cinemaId];
+    return cinemaEntities[cinemaId] as Cinema;
   });
 };
 

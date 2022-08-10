@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, withLatestFrom, switchMap, catchError, of } from 'rxjs';
+import { map, withLatestFrom, mergeMap, catchError, of } from 'rxjs';
 import { Room } from '../../models/room.model';
 import { Cinema } from '../../models/cinema.model';
 import { AppState } from '..';
@@ -22,7 +22,7 @@ export class CinemaEffects {
   loadCinemas$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CinemasActions.loadCinemas),
-      switchMap(() =>
+      mergeMap(() =>
         this.cinemasService.getCinemas().pipe(
           map((data) => CinemasActions.loadCinemasSuccess({ cinemas: data })),
           catchError((error) =>
@@ -36,7 +36,7 @@ export class CinemaEffects {
   deleteCinema$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CinemasActions.deleteCinema),
-      switchMap((actionData) =>
+      mergeMap((actionData) =>
         this.cinemasService.deleteCinema(actionData.cinemaId).pipe(
           map((data) => CinemasActions.deleteCinemaSuccess({ cinemaId: data })),
           catchError((error) =>
@@ -65,6 +65,18 @@ export class CinemaEffects {
       })
     )
   );
+
+  editCinema$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CinemasActions.editCinema),
+      mergeMap((actionData) =>
+        this.cinemasService.updateCinema(actionData.cinema).pipe(
+          map((data) => CinemasActions.editCinemaSuccess({ cinema: data })),
+          catchError((error) => of(CinemasActions.editCinemaFailure({ error })))
+        )
+      )
+    );
+  });
 
   // editCinema$ = createEffect(() =>
   //   this.actions$.pipe(

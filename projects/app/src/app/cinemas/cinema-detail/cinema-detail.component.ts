@@ -13,11 +13,9 @@ import * as RoomsActions from '../../store/rooms/rooms.actions';
   templateUrl: './cinema-detail.component.html',
 })
 export class CinemaDetailComponent implements OnInit, OnDestroy {
-  unsubscribe$: Subject<void> = new Subject<void>();
-  cinema$: Observable<Cinema | undefined> = new Observable<
-    Cinema | undefined
-  >();
-  rooms$: Observable<Room[]> = new Observable<Room[]>();
+  unsubscribe$ = new Subject<void>();
+  cinema$ = new Observable<Cinema>();
+  rooms$ = new Observable<Room[]>();
   cinemaId: number | undefined;
 
   constructor(private store: Store, private route: ActivatedRoute) {}

@@ -64,6 +64,9 @@ export const cinemasFeature = createFeature({
     on(CinemaActions.addCinemaSuccess, (state, action) => {
       return cinemasAdapter.addOne(action.cinema, state);
     }),
+    on(CinemaActions.editCinemaSuccess, (state, action) => {
+      return cinemasAdapter.upsertOne(action.cinema, state);
+    }),
   ),
 });
 

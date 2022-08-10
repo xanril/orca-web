@@ -10,7 +10,6 @@ const cinemasRoutes: Routes = [
     component: CinemasPageComponent,
     children: [
       { path: 'detail/:cinemaId', component: CinemaDetailComponent },
-      // { path: 'edit/:id', component: EditCinemaComponent },
       { path: '', component: CinemasStartComponent },
     ],
   },

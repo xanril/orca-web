@@ -23,6 +23,13 @@ const appRoutes: Routes = [
       ),
   },
   {
+    path: 'schedules',
+    loadChildren: () =>
+      import('./schedules/schedules.module').then(
+        (m) => m.SchedulesModule
+      ),
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full',

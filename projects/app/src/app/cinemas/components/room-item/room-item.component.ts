@@ -30,7 +30,7 @@ export class CinemaRoomItemComponent implements OnInit {
     }));
   }
 
-  doneEditingHandler() {
+  submitHandler() {
     this.store.dispatch(
       RoomsActions.editRoom({
         room: {

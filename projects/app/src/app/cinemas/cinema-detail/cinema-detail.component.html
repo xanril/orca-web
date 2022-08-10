@@ -16,11 +16,11 @@ Location: {{ (cinema$ | async)?.location }}
           <app-room-item [room]="room"></app-room-item>
         </td>
       </tr>
-      <!-- <tr>
-        <td colspan="4" class="bg-rose-500">
-          hello
+      <tr>
+        <td colspan="2">
+          <app-add-room-item [cinemaId]="(cinema$ | async)?.id"></app-add-room-item>
         </td>
-      </tr> -->
+      </tr>
     </tbody>
   </table>
 </div>

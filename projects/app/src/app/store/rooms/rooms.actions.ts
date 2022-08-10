@@ -13,6 +13,21 @@ export const loadRoomsFailure = createAction(
   props<{ error: any }>()
 );
 
+export const addRoom = createAction(
+  '[Rooms API] Add Room',
+  props<{ room: Room }>()
+);
+
+export const addRoomSuccess = createAction(
+  '[Rooms API] Add Room Success',
+  props<{ room: Room }>()
+);
+
+export const addRoomFailure = createAction(
+  '[Rooms API] Add Room Failure',
+  props<{ error: any }>()
+);
+
 export const editRoom = createAction(
   '[Rooms API] Edit Room',
   props<{ room: Room }>()

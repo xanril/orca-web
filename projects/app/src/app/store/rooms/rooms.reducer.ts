@@ -16,6 +16,9 @@ export const roomsFeature = createFeature({
     on(RoomsActions.loadRoomsSuccess, (state, action) => {
       return roomsAdapter.addMany(action.rooms, state);
     }),
+    on(RoomsActions.addRoomSuccess, (state, action) => {
+      return roomsAdapter.addOne(action.room, state);
+    }),
     on(RoomsActions.editRoomSuccess, (state, action) => {
       return roomsAdapter.upsertOne(action.room, state);
     }),

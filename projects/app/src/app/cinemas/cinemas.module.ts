@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared-ui.module';
 import { NewCinemaBlockComponent } from './new-cinema-block/new-cinema-block.component';
 import { EditCinemaComponent } from './edit-cinema/edit-cinema.component';
 import { CinemaRoomItemComponent } from './components/room-item/room-item.component';
-import { NewCinemaRoomBlockComponent } from './new-cinema-room-block/new-cinema-room-block.component';
+import { AddRoomItemComponent } from './components/add-room-item/add-room-item.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CinemaRoomScheduleItemComponent } from './cinema-room-schedule-item/cinema-room-schedule-item.component';
 import { EditCinemaRoomComponent } from './edit-cinema-room/edit-cinema-room.component';
@@ -23,7 +23,7 @@ import { CinemaDetailComponent } from './cinema-detail/cinema-detail.component';
     NewCinemaBlockComponent,
     EditCinemaComponent,
     CinemaRoomItemComponent,
-    NewCinemaRoomBlockComponent,
+    AddRoomItemComponent,
     CinemaRoomScheduleItemComponent,
     EditCinemaRoomComponent,
     AddCinemaRoomScheduleComponent,

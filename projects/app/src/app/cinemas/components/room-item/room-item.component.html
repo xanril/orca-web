@@ -34,7 +34,7 @@
   [ngClass]="{ hidden: !isEditing }"
 >
   <div class="w-full">
-    <form [formGroup]="roomForm">
+    <form [formGroup]="roomForm" (ngSubmit)="submitHandler()">
       <div class="form-control">
         <label class="input-group">
           <span>Name</span>
@@ -47,7 +47,6 @@
     <button
       type="submit"
       class="btn btn-link btn-square btn-sm text-base-content hover:text-success"
-      (click)="doneEditingHandler()"
     >
       <!-- prettier-ignore -->
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

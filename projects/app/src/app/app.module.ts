@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.co
 import { CinemaEffects } from './store/cinemas/cinema.effects';
 import { MoviesEffects } from './store/movies/movies.effects';
 import { RoomsEffects } from './store/rooms/rooms.effects';
+import { SchedulesEffects } from './store/schedules/schedules.effects';
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent, PageNotFoundComponent],
@@ -26,7 +27,7 @@ import { RoomsEffects } from './store/rooms/rooms.effects';
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),
-    EffectsModule.forRoot([MoviesEffects, CinemaEffects, RoomsEffects]),
+    EffectsModule.forRoot([MoviesEffects, CinemaEffects, RoomsEffects, SchedulesEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

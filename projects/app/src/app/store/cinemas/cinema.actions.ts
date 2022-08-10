@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Room } from '../../models/room.model';
 import { Cinema } from '../../models/cinema.model';
-import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
+import { Schedule } from '../../models/schedule.model';
 
 export const loadCinemas = createAction('[Cinema API] Load Cinemas');
 
@@ -90,7 +90,7 @@ export const addCinemaRoomSchedule = createAction(
 
 export const addCinemaRoomScheduleSuccess = createAction(
   '[Cinema] Add Cinema Room Schedule Success',
-  props<{ newSchedule: CinemaRoomSchedule }>()
+  props<{ newSchedule: Schedule }>()
 );
 
 export const addCinemaRoomScheduleFailure = createAction(

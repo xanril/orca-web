@@ -6,7 +6,7 @@ import { Room } from '../../models/room.model';
 import { Cinema } from '../../models/cinema.model';
 import { AppState } from '..';
 import { cinemasFeature } from './cinemas.reducer';
-import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
+import { Schedule } from '../../models/schedule.model';
 import { CinemasService } from '../../services/cinemas.service';
 import * as CinemasActions from './cinema.actions';
 import * as CinemasSelectors from './cinema.selectors';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CinemaRoomSchedule } from '../../models/cinema-room-schedule.model';
+import { Schedule } from '../../models/schedule.model';
 import { Movie } from '../../models/movie.model';
 import { moviesFeature } from '../../store/movies/movies.reducer';
 
@@ -9,12 +9,11 @@ import { moviesFeature } from '../../store/movies/movies.reducer';
   templateUrl: './cinema-room-schedule-item.component.html',
 })
 export class CinemaRoomScheduleItemComponent implements OnInit {
-  scheduleItem: CinemaRoomSchedule = {
+  scheduleItem: Schedule = {
     id: 0,
     cinemaId: 0,
     cinemaRoomId: 0,
     movieId: 0,
-    seat: [],
     dayOfWeek: 0,
     startTime: new Date(2022, 9, 17, 11, 15, 0),
     endTime: new Date(2022, 9, 17, 14, 15, 0),

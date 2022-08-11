@@ -1,0 +1,23 @@
+<div>
+  <form [formGroup]="selectForm">
+    <select
+      class="select select-bordered select-lg w-full"
+      formControlName="cinema"
+    >
+      <option value="" disabled selected>Select Cinema</option>
+      <option *ngFor="let cinema of cinemas$ | async" [value]="cinema.id">
+        {{ cinema.name }}
+      </option>
+    </select>
+
+    <select
+      class="select select-bordered select-lg w-full"
+      formControlName="room"
+    >
+      <option value="" disabled selected>Select Room</option>
+      <option *ngFor="let room of rooms$ | async" [value]="room.id">
+        {{ room.name }}
+      </option>
+    </select>
+  </form>
+</div>

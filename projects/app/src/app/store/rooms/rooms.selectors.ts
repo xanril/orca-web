@@ -19,5 +19,5 @@ export const selectTotalCount = createSelector(
 
 export const selectRoomsWithCinemaId = (cinemaId: number) =>
   createSelector(selectAllRooms, (rooms) => {
-    return rooms.filter((room) => room.cinemaId === cinemaId);
+    return rooms.filter((room) => room.cinemaId == cinemaId);
   });

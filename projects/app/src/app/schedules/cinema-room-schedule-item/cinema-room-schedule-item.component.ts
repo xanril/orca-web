@@ -12,7 +12,7 @@ export class CinemaRoomScheduleItemComponent implements OnInit {
   scheduleItem: Schedule = {
     id: 0,
     cinemaId: 0,
-    cinemaRoomId: 0,
+    roomId: 0,
     movieId: 0,
     dayOfWeek: 0,
     startTime: new Date(2022, 9, 17, 11, 15, 0),

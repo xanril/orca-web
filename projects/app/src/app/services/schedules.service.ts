@@ -6,7 +6,7 @@ const DUMMY_CINEMA_ROOM_SCHEDULES: Schedule[] = [
   {
     id: 0,
     cinemaId: 0,
-    cinemaRoomId: 0,
+    roomId: 0,
     movieId: 0,
     dayOfWeek: 0,
     startTime: new Date(2022, 9, 17, 11, 15, 0),
@@ -16,7 +16,7 @@ const DUMMY_CINEMA_ROOM_SCHEDULES: Schedule[] = [
   {
     id: 1,
     cinemaId: 1,
-    cinemaRoomId: 0,
+    roomId: 2,
     movieId: 0,
     dayOfWeek: 0,
     startTime: new Date(2022, 9, 17, 14, 30, 0),
@@ -26,7 +26,7 @@ const DUMMY_CINEMA_ROOM_SCHEDULES: Schedule[] = [
   {
     id: 2,
     cinemaId: 0,
-    cinemaRoomId: 0,
+    roomId: 0,
     movieId: 2,
     dayOfWeek: 0,
     startTime: new Date(2022, 9, 17, 16, 45, 0),

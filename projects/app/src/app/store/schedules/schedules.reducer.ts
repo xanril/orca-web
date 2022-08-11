@@ -3,7 +3,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { Schedule } from '../../models/schedule.model';
 import * as SchedulesActions from './schedules.actions';
 
-export const schedulesFeatureKey = 'schedulesDate';
+export const schedulesFeatureKey = 'schedulesData';
 
 export const schedulesAdapter = createEntityAdapter<Schedule>();
 

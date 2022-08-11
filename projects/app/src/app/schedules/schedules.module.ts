@@ -10,6 +10,7 @@ import { CinemaRoomScheduleItemComponent } from './cinema-room-schedule-item/cin
 import { SchedulesSideComponent } from './components/schedules-side/schedules-side.component';
 import { schedulesPageFeature } from './store/schedules-page.reducer';
 import { ScheduleDetailComponent } from './schedule-detail/schedule-detail.component';
+import { ScheduleItemComponent } from './components/schedule-item/schedule-item.component';
 @NgModule({
   declarations: [
     SchedulesPageComponent,
@@ -18,6 +19,7 @@ import { ScheduleDetailComponent } from './schedule-detail/schedule-detail.compo
     CinemaRoomScheduleItemComponent,
     SchedulesSideComponent,
     ScheduleDetailComponent,
+    ScheduleItemComponent,
   ],
   imports: [
     CommonModule,

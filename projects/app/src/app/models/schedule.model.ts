@@ -1,7 +1,7 @@
 export interface Schedule {
   id: number;
   cinemaId: number;
-  cinemaRoomId: number;
+  roomId: number;
   movieId: number;
   dayOfWeek: number;
   startTime: Date;

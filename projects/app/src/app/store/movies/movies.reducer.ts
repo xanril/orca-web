@@ -1,53 +1,30 @@
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { Movie } from '../../models/movie.model';
 import * as MoviesPageActions from './movies.actions';
 
 export const moviesFeatureKey = 'moviesData';
 
-export interface State {
-  movies: Movie[];
-}
+export const moviesAdapter = createEntityAdapter<Movie>();
 
-export const initialState: State = {
-  movies: [],
-};
+export interface State extends EntityState<Movie> {
+}
 
 export const moviesFeature = createFeature({
   name: moviesFeatureKey,
   reducer: createReducer(
-    initialState,
+    moviesAdapter.getInitialState(),
     on(MoviesPageActions.loadMoviesSuccess, (state: State, actions) => {
-      return {
-        ...state,
-        movies: [...actions.movies],
-      };
+      return moviesAdapter.addMany(actions.movies, state);
     }),
     on(MoviesPageActions.addMovieSuccess, (state: State, action) => {
-      // TODO: remove when backend is integrated
-      const newMovie: Movie = {
-        ...action.movie,
-        id: state.movies.length,
-      };
-
-      return {
-        ...state,
-        movies: [...state.movies, newMovie],
-      };
+      return moviesAdapter.addOne(action.movie, state);
     }),
     on(MoviesPageActions.deleteMovieSuccess, (state: State, action) => {
-      return {
-        ...state,
-        movies: state.movies.filter((item) => item.id !== action.id),
-      };
+      return moviesAdapter.removeOne(action.id, state);
     }),
     on(MoviesPageActions.updateMovieSuccess, (state: State, action) => {
-      const newMovies = [...state.movies];
-      newMovies[action.updatedMovie.id] = action.updatedMovie;
-
-      return {
-        ...state,
-        movies: [...newMovies],
-      };
+      return moviesAdapter.upsertOne(action.updatedMovie, state);
     })
   ),
 });
@@ -55,5 +32,4 @@ export const moviesFeature = createFeature({
 export const {
   name, // feature name
   reducer, // feature reducer
-  selectMovies,
 } = moviesFeature;

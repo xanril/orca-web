@@ -1,15 +1,21 @@
 import { createSelector } from '@ngrx/store';
 import { Movie } from '../../models/movie.model';
-import { moviesFeature } from './movies.reducer';
+import { moviesAdapter, moviesFeature } from './movies.reducer';
 
-export const selectMovieWithId = (movieId: number) => {
-    return createSelector(
-        selectMovies,
-        ((movies) => {
-            const movie = movies.find((movie) => movie.id === movieId);
-            return movie as Movie;
-        })
-    )
-}
+const { selectAll, selectEntities, selectTotal } = moviesAdapter.getSelectors();
 
-export const { selectMovies } = moviesFeature;
+export const selectMovieWithId = (movieId: number) =>
+  createSelector(moviesFeature.selectMoviesDataState, (state) => {
+    const movieEntities = selectEntities(state);
+    return movieEntities[movieId] as Movie;
+  });
+
+export const selectMovies = createSelector(
+  moviesFeature.selectMoviesDataState,
+  (state) => selectAll(state)
+);
+
+export const selectTotalMoviesCount = createSelector(
+  moviesFeature.selectMoviesDataState,
+  (state) => selectTotal(state)
+);

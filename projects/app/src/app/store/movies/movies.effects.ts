@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { switchMap, map, catchError, of, merge, mergeWith, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { switchMap, map, catchError, of, tap, withLatestFrom } from 'rxjs';
 import { Movie } from '../../models/movie.model';
 import { MoviesService } from '../../services/movies.service';
 import { TMDBService } from '../../services/tmdb.service';
 import * as MoviesActions from './movies.actions';
+import * as MoviesSelectors from './movies.selectors';
 
 @Injectable()
 export class MoviesEffects {
@@ -13,7 +15,8 @@ export class MoviesEffects {
     private actions$: Actions,
     private moviesService: MoviesService,
     private tmdbService: TMDBService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   loadMovies$ = createEffect(() =>
@@ -39,10 +42,13 @@ export class MoviesEffects {
       ofType(MoviesActions.addMovie),
       switchMap((actionData) =>
         this.tmdbService.getMovieDetails(actionData.searchMovieResult.id).pipe(
-          map((tmdbMovieDetails) => {
-            // compose movie object
+          withLatestFrom(
+            this.store.select(MoviesSelectors.selectTotalMoviesCount)
+          ),
+          map(([tmdbMovieDetails, totalCount]) => {
+            // TODO: assign proper movie id
             const newMovie: Movie = {
-              id: -1,
+              id: totalCount,
               tmdbId: actionData.searchMovieResult.id,
               title: actionData.searchMovieResult.title,
               tagline: tmdbMovieDetails.tagline ?? '',

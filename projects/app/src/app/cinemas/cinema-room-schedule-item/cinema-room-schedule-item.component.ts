@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Schedule } from '../../models/schedule.model';
 import { Movie } from '../../models/movie.model';
-import { moviesFeature } from '../../store/movies/movies.reducer';
+import * as MoviesSelectors from '../../store/movies/movies.selectors';
 
 @Component({
   selector: 'app-cinema-room-schedule-item',
@@ -26,7 +26,7 @@ export class CinemaRoomScheduleItemComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.select(moviesFeature.selectMovies).subscribe((movies) => {
+    this.store.select(MoviesSelectors.selectMovies).subscribe((movies) => {
       this.movieItem = movies.find((m) => m.id === this.scheduleItem.movieId);
     });
   }

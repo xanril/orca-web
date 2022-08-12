@@ -1,0 +1,11 @@
+.day-item.active {
+  @apply bg-primary cursor-default;
+}
+
+.day-item.active p.weekday {
+  @apply text-primary-content;
+}
+
+.day-item.active p.date-number {
+  @apply text-primary-content font-bold;
+}

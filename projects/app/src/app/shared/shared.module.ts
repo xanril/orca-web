@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ListMenuItemComponent } from './list-menu-item/list-menu-item.component';
 import { WeekCalendarComponent } from './week-calendar/week-calendar.component';
+import { DayCalendarComponent } from './day-calendar/day-calendar.component';
 
 @NgModule({
   declarations: [
     PaginationComponent,
     ListMenuItemComponent,
-    WeekCalendarComponent
+    WeekCalendarComponent,
+    DayCalendarComponent
   ],
   imports: [
     CommonModule

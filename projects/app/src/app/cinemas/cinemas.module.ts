@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { CinemasPageRoutingModule } from './cinemas-routing.module';
-import { SharedModule } from '../shared/shared-ui.module';
+import { SharedModule } from '../shared/shared.module';
 import { CinemasPageComponent } from './cinemas-page/cinemas-page.component';
 import { RoomItemComponent } from './components/room-item/room-item.component';
 import { AddNewItemComponent } from './components/add-new-item/add-room-item.component';

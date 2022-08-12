@@ -20,4 +20,8 @@ export class ScheduleItemComponent implements OnInit {
   ngOnInit(): void {
     this.movie$ = this.store.select(MoviesSelectors.selectMovieWithId(this.schedule.movieId));
   }
+
+  editHandler() {}
+
+  deleteHandler() {}
 }

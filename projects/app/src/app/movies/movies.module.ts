@@ -9,7 +9,7 @@ import { MoviesListPageComponent } from './movies-page/movies-page.component';
 import { MoviesSearchComponent } from './movies-search/movies-search.component';
 import { SearchMovieItemComponent } from './components/search-movie-item/search-movie-item.component';
 import { MoviesPageRoutingModule } from './movies-routing.module';
-import { SharedModule } from '../shared/shared-ui.module';
+import { SharedModule } from '../shared/shared.module';
 import { SearchMovieFormComponent } from './components/search-movie-form/search-movie-form.component';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { MoviesStartComponent } from './movies-start/movies-start.component';

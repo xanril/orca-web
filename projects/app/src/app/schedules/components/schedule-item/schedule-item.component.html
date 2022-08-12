@@ -1,8 +1,7 @@
 <div class="flex flex-row items-center">
-  <div class="flex flex-row w-full">
-    <div>{{ schedule.startTime | date: "shortTime" }}</div>
-    <div>{{ schedule.endTime | date: "shortTime" }}</div>
-    <div>{{ schedule.dayOfWeek }}</div>
+  <div class="flex flex-row w-full items-center">
+    <div class="font-bold p-1">{{ schedule.startTime | date: "shortTime" }}</div>
+    <div class="font-bold p-1">{{ schedule.endTime | date: "shortTime" }}</div>
     <div>{{ (movie$ | async)?.title }}</div>
     <div>{{ schedule.ticketPrice }}</div>
   </div>

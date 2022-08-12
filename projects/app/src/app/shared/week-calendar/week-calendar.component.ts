@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-week-calendar',
   templateUrl: './week-calendar.component.html',
 })
 export class WeekCalendarComponent implements OnInit {
-  activeDayOffset: number = 0;
+  @Input() activeDayOffset: number = 0;
+  @Output() onDayItemClick = new EventEmitter<number>();
   dayItems = [0, 1, 2, 3, 4, 5, 6];
 
   constructor() {}
@@ -13,6 +14,6 @@ export class WeekCalendarComponent implements OnInit {
   ngOnInit(): void {}
 
   dayClickHandler(dayOffset: number) {
-    this.activeDayOffset = dayOffset;
+    this.onDayItemClick.emit(dayOffset);
   }
 }

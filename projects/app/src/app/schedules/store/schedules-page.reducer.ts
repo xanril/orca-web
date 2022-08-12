@@ -8,11 +8,13 @@ export const schedulesPageFeatureKey = 'schedulesPage';
 export interface State {
   activeCinemaId: number | null;
   activeRoomId: number | null;
+  activeDayIndex: number;
 }
 
 const initialState: State = {
   activeCinemaId: null,
   activeRoomId: null,
+  activeDayIndex: 0,
 };
 
 export const schedulesPageFeature = createFeature({
@@ -32,10 +34,16 @@ export const schedulesPageFeature = createFeature({
       };
     }),
     on(SchedulesPageActions.resetActiveRoomId, (state, action) => {
-        return {
-          ...state,
-          activeRoomId: null,
-        };
-      })
+      return {
+        ...state,
+        activeRoomId: null,
+      };
+    }),
+    on(SchedulesPageActions.setActiveDayIndex, (state, action) => {
+      return {
+        ...state,
+        activeDayIndex: action.dayIndex,
+      };
+    })
   ),
 });

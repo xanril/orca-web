@@ -1,4 +1,4 @@
-<app-week-calendar></app-week-calendar>
+<app-week-calendar [activeDayOffset]="(activeDayIndex$ | async) ?? 0" (onDayItemClick)="dayItemClickHandler($event)"></app-week-calendar>
 
 <div class="overflow-x-auto">
   <table class="table w-full">

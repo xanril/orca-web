@@ -13,3 +13,8 @@ export const setActiveRoomId = createAction(
 export const resetActiveRoomId = createAction(
   '[Schedules Page] Reset Active Room ID'
 );
+
+export const setActiveDayIndex = createAction(
+  '[Schedules Page] Set Active Day Index',
+  props<{ dayIndex: number }>()
+)

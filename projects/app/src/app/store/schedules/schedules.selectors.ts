@@ -2,6 +2,8 @@ import { createSelector } from '@ngrx/store';
 import { schedulesAdapter, schedulesFeature } from './schedules.reducer';
 
 export const { selectAll } = schedulesAdapter.getSelectors();
+export const { selectEntities, selectIds, selectSchedulesDataState } =
+  schedulesFeature;
 
 export const selectSchedulesWithCinemaIdAndRoomId = (
   cinemaId: number,

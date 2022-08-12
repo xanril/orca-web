@@ -20,7 +20,6 @@ export class MovieResolverService implements Resolve<Movie> {
     state: RouterStateSnapshot
   ): Observable<Movie> {
     const movieId = route.params['movieId'];
-    console.log("resolve: " + movieId);
     return this.store
       .select(MoviesSelectors.selectMovieWithId(+movieId))
       .pipe(take(1));

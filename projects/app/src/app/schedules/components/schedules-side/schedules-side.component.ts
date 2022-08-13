@@ -32,13 +32,9 @@ export class SchedulesSideComponent implements OnInit, OnDestroy {
       .get('cinema')
       ?.valueChanges.pipe(takeUntil(this.unsubscribe$))
       .subscribe((data) => {
+        console.log(data);
         if (!isNaN(data)) {
           this.selectForm.get('room')?.setValue('');
-
-          this.store.dispatch(SchedulesPageActions.setActiveCinemaId({ id: +data }));
-
-          this.store.dispatch(SchedulesPageActions.resetActiveRoomId());
-
           this.rooms$ = this.store.select(RoomsSelector.selectRoomsWithCinemaId(data));
         }
       });
@@ -48,10 +44,26 @@ export class SchedulesSideComponent implements OnInit, OnDestroy {
       ?.valueChanges.pipe(takeUntil(this.unsubscribe$))
       .subscribe((data) => {
         if (data !== '') {
-          this.store.dispatch(SchedulesPageActions.setActiveRoomId({ id: +data }));
-
           const cinemaId = this.selectForm.get('cinema')?.value;
           this.router.navigate(['schedules', 'cinema', cinemaId, 'room', data]);
+        }
+      });
+
+    this.store
+      .select(SchedulesPageSelectors.selectActiveCinemaId)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((cinemaId) => {
+        if (cinemaId != null) {
+          this.selectForm.get('cinema')?.setValue(cinemaId);
+        }
+      });
+
+    this.store
+      .select(SchedulesPageSelectors.selectActiveRoomId)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((roomId) => {
+        if (roomId != null) {
+          this.selectForm.get('room')?.setValue(roomId);
         }
       });
   }

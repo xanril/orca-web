@@ -1,9 +1,10 @@
 <div class="flex flex-row items-center">
   <div class="flex flex-row w-full items-center">
-    <div class="font-bold p-1">{{ schedule.startTime | date: "shortTime" }}</div>
-    <div class="font-bold p-1">{{ schedule.endTime | date: "shortTime" }}</div>
-    <div>{{ (movie$ | async)?.title }}</div>
-    <div>{{ schedule.ticketPrice }}</div>
+    <div class="font-bold p-1 text-center">
+      {{ schedule.startTime | date: "shortTime" }} - {{ schedule.endTime | date: "shortTime" }}
+    </div>
+    <div class="grow px-3">{{ (movie$ | async)?.title }}</div>
+    <div class="px-2">{{ schedule.ticketPrice }} PHP</div>
   </div>
   <div>
     <button

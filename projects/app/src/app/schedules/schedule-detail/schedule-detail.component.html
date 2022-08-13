@@ -1,18 +1,21 @@
 <app-week-calendar [activeDayOffset]="(activeDayIndex$ | async) ?? 0" (onDayItemClick)="dayItemClickHandler($event)"></app-week-calendar>
 
-<div class="overflow-x-auto">
+<div class="overflow-x-auto mt-10">
   <table class="table w-full">
-    <!-- head -->
     <thead>
       <tr>
-        <th></th>
-        <th>Schedule</th>
+        <td>
+          <div class="flex flex-row items-center">
+            <div class="w-44 text-center">Time</div>
+            <div class="grow pl-5">Movie</div>
+            <div class="w-16">Price</div>
+            <div class="w-16"></div>
+          </div>
+        </td>
       </tr>
     </thead>
     <tbody>
-      <!-- row 1 -->
-      <tr *ngFor="let schedule of schedules$ | async; index as i">
-        <th>{{ i + 1 }}</th>
+      <tr *ngFor="let schedule of schedules$ | async">
         <td>
           <app-schedule-detail-item
             [schedule]="schedule"

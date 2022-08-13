@@ -4,19 +4,19 @@ import { Observable } from 'rxjs';
 import { Movie } from '../../../models/movie.model';
 import { Schedule } from '../../../models/schedule.model';
 import * as MoviesSelectors from '../../../store/movies/movies.selectors';
+import * as SchedulesActions from '../../../store/schedules/schedules.actions';
 
 @Component({
   selector: 'app-schedule-detail-item',
   templateUrl: './schedule-item.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class ScheduleItemComponent implements OnInit {
-  @Input() schedule!: Schedule
+  @Input() schedule!: Schedule;
   movie$ = new Observable<Movie>();
   isFormShown = false;
 
-  constructor(private store: Store) { }
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.movie$ = this.store.select(MoviesSelectors.selectMovieWithId(this.schedule.movieId));
@@ -26,7 +26,9 @@ export class ScheduleItemComponent implements OnInit {
     this.isFormShown = true;
   }
 
-  deleteHandler() {}
+  deleteHandler() {
+    this.store.dispatch(SchedulesActions.deleteSchedule({ id: this.schedule.id }));
+  }
 
   cancelHandler() {
     this.isFormShown = false;

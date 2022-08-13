@@ -12,3 +12,18 @@ export const loadSchedulesFailure = createAction(
   '[Schedules API] Load Schedules Failure',
   props<{ error: any }>()
 );
+
+export const deleteSchedule = createAction(
+  '[Schedules API] Delete Schedule',
+  props<{ id: number }>()
+);
+
+export const deleteScheduleSuccess = createAction(
+  '[Schedules API] Delete Schedule Success',
+  props<{ id: number }>()
+);
+
+export const deleteScheduleFailure = createAction(
+  '[Schedules API] Delete Schedule Failure',
+  props<{ error: any }>()
+);

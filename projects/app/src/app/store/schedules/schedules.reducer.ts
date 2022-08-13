@@ -11,10 +11,15 @@ export interface State extends EntityState<Schedule> {}
 
 export const schedulesFeature = createFeature({
   name: schedulesFeatureKey,
-  reducer: createReducer(schedulesAdapter.getInitialState(),
-  on(SchedulesActions.loadSchedulesSuccess, (state, action) => {
-    return schedulesAdapter.addMany(action.schedules, state);
-  })),
+  reducer: createReducer(
+    schedulesAdapter.getInitialState(),
+    on(SchedulesActions.loadSchedulesSuccess, (state, action) => {
+      return schedulesAdapter.addMany(action.schedules, state);
+    }),
+    on(SchedulesActions.deleteScheduleSuccess, (state, action) => {
+      return schedulesAdapter.removeOne(action.id, state);
+    })
+  ),
 });
 
 export const { reducer } = schedulesFeature;

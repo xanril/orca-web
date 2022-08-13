@@ -5,6 +5,7 @@ import { ListMenuItemComponent } from './list-menu-item/list-menu-item.component
 import { WeekCalendarComponent } from './week-calendar/week-calendar.component';
 import { DayCalendarComponent } from './day-calendar/day-calendar.component';
 import { EditDeleteButtonsComponent } from './edit-delete/edit-delete-buttons.component';
+import { SubmitCancelButtonsComponent } from './submit-cancel-buttons/submit-cancel-buttons.component';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { EditDeleteButtonsComponent } from './edit-delete/edit-delete-buttons.co
     ListMenuItemComponent,
     WeekCalendarComponent,
     DayCalendarComponent,
-    EditDeleteButtonsComponent
+    EditDeleteButtonsComponent,
+    SubmitCancelButtonsComponent
   ],
   imports: [
     CommonModule
@@ -21,7 +23,8 @@ import { EditDeleteButtonsComponent } from './edit-delete/edit-delete-buttons.co
     PaginationComponent,
     ListMenuItemComponent,
     WeekCalendarComponent,
-    EditDeleteButtonsComponent
+    EditDeleteButtonsComponent,
+    SubmitCancelButtonsComponent
   ]
 })
 export class SharedModule { }

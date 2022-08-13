@@ -27,4 +27,8 @@ export class ScheduleItemComponent implements OnInit {
   }
 
   deleteHandler() {}
+
+  cancelHandler() {
+    this.isFormShown = false;
+  }
 }

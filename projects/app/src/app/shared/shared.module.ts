@@ -4,13 +4,15 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { ListMenuItemComponent } from './list-menu-item/list-menu-item.component';
 import { WeekCalendarComponent } from './week-calendar/week-calendar.component';
 import { DayCalendarComponent } from './day-calendar/day-calendar.component';
+import { EditDeleteButtonsComponent } from './edit-delete/edit-delete-buttons.component';
 
 @NgModule({
   declarations: [
     PaginationComponent,
     ListMenuItemComponent,
     WeekCalendarComponent,
-    DayCalendarComponent
+    DayCalendarComponent,
+    EditDeleteButtonsComponent
   ],
   imports: [
     CommonModule
@@ -18,7 +20,8 @@ import { DayCalendarComponent } from './day-calendar/day-calendar.component';
   exports: [
     PaginationComponent,
     ListMenuItemComponent,
-    WeekCalendarComponent
+    WeekCalendarComponent,
+    EditDeleteButtonsComponent
   ]
 })
 export class SharedModule { }

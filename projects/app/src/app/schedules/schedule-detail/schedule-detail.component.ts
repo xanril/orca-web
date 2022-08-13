@@ -41,12 +41,8 @@ export class ScheduleDetailComponent implements OnInit, OnDestroy {
         );
       });
 
-    this.schedules$ = this.store.select(
-      SchedulesPageSelectors.selectSchedulesForActiveDay
-    );
-    this.activeDayIndex$ = this.store.select(
-      SchedulesPageSelectors.selectActiveDayIndex
-    );
+    this.schedules$ = this.store.select(SchedulesPageSelectors.selectSchedulesForActiveDay);
+    this.activeDayIndex$ = this.store.select(SchedulesPageSelectors.selectActiveDayIndex);
   }
 
   ngOnDestroy(): void {

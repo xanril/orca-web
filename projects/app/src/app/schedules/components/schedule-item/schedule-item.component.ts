@@ -14,6 +14,7 @@ import * as MoviesSelectors from '../../../store/movies/movies.selectors';
 export class ScheduleItemComponent implements OnInit {
   @Input() schedule!: Schedule
   movie$ = new Observable<Movie>();
+  isFormShown = false;
 
   constructor(private store: Store) { }
 
@@ -21,7 +22,9 @@ export class ScheduleItemComponent implements OnInit {
     this.movie$ = this.store.select(MoviesSelectors.selectMovieWithId(this.schedule.movieId));
   }
 
-  editHandler() {}
+  editHandler() {
+    this.isFormShown = true;
+  }
 
   deleteHandler() {}
 }

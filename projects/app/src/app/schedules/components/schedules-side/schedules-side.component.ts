@@ -32,7 +32,6 @@ export class SchedulesSideComponent implements OnInit, OnDestroy {
       .get('cinema')
       ?.valueChanges.pipe(takeUntil(this.unsubscribe$))
       .subscribe((data) => {
-        console.log(data);
         if (!isNaN(data)) {
           this.selectForm.get('room')?.setValue('');
           this.rooms$ = this.store.select(RoomsSelector.selectRoomsWithCinemaId(data));

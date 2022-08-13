@@ -12,17 +12,24 @@
   ></app-edit-delete-buttons>
 </div>
 <div *ngIf="isFormShown">
-  <form>
+  <form [formGroup]="scheduleForm">
     <div class="flex flex-row">
       <div class="flex flex-col w-full">
-        <select class="select select-bordered">
-          <option selected>11:15 AM</option>
+        <select class="select select-bordered" formControlName="time">
+          <option disabled selected>Select Start Time</option>
+          <option *ngFor="let item of startTimeOptions" [value]="item | date: 'mediumTime'">
+            {{ item | date: "shortTime" }}
+          </option>
         </select>
-        <select class="select select-bordered">
-          <option selected>Everything, Everywhere All At Once</option>
+        <select class="select select-bordered" formControlName="movie">
+          <option value="" disabled selected>Select Movie</option>
+          <option *ngFor="let movie of movies" [value]="movie.id">
+            {{ movie.title }}
+          </option>
         </select>
-        <select class="select select-bordered">
-          <option>200</option>
+        <select class="select select-bordered" formControlName="price">
+          <option value="" disabled selected>Select Price</option>
+          <option value="200">200</option>
         </select>
       </div>
       <app-submit-cancel-buttons (onCancelClick)="cancelHandler()"> </app-submit-cancel-buttons>

@@ -3,8 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil, map, Observable } from 'rxjs';
 import { Schedule } from '../../models/schedule.model';
+import { Movie } from '../../models/movie.model';
 import * as SchedulesPageSelectors from '../store/schedules-page.selectors';
 import * as SchedulesPageActions from '../store/schedules-page.actions';
+import * as MoviesSelectors from '../../store/movies/movies.selectors';
 
 @Component({
   selector: 'app-schedule-detail',
@@ -13,6 +15,7 @@ import * as SchedulesPageActions from '../store/schedules-page.actions';
 export class ScheduleDetailComponent implements OnInit, OnDestroy {
   unsubscribe$ = new Subject<void>();
   schedules$ = new Observable<Schedule[]>();
+  movies$ = new Observable<Movie[]>();
   activeDayIndex$ = new Observable<number>();
 
   constructor(private route: ActivatedRoute, private store: Store) {}
@@ -43,6 +46,7 @@ export class ScheduleDetailComponent implements OnInit, OnDestroy {
 
     this.schedules$ = this.store.select(SchedulesPageSelectors.selectSchedulesForActiveDay);
     this.activeDayIndex$ = this.store.select(SchedulesPageSelectors.selectActiveDayIndex);
+    this.movies$ = this.store.select(MoviesSelectors.selectMovies);
   }
 
   ngOnDestroy(): void {

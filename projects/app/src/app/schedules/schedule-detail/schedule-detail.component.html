@@ -19,6 +19,8 @@
         <td>
           <app-schedule-detail-item
             [schedule]="schedule"
+            [schedules]="schedules$ | async"
+            [movies]="movies$ | async"
           ></app-schedule-detail-item>
         </td>
       </tr>

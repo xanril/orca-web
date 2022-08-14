@@ -7,8 +7,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./search-movie-form.component.css'],
 })
 export class SearchMovieFormComponent implements OnInit {
-  @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
-  searchMovieForm: FormGroup = new FormGroup({
+  @Output() onSearch = new EventEmitter<string>();
+  searchMovieForm = new FormGroup({
     queryTitle: new FormControl('', [Validators.required]),
   });
 

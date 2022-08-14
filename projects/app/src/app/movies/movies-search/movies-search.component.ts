@@ -10,22 +10,17 @@ import * as MoviesPageSelectors from '../store/movies-page.selectors';
   templateUrl: './movies-search.component.html',
 })
 export class MoviesSearchComponent implements OnInit, OnDestroy {
-  searchResponse$: Observable<SearchMovieResponse | null> =
-    new Observable<SearchMovieResponse | null>();
-  searchedTitle?: string;
+  searchResponse$ = new Observable<SearchMovieResponse | null>();
+  searchedTitle = '';
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.searchResponse$ = this.store.select(
-      MoviesPageSelectors.selectSearchResponse
-    );
+    this.searchResponse$ = this.store.select(MoviesPageSelectors.selectSearchResponse);
   }
 
   ngOnDestroy(): void {
-    this.store.dispatch(
-      MoviesPageActions.resetSearch()
-    );
+    this.store.dispatch(MoviesPageActions.resetSearch());
   }
 
   searchHandler(movieQuery: string) {

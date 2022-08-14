@@ -7,7 +7,7 @@ export const searchMovieReset = createAction('[Movies] Search Reset');
 export const loadMovies = createAction('[Movies / API] Load Movies');
 
 export const loadMoviesSuccess = createAction(
-  '[Movies / API] Load Movies Success',
+  '[Movies API] Load Movies Success',
   props<{
     movies: Movie[];
   }>()

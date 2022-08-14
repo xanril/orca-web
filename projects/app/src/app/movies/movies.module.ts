@@ -34,19 +34,18 @@ import { MovieEditComponent } from './movie-edit/movie-edit.component';
     HttpClientModule,
     SharedModule,
     MoviesPageRoutingModule,
-    StoreModule.forFeature(
-      moviesPageFeature
-    ),
+    StoreModule.forFeature(moviesPageFeature),
     EffectsModule.forFeature([MoviesPageApiEffects]),
   ],
   exports: [
     MoviesListPageComponent,
+    MovieListComponent,
     MovieDetailComponent,
     MoviesSearchComponent,
     SearchMovieItemComponent,
     SearchMovieFormComponent,
-    MovieListComponent,
     MoviesStartComponent,
+    MovieEditComponent,
   ],
 })
 export class MoviesModule {}

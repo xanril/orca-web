@@ -11,9 +11,9 @@ import * as MoviesSelectors from '../../store/movies/movies.selectors';
   templateUrl: './movie-detail.component.html',
 })
 export class MovieDetailComponent implements OnInit, OnDestroy {
-  unsubscribe$: Subject<void> = new Subject<void>();
-  backdropImageUrl: string = '';
-  posterImageUrl: string = '';
+  unsubscribe$ = new Subject<void>();
+  backdropImageUrl = '';
+  posterImageUrl = '';
   movie!: Movie;
 
   constructor(
@@ -24,7 +24,6 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // const movieId = +this.route.snapshot.params['movieId'];
     this.route.params
       .pipe(
         takeUntil(this.unsubscribe$),
@@ -37,12 +36,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
       )
       .subscribe((movie) => {
         this.movie = movie;
-        this.backdropImageUrl = this.tmdbService.composeBackdropUrl(
-          movie.backdropUrl
-        );
-        this.posterImageUrl = this.tmdbService.composePosterUrl(
-          movie.posterUrl
-        );
+        this.backdropImageUrl = this.tmdbService.composeBackdropUrl(movie.backdropUrl);
+        this.posterImageUrl = this.tmdbService.composePosterUrl(movie.posterUrl);
       });
   }
 

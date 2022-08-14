@@ -42,9 +42,7 @@ export class MoviesEffects {
       ofType(MoviesActions.addMovie),
       switchMap((actionData) =>
         this.tmdbService.getMovieDetails(actionData.searchMovieResult.id).pipe(
-          withLatestFrom(
-            this.store.select(MoviesSelectors.selectTotalMoviesCount)
-          ),
+          withLatestFrom(this.store.select(MoviesSelectors.selectTotalMoviesCount)),
           map(([tmdbMovieDetails, totalCount]) => {
             // TODO: assign proper movie id
             const newMovie: Movie = {
@@ -57,8 +55,7 @@ export class MoviesEffects {
               posterUrl: actionData.searchMovieResult.poster_path,
               backdropUrl: actionData.searchMovieResult.backdrop_path,
               releaseDate: new Date(tmdbMovieDetails.release_date),
-              genre:
-                tmdbMovieDetails.genres?.map((item) => item.name ?? '') ?? [],
+              genre: tmdbMovieDetails.genres?.map((item) => item.name ?? '') ?? [],
             };
 
             return newMovie;
@@ -88,9 +85,7 @@ export class MoviesEffects {
           map((response) => {
             return MoviesActions.deleteMovieSuccess({ id: response });
           }),
-          catchError((error) =>
-            of(MoviesActions.deleteMoviesError({ error: error }))
-          )
+          catchError((error) => of(MoviesActions.deleteMoviesError({ error: error })))
         );
       })
     )
@@ -101,9 +96,7 @@ export class MoviesEffects {
       ofType(MoviesActions.updateMovie),
       switchMap((actionData) =>
         this.moviesService.updateMovie(actionData.updatedMovie).pipe(
-          map((data) =>
-            MoviesActions.updateMovieSuccess({ updatedMovie: data })
-          ),
+          map((data) => MoviesActions.updateMovieSuccess({ updatedMovie: data })),
           catchError((error) => of(MoviesActions.updateMoviesError({ error })))
         )
       )
@@ -114,9 +107,7 @@ export class MoviesEffects {
     () => {
       return this.actions$.pipe(
         ofType(MoviesActions.updateMovieSuccess),
-        tap((actionData) =>
-          this.router.navigate(['/movies/detail', actionData.updatedMovie.id])
-        )
+        tap((actionData) => this.router.navigate(['/movies/detail', actionData.updatedMovie.id]))
       );
     },
     {

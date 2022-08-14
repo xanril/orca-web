@@ -11,35 +11,20 @@ import * as MoviesActions from '../../store/movies/movies.actions';
   templateUrl: './movie-edit.component.html',
 })
 export class MovieEditComponent implements OnInit {
+  dayOptions$ = new Observable<number[]>();
   movie!: Movie;
-  movieForm: FormGroup = new FormGroup({});
+  movieForm = new FormGroup({});
+  // prettier-ignore
   monthOptions: string[] = [
-    'JAN',
-    'FEB',
-    'MAR',
-    'APR',
-    'MAY',
-    'JUN',
-    'JUL',
-    'AUG',
-    'SEP',
-    'OCT',
-    'NOV',
-    'DEC',
+    'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC',
   ];
-  yearOptions: number[] = [];
   dayOptions: number[] = [];
-  dayOptions$: Observable<number[]> = new Observable<number[]>();
+  yearOptions: number[] = [];
 
-  constructor(
-    private route: ActivatedRoute,
-    private store: Store,
-    private router: Router
-  ) {}
+  constructor(private route: ActivatedRoute, private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.movie = this.route.snapshot.data['movie'];
-    console.log("movie edit" + this.movie);
 
     // convert release date to individual items.
     const releaseYear = this.movie.releaseDate.getUTCFullYear();
@@ -99,15 +84,12 @@ export class MovieEditComponent implements OnInit {
     updatedMovie.backdropUrl = this.movieForm.get('backdropUrl')?.value;
     updatedMovie.overview = this.movieForm.get('overview')?.value;
     updatedMovie.posterUrl = this.movieForm.get('posterUrl')?.value;
-    updatedMovie.runtime =
-      +this.movieForm.get('runtime')?.value ?? this.movie.runtime;
+    updatedMovie.runtime = +this.movieForm.get('runtime')?.value ?? this.movie.runtime;
     updatedMovie.tagline = this.movieForm.get('tagline')?.value;
     updatedMovie.title = this.movieForm.get('title')?.value;
     updatedMovie.releaseDate = newDate;
 
-    this.store.dispatch(
-      MoviesActions.updateMovie({ updatedMovie: updatedMovie })
-    );
+    this.store.dispatch(MoviesActions.updateMovie({ updatedMovie: updatedMovie }));
   }
 
   cancelHandler() {

@@ -12,7 +12,7 @@ import * as MoviesActions from '../../../store/movies/movies.actions';
 export class MovieListComponent implements OnInit {
   @Input() movies: Movie[] | null = [];
   @Input() activeMovieId: number | null = -1;
-  @Output() onSearch: EventEmitter<void> = new EventEmitter<void>();
+  @Output() onSearch = new EventEmitter<void>();
 
   constructor(private store: Store, private router: Router) {}
 

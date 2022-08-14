@@ -11,24 +11,23 @@ import * as MoviesActions from '../../../store/movies/movies.actions';
 })
 export class SearchMovieItemComponent implements OnInit {
   @Input() resultItem!: SearchMovieResult;
-  cardImageUrl!: string;
-  isMovieAdded: boolean = false;
+  cardImageUrl = '';
+  isMovieAdded = false;
 
-  constructor(private tmdbService: TMDBService,
-    private store: Store<AppState>) {}
+  constructor(private tmdbService: TMDBService, private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.cardImageUrl = this.tmdbService.composePosterUrl(
-      this.resultItem.poster_path!
-    );
+    this.cardImageUrl = this.tmdbService.composePosterUrl(this.resultItem.poster_path!);
 
     this.isMovieAdded = this.resultItem.isAdded ?? false;
   }
 
   onAddMovie() {
-    this.store.dispatch(MoviesActions.addMovie({
-      searchMovieResult: this.resultItem
-    }))
+    this.store.dispatch(
+      MoviesActions.addMovie({
+        searchMovieResult: this.resultItem,
+      })
+    );
 
     this.isMovieAdded = true;
   }

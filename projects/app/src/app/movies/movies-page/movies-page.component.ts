@@ -6,13 +6,14 @@ import { Movie } from '../../models/movie.model';
 import * as MovieSelectors from '../../store/movies/movies.selectors';
 import * as MoviesPageSelectors from '../store/movies-page.selectors';
 import * as MoviesPageActions from '../store/movies-page.actions';
+
 @Component({
   selector: 'app-movies-list-page',
   templateUrl: './movies-page.component.html',
 })
 export class MoviesListPageComponent implements OnInit, OnDestroy {
-  movies$: Observable<Movie[]> = new Observable<Movie[]>();
-  activeMovieId$: Observable<number> = new Observable<number>();
+  movies$ = new Observable<Movie[]>();
+  activeMovieId$ = new Observable<number>();
 
   constructor(
     private store: Store,

@@ -26,8 +26,14 @@ export class MoviesPageApiEffects {
               return result;
             });
 
+            return {
+              ...response,
+              results: updatedResults,
+            };
+          }),
+          map((response) => {
             // filter results that don't have posters / backdrop images
-            const filteredResults = updatedResults.filter((result: SearchMovieResult) => {
+            const filteredResults = response.results.filter((result: SearchMovieResult) => {
               if (
                 result.poster_path == null ||
                 result.poster_path === '' ||

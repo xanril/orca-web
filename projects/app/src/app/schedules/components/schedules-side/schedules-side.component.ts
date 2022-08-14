@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subject, takeUntil, map } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { Cinema } from '../../../models/cinema.model';
 import { Room } from '../../../models/room.model';
 import * as CinemasSelector from '../../../store/cinemas/cinema.selectors';

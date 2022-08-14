@@ -1,6 +1,4 @@
-import { state } from '@angular/animations';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { Action } from 'rxjs/internal/scheduler/Action';
 import * as SchedulesPageActions from './schedules-page.actions';
 
 export const schedulesPageFeatureKey = 'schedulesPage';

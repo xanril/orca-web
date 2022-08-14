@@ -10,7 +10,7 @@ import * as CinemasPageSelectors from '../store/cinemas-page.selectors';
   templateUrl: './cinemas-page.component.html',
 })
 export class CinemasPageComponent implements OnInit {
-  cinemas$: Observable<Cinema[]> = new Observable<Cinema[]>();
+  cinemas$ = new Observable<Cinema[]>();
   activeCinemaId$ = new Observable<number | null>();
 
   constructor(

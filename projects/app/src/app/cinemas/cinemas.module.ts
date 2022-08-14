@@ -11,7 +11,7 @@ import { CinemaListComponent } from './components/cinema-list/cinema-list.compon
 import { CinemasStartComponent } from './cinemas-start/cinemas-start.component';
 import { CinemaDetailComponent } from './cinema-detail/cinema-detail.component';
 import { CinemaEditFormComponent } from './components/cinema-edit-form/cinema-edit-form.component';
-import * as fromCinemasPage from './store/cinemas-page.reducer';
+import { cinemasPageFeature } from './store/cinemas-page.reducer';
 
 @NgModule({
   declarations: [
@@ -28,10 +28,7 @@ import * as fromCinemasPage from './store/cinemas-page.reducer';
     ReactiveFormsModule,
     SharedModule,
     CinemasPageRoutingModule,
-    StoreModule.forFeature(
-      fromCinemasPage.cinemasPageFeature
-    ),
+    StoreModule.forFeature(cinemasPageFeature),
   ],
-  exports: [CinemasPageComponent],
 })
 export class CinemasModule {}

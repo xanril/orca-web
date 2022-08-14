@@ -37,15 +37,5 @@ import { MovieEditComponent } from './movie-edit/movie-edit.component';
     StoreModule.forFeature(moviesPageFeature),
     EffectsModule.forFeature([MoviesPageApiEffects]),
   ],
-  exports: [
-    MoviesListPageComponent,
-    MovieListComponent,
-    MovieDetailComponent,
-    MoviesSearchComponent,
-    SearchMovieItemComponent,
-    SearchMovieFormComponent,
-    MoviesStartComponent,
-    MovieEditComponent,
-  ],
 })
 export class MoviesModule {}

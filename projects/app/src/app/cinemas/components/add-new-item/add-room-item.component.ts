@@ -9,8 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AddNewItemComponent implements OnInit {
   @Input() addLabel: string = 'Add New Item';
   @Input() placeholder: string = 'Item Name';
-  @Output() onSubmit: EventEmitter<string> = new EventEmitter<string>();
-
+  @Output() onSubmit = new EventEmitter<string>();
   isFormShown: boolean = false;
   nameForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),

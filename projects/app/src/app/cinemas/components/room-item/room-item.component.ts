@@ -10,7 +10,7 @@ import * as RoomsActions from '../../../store/rooms/rooms.actions';
 })
 export class RoomItemComponent implements OnInit {
   @Input() room!: Room;
-  isEditing: boolean = false;
+  isEditing = false;
   roomForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
   });
@@ -25,9 +25,11 @@ export class RoomItemComponent implements OnInit {
   }
 
   deleteHandler() {
-    this.store.dispatch(RoomsActions.deleteRoom({
-      roomId: this.room.id
-    }));
+    this.store.dispatch(
+      RoomsActions.deleteRoom({
+        roomId: this.room.id,
+      })
+    );
   }
 
   submitHandler() {

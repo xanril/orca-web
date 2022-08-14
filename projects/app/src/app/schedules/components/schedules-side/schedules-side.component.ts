@@ -7,7 +7,6 @@ import { Cinema } from '../../../models/cinema.model';
 import { Room } from '../../../models/room.model';
 import * as CinemasSelector from '../../../store/cinemas/cinema.selectors';
 import * as RoomsSelector from '../../../store/rooms/rooms.selectors';
-import * as SchedulesPageActions from '../../store/schedules-page.actions';
 import * as SchedulesPageSelectors from '../../store/schedules-page.selectors';
 
 @Component({

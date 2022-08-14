@@ -15,7 +15,6 @@ export class AddScheduleItemComponent implements OnInit {
   @Input() activeCinemaId: number = 0;
   @Input() activeRoomId: number = 0;
   @Input() activeDayIndex: number | null = 0;
-
   isFormShown: boolean = false;
 
   constructor(private store: Store) {}

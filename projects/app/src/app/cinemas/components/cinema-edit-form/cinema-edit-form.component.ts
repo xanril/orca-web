@@ -13,9 +13,9 @@ import * as CinemasActions from '../../../store/cinemas/cinema.actions';
 export class CinemaEditFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() cinema: Cinema | null = null;
   unsubscribe$ = new Subject<void>();
-  isFormShown: boolean = false;
-  displayedName: string = '';
-  displayedLocation: string = '';
+  isFormShown = false;
+  displayedName = '';
+  displayedLocation = '';
   cinemaForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
     location: new FormControl(''),

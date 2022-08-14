@@ -15,7 +15,9 @@
       </select>
       <select class="select select-bordered" formControlName="price">
         <option value="" disabled selected>Select Price</option>
-        <option value="200">200</option>
+        <option *ngFor="let price of ticketPriceOptions" [value]="price">
+          {{ price }}
+        </option>
       </select>
     </div>
     <app-submit-cancel-buttons (onCancelClick)="cancelHandler()"> </app-submit-cancel-buttons>

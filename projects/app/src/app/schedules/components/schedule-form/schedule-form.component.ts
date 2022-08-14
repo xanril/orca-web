@@ -23,6 +23,7 @@ export class ScheduleFormComponent implements OnInit, OnDestroy {
   }>();
   unsubscribe$ = new Subject<void>();
   startTimeOptions: Date[] = [];
+  ticketPriceOptions: number[] = [];
   scheduleForm = new FormGroup({
     time: new FormControl('', [Validators.required]),
     movie: new FormControl('', [Validators.required]),
@@ -32,9 +33,15 @@ export class ScheduleFormComponent implements OnInit, OnDestroy {
   constructor(private dateHelperService: DateHelperService) {}
 
   ngOnInit(): void {
+    // initialize start time options
     this.startTimeOptions = this.dateHelperService.generateStartTimeOptions(
       this.schedule?.startTime ?? new Date(Date.now())
     );
+
+    // initialize ticket price options
+    for(let i = 200; i < 700; i = i + 50) {
+      this.ticketPriceOptions.push(i);
+    }
 
     this.scheduleForm.get('time')?.setValue(this.schedule?.startTime.toLocaleTimeString() ?? '');
     this.scheduleForm.get('movie')?.setValue(this.schedule?.movieId ?? '');

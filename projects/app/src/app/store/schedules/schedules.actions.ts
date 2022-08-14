@@ -27,3 +27,18 @@ export const deleteScheduleFailure = createAction(
   '[Schedules API] Delete Schedule Failure',
   props<{ error: any }>()
 );
+
+export const updateSchedule = createAction(
+  '[Schedules API] Update Schedule',
+  props<{ schedule: Schedule }>()
+);
+
+export const updateScheduleSuccess = createAction(
+  '[Schedules API] Update Schedule Success',
+  props<{ schedule: Schedule }>()
+);
+
+export const updateScheduleFailure = createAction(
+  '[Schedules API] Update Schedule Failure',
+  props<{ error: any }>()
+);

@@ -17,6 +17,7 @@ export class ScheduleFormComponent implements OnInit, OnDestroy {
   @Output() onCancel = new EventEmitter<void>();
   @Output() onSubmit = new EventEmitter<{
     startTime: Date;
+    endTime: Date;
     movieId: number;
     ticketPrice: number;
   }>();
@@ -74,8 +75,13 @@ export class ScheduleFormComponent implements OnInit, OnDestroy {
       (item) => item.toLocaleTimeString() === selectedTimeInForm
     );
 
+    const selectedMovieId = +this.scheduleForm.get('movie')?.value;
+    const selectedMovie = this.movies?.find((item) => item.id == selectedMovieId);
+    const endTime = this.dateHelperService.calculateEndTime(this.startTimeOptions[timeIndex], selectedMovie?.runtime ?? 0);
+
     this.onSubmit.emit({
       startTime: this.startTimeOptions[timeIndex],
+      endTime: endTime,
       movieId: +this.scheduleForm.get('movie')?.value,
       ticketPrice: +this.scheduleForm.get('price')?.value,
     });

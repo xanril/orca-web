@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Movie } from '../../../models/movie.model';
 import { Schedule } from '../../../models/schedule.model';
-import { DateHelperService } from '../../../services/schedule-date.service';
 import * as MoviesSelectors from '../../../store/movies/movies.selectors';
 import * as SchedulesActions from '../../../store/schedules/schedules.actions';
 
@@ -19,7 +18,7 @@ export class ScheduleItemComponent implements OnInit {
   movies$ = new Observable<Movie[]>();
   isFormShown = false;
 
-  constructor(private store: Store, private dateHelperService: DateHelperService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.movie$ = this.store.select(MoviesSelectors.selectMovieWithId(this.schedule.movieId));
@@ -36,5 +35,25 @@ export class ScheduleItemComponent implements OnInit {
 
   cancelHandler() {
     this.isFormShown = false;
+  }
+
+  submitHandler(event: {
+    startTime: Date;
+    endTime: Date;
+    movieId: number;
+    ticketPrice: number;
+  }) {
+
+    const updatedSchedule: Schedule = {
+      ...this.schedule,
+      startTime: event.startTime,
+      endTime: event.endTime,
+      movieId: event.movieId,
+      ticketPrice: event.ticketPrice
+    };
+
+    this.store.dispatch(SchedulesActions.updateSchedule({
+      schedule: updatedSchedule
+    }));
   }
 }

@@ -31,4 +31,16 @@ export class SchedulesEffects {
       )
     );
   });
+
+  updateSchedule$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(SchedulesActions.updateSchedule),
+      mergeMap((actionData) =>
+        this.schedulesService.updateSchedule(actionData.schedule).pipe(
+          map((data) => SchedulesActions.updateScheduleSuccess({ schedule: data })),
+          catchError((error) => of(SchedulesActions.updateScheduleFailure({ error })))
+        )
+      )
+    );
+  });
 }

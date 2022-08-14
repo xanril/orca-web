@@ -18,6 +18,9 @@ export const schedulesFeature = createFeature({
     }),
     on(SchedulesActions.deleteScheduleSuccess, (state, action) => {
       return schedulesAdapter.removeOne(action.id, state);
+    }),
+    on(SchedulesActions.updateScheduleSuccess, (state, action) => {
+      return schedulesAdapter.upsertOne(action.schedule, state);
     })
   ),
 });

@@ -17,4 +17,5 @@
   [schedules]="schedules"
   [movies]="movies$ | async"
   (onCancel)="cancelHandler()"
+  (onSubmit)="submitHandler($event)"
 ></app-schedule-form>

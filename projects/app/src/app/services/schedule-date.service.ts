@@ -7,9 +7,9 @@ export class DateHelperService {
   constructor() {}
 
   
-  calculateEndTime(startTime: Date, durationMins: number): Date {
-    // convert duration to milliseconds
-    const durationMs = durationMins * 1000 * 60;
+  calculateEndTime(startTime: Date, movieRuntimeMins: number): Date {
+    // convert movieRuntimeMins to milliseconds
+    const durationMs = movieRuntimeMins * 1000 * 60;
 
     // round UP to nearest 15-min factor
     const remainder = durationMs % this.intervalFactorMs;

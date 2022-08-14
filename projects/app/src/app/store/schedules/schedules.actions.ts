@@ -42,3 +42,18 @@ export const updateScheduleFailure = createAction(
   '[Schedules API] Update Schedule Failure',
   props<{ error: any }>()
 );
+
+export const addSchedule = createAction(
+  '[Schedules API] Add Schedule',
+  props<{ schedule: Schedule }>()
+);
+
+export const addScheduleSuccess = createAction(
+  '[Schedules API] Add Schedule Success',
+  props<{ schedule: Schedule }>()
+);
+
+export const addScheduleFailure = createAction(
+  '[Schedules API] Add Schedule Failure',
+  props<{ error: any }>()
+);

@@ -43,4 +43,15 @@ export class SchedulesEffects {
       )
     );
   });
+
+  addSchedule$ = createEffect(() => {
+    return this.actions$.pipe(
+        ofType(SchedulesActions.addSchedule),
+        mergeMap((actionData) =>
+          this.schedulesService.addSchedule(actionData.schedule).pipe(
+            map(data => SchedulesActions.addScheduleSuccess({ schedule: data })),
+            catchError(error => of(SchedulesActions.addScheduleFailure({ error }))))
+          ),
+    );
+  });
 }

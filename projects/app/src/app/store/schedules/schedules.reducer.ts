@@ -21,6 +21,9 @@ export const schedulesFeature = createFeature({
     }),
     on(SchedulesActions.updateScheduleSuccess, (state, action) => {
       return schedulesAdapter.upsertOne(action.schedule, state);
+    }),
+    on(SchedulesActions.addScheduleSuccess, (state, action) => {
+      return schedulesAdapter.addOne(action.schedule, state);
     })
   ),
 });

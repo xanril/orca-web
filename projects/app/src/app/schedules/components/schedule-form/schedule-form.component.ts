@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { Movie } from '../../../models/movie.model';
 import { Schedule } from '../../../models/schedule.model';
-import { DateHelperService } from '../../../services/schedule-date.service';
+import { DateHelperService } from '../../../services/date-helper.service';
 
 @Component({
   selector: 'app-schedule-form',
@@ -77,7 +77,10 @@ export class ScheduleFormComponent implements OnInit, OnDestroy {
 
     const selectedMovieId = +this.scheduleForm.get('movie')?.value;
     const selectedMovie = this.movies?.find((item) => item.id == selectedMovieId);
-    const endTime = this.dateHelperService.calculateEndTime(this.startTimeOptions[timeIndex], selectedMovie?.runtime ?? 0);
+    const endTime = this.dateHelperService.calculateEndTime(
+      this.startTimeOptions[timeIndex],
+      selectedMovie?.runtime ?? 0
+    );
 
     this.onSubmit.emit({
       startTime: this.startTimeOptions[timeIndex],
@@ -85,6 +88,14 @@ export class ScheduleFormComponent implements OnInit, OnDestroy {
       movieId: +this.scheduleForm.get('movie')?.value,
       ticketPrice: +this.scheduleForm.get('price')?.value,
     });
+
+    this.resetFormValues();
+  }
+
+  resetFormValues() {
+    this.scheduleForm.get('time')?.setValue('');
+    this.scheduleForm.get('movie')?.setValue('');
+    this.scheduleForm.get('price')?.setValue('');
   }
 
   isValidStartTime(startTime: Date): boolean {
@@ -103,17 +114,13 @@ export class ScheduleFormComponent implements OnInit, OnDestroy {
       // if the start time + durationMs overlaps with the next schedule
       const durationMs = (selectedMovie?.runtime ?? 0) * 1000 * 60;
       const comparedDate = new Date(schedule.startTime.getTime() - durationMs);
-      if (
-        startTime.getTime() >= comparedDate.getTime() &&
-        startTime.getTime() <= schedule.startTime.getTime()
-      ) {
+      if (this.dateHelperService.checkIfTimeBound(startTime, comparedDate, schedule.startTime)) {
         return false;
       }
 
       // if startTime is within the timespan of scheduled movie
       if (
-        startTime.getTime() >= schedule.startTime.getTime() &&
-        startTime.getTime() <= schedule.endTime.getTime()
+        this.dateHelperService.checkIfTimeBound(startTime, schedule.startTime, schedule.endTime)
       ) {
         return false;
       }

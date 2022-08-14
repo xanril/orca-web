@@ -1,4 +1,7 @@
-<app-week-calendar [activeDayOffset]="(activeDayIndex$ | async) ?? 0" (onDayItemClick)="dayItemClickHandler($event)"></app-week-calendar>
+<app-week-calendar
+  [activeDayOffset]="(activeDayIndex$ | async) ?? 0"
+  (onDayItemClick)="dayItemClickHandler($event)"
+></app-week-calendar>
 
 <div class="overflow-x-auto mt-10">
   <table class="table w-full">
@@ -21,6 +24,17 @@
             [schedule]="schedule"
             [schedules]="schedules$ | async"
           ></app-schedule-detail-item>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <app-add-schedule-item
+            [schedules]="schedules$ | async"
+            [movies]="movies$ | async"
+            [activeCinemaId]="activeCinemaId"
+            [activeRoomId]="activeRoomId"
+            [activeDayIndex]="activeDayIndex$ | async"
+          ></app-add-schedule-item>
         </td>
       </tr>
     </tbody>

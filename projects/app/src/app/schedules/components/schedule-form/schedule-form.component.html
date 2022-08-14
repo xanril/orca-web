@@ -2,7 +2,7 @@
   <div class="flex flex-row">
     <div class="flex flex-col w-full">
       <select class="select select-bordered" formControlName="time">
-        <option disabled selected>Select Start Time</option>
+        <option value="" disabled selected>Select Start Time</option>
         <option *ngFor="let item of startTimeOptions" [value]="item | date: 'mediumTime'">
           {{ item | date: "shortTime" }}
         </option>

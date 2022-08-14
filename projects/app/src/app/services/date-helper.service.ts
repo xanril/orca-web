@@ -6,7 +6,6 @@ export class DateHelperService {
 
   constructor() {}
 
-  
   calculateEndTime(startTime: Date, movieRuntimeMins: number): Date {
     // convert movieRuntimeMins to milliseconds
     const durationMs = movieRuntimeMins * 1000 * 60;
@@ -25,7 +24,7 @@ export class DateHelperService {
     let startDate = new Date(seedDate);
     startDate.setHours(0, 0, 0, 0);
 
-    const endDate = new Date(startDate.getTime() + (1000 * 60 * 60 * 24));
+    const endDate = new Date(startDate.getTime() + 1000 * 60 * 60 * 24);
     const startTimeOptions: Date[] = [];
 
     do {
@@ -34,5 +33,23 @@ export class DateHelperService {
     } while (startDate < endDate);
 
     return startTimeOptions;
+  }
+
+  checkIfTimeBound(targetDate: Date, lowerBoundDate: Date, upperBoundDate: Date): boolean {
+    // convert to same day
+    const convertedLowerBound = new Date(targetDate);
+    convertedLowerBound.setHours(lowerBoundDate.getHours(), lowerBoundDate.getMinutes());
+
+    const convertedUpperBound = new Date(targetDate);
+    convertedUpperBound.setHours(upperBoundDate.getHours(), upperBoundDate.getMinutes());
+
+    if (
+      targetDate.getTime() >= convertedLowerBound.getTime() &&
+      targetDate.getTime() <= convertedUpperBound.getTime()
+    ) {
+      return true;
+    }
+
+    return false;
   }
 }

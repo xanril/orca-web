@@ -12,6 +12,7 @@ import { SchedulesSideComponent } from './components/schedules-side/schedules-si
 import { schedulesPageFeature } from './store/schedules-page.reducer';
 import { ScheduleDetailComponent } from './schedule-detail/schedule-detail.component';
 import { ScheduleItemComponent } from './components/schedule-item/schedule-item.component';
+import { ScheduleFormComponent } from './components/schedule-form/schedule-form.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ScheduleItemComponent } from './components/schedule-item/schedule-item.
     SchedulesSideComponent,
     ScheduleDetailComponent,
     ScheduleItemComponent,
+    ScheduleFormComponent,
   ],
   imports: [
     CommonModule,

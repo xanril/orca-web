@@ -1,15 +1,14 @@
 <span class="text-3xl">Manage Cinemas</span>
 
 <div class="w-full flex flex-row space-x-2 mt-10">
-  <div class="w-5/12">
+  <div class="w-4/12">
     <app-cinema-list
+      class="mr-10"
       [cinemas]="cinemas$ | async"
       [activeCinemaId]="activeCinemaId$ | async"
     ></app-cinema-list>
   </div>
-  <div class="w-7/12">
-    <div class="w-full">
-      <router-outlet></router-outlet>
-    </div>
+  <div class="main-content">
+    <router-outlet></router-outlet>
   </div>
 </div>

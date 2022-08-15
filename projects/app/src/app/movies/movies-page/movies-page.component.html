@@ -1,12 +1,15 @@
 <div class="text-3xl">Manage Movies</div>
 
 <div class="w-full flex flex-row space-x-2 mt-10">
-  <div class="w-5/12">
-    <app-movie-list [movies]="movies$ | async" [activeMovieId]="activeMovieId$ | async" (onSearch)="searchClicked()"></app-movie-list>
+  <div class="w-4/12">
+    <app-movie-list
+      class="mr-10"
+      [movies]="movies$ | async"
+      [activeMovieId]="activeMovieId$ | async"
+      (onSearch)="searchClicked()"
+    ></app-movie-list>
   </div>
-  <div class="w-7/12">
-    <div class="w-full">
+  <div class="main-content">
       <router-outlet></router-outlet>
-    </div>
   </div>
 </div>

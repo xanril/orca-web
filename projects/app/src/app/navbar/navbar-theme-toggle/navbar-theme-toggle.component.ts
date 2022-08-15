@@ -11,7 +11,7 @@ export class NavbarThemeToggleComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    const storedTheme = localStorage.getItem('gala-theme');
+    const storedTheme = localStorage.getItem('orca-theme');
     
     if (!storedTheme) {
       // no stored theme found, 
@@ -34,7 +34,7 @@ export class NavbarThemeToggleComponent implements OnInit {
 
   setTheme(theme: string) {
     this.activeTheme = theme;
-    localStorage.setItem('gala-theme', this.activeTheme);
+    localStorage.setItem('orca-theme', this.activeTheme);
     document.documentElement.setAttribute('data-theme', theme);
   }
 }

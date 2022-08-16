@@ -5,7 +5,6 @@ import { MoviesListPageComponent } from './movies-page/movies-page.component';
 import { MoviesStartComponent } from './movies-start/movies-start.component';
 import { MoviesSearchComponent } from './movies-search/movies-search.component';
 import { MovieEditComponent } from './movie-edit/movie-edit.component';
-import { MovieResolverService } from '../services/movie.resolver.service';
 
 const manageMovieRoutes: Routes = [
   {
@@ -20,7 +19,6 @@ const manageMovieRoutes: Routes = [
       {
         path: 'edit/:movieId',
         component: MovieEditComponent,
-        resolve: { movie: MovieResolverService },
       },
       { path: '', component: MoviesStartComponent, pathMatch: 'full' },
     ],

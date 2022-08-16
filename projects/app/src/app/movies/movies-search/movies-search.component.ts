@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { SearchMovieResponse } from '../../models/search-movie-result.model';
+import { SearchMovieResponse, SearchMovieResult } from '../../models/search-movie-result.model';
 import * as MoviesPageActions from '../store/movies-page.actions';
 import * as MoviesPageSelectors from '../store/movies-page.selectors';
+import * as MoviesActions from '../../store/movies/movies.actions';
 
 @Component({
   selector: 'app-search-movie',
@@ -11,7 +12,6 @@ import * as MoviesPageSelectors from '../store/movies-page.selectors';
 })
 export class MoviesSearchComponent implements OnInit, OnDestroy {
   searchResponse$ = new Observable<SearchMovieResponse | null>();
-  searchedTitle = '';
 
   constructor(private store: Store) {}
 
@@ -37,6 +37,14 @@ export class MoviesSearchComponent implements OnInit, OnDestroy {
     this.store.dispatch(
       MoviesPageActions.searchMovie({
         page: targetPage,
+      })
+    );
+  }
+
+  addMovieHandler(searchResult: SearchMovieResult) {
+    this.store.dispatch(
+      MoviesActions.addMovie({
+        searchMovieResult: searchResult,
       })
     );
   }

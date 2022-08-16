@@ -1,9 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-.card figure {
-  align-items: unset;
-}
-
+/* fix for select items within input groups */
 .input-group .select:focus,
 .input-group .input:focus {
   outline: none;

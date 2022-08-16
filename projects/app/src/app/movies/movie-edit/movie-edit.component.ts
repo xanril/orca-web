@@ -2,15 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map, merge, Observable } from 'rxjs';
+import { map, merge, mergeMap, Observable, Subject, takeUntil } from 'rxjs';
 import { Movie } from '../../models/movie.model';
 import * as MoviesActions from '../../store/movies/movies.actions';
+import * as MoviesSelectors from '../../store/movies/movies.selectors';
 
 @Component({
   selector: 'app-movie-edit',
   templateUrl: './movie-edit.component.html',
 })
 export class MovieEditComponent implements OnInit {
+  unsubscribe$ = new Subject<void>();
   dayOptions$ = new Observable<number[]>();
   movie!: Movie;
   movieForm = new FormGroup({});
@@ -24,29 +26,39 @@ export class MovieEditComponent implements OnInit {
   constructor(private route: ActivatedRoute, private store: Store, private router: Router) {}
 
   ngOnInit(): void {
-    this.movie = this.route.snapshot.data['movie'];
+    this.route.params
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        mergeMap((params) => {
+          const movieId = +params['movieId'];
+          return this.store.select(MoviesSelectors.selectMovieWithId(movieId));
+        })
+      )
+      .subscribe((movie) => {
+        this.movie = movie;
 
-    // convert release date to individual items.
-    const releaseYear = this.movie.releaseDate.getUTCFullYear();
-    const releaseMonth = this.movie.releaseDate.getUTCMonth();
-    const releaseDay = this.movie.releaseDate.getUTCDate();
+        // convert release date to individual items.
+        const releaseYear = this.movie.releaseDate.getUTCFullYear();
+        const releaseMonth = this.movie.releaseDate.getUTCMonth();
+        const releaseDay = this.movie.releaseDate.getUTCDate();
 
-    const dateNow = new Date(Date.now());
-    for (let index = 1980; index <= dateNow.getUTCFullYear(); index++) {
-      this.yearOptions.push(index);
-    }
+        const dateNow = new Date(Date.now());
+        for (let index = 1980; index <= dateNow.getUTCFullYear(); index++) {
+          this.yearOptions.push(index);
+        }
 
-    this.movieForm = new FormGroup({
-      title: new FormControl(this.movie.title, [Validators.required]),
-      runtime: new FormControl(this.movie.runtime),
-      releaseYear: new FormControl(releaseYear),
-      releaseMonth: new FormControl(releaseMonth),
-      releaseDay: new FormControl(releaseDay),
-      tagline: new FormControl(this.movie.tagline),
-      overview: new FormControl(this.movie.overview),
-      backdropUrl: new FormControl(this.movie.backdropUrl),
-      posterUrl: new FormControl(this.movie.posterUrl),
-    });
+        this.movieForm = new FormGroup({
+          title: new FormControl(this.movie.title, [Validators.required]),
+          runtime: new FormControl(this.movie.runtime),
+          releaseYear: new FormControl(releaseYear),
+          releaseMonth: new FormControl(releaseMonth),
+          releaseDay: new FormControl(releaseDay),
+          tagline: new FormControl(this.movie.tagline),
+          overview: new FormControl(this.movie.overview),
+          backdropUrl: new FormControl(this.movie.backdropUrl),
+          posterUrl: new FormControl(this.movie.posterUrl),
+        });
+      });
 
     this.dayOptions$ = merge(
       this.route.params,

@@ -4,7 +4,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-search-movie-form',
   templateUrl: './search-movie-form.component.html',
-  styleUrls: ['./search-movie-form.component.css'],
 })
 export class SearchMovieFormComponent implements OnInit {
   @Output() onSearch = new EventEmitter<string>();

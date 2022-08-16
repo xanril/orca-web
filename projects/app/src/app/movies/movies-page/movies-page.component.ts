@@ -6,6 +6,7 @@ import { Movie } from '../../models/movie.model';
 import * as MovieSelectors from '../../store/movies/movies.selectors';
 import * as MoviesPageSelectors from '../store/movies-page.selectors';
 import * as MoviesPageActions from '../store/movies-page.actions';
+import * as MoviesActions from '../../store/movies/movies.actions';
 
 @Component({
   selector: 'app-movies-list-page',
@@ -15,10 +16,7 @@ export class MoviesListPageComponent implements OnInit, OnDestroy {
   movies$ = new Observable<Movie[]>();
   activeMovieId$ = new Observable<number>();
 
-  constructor(
-    private store: Store,
-    private router: Router
-  ) {}
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.movies$ = this.store.select(MovieSelectors.selectMovies);
@@ -32,5 +30,23 @@ export class MoviesListPageComponent implements OnInit, OnDestroy {
   searchClicked() {
     this.store.dispatch(MoviesPageActions.resetActiveMovie());
     this.router.navigate(['/movies/search']);
+  }
+
+  itemClickHandler(id: number) {
+    this.store.dispatch(
+      MoviesPageActions.setActiveMovie({
+        movieId: id,
+      })
+    );
+
+    this.router.navigate(['/movies/detail', id]);
+  }
+
+  itemDeleteHandler(id: number) {
+    this.store.dispatch(
+      MoviesActions.deleteMovie({
+        id: id,
+      })
+    );
   }
 }

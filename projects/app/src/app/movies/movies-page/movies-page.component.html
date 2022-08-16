@@ -7,6 +7,8 @@
       [movies]="movies$ | async"
       [activeMovieId]="activeMovieId$ | async"
       (onSearch)="searchClicked()"
+      (onItemClick)="itemClickHandler($event)"
+      (onItemDelete)="itemDeleteHandler($event)"
     ></app-movie-list>
   </div>
   <div class="main-content">

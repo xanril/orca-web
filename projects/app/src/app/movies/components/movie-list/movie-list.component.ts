@@ -1,9 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Movie } from '../../../models/movie.model';
-import * as MoviesPageActions from '../../store/movies-page.actions';
-import * as MoviesActions from '../../../store/movies/movies.actions';
 
 @Component({
   selector: 'app-movie-list',
@@ -13,8 +9,10 @@ export class MovieListComponent implements OnInit {
   @Input() movies: Movie[] | null = [];
   @Input() activeMovieId: number | null = -1;
   @Output() onSearch = new EventEmitter<void>();
+  @Output() onItemClick = new EventEmitter<number>();
+  @Output() onItemDelete = new EventEmitter<number>();
 
-  constructor(private store: Store, private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {}
 
@@ -23,20 +21,10 @@ export class MovieListComponent implements OnInit {
   }
 
   itemClickHandler(itemId: number) {
-    this.store.dispatch(
-      MoviesPageActions.setActiveMovie({
-        movieId: itemId,
-      })
-    );
-
-    this.router.navigate(['/movies/detail', itemId]);
+    this.onItemClick.emit(itemId);
   }
 
   itemDeleteHandler(itemId: number) {
-    this.store.dispatch(
-      MoviesActions.deleteMovie({
-        id: itemId,
-      })
-    );
+    this.onItemDelete.emit(itemId);
   }
 }

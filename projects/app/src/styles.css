@@ -13,12 +13,12 @@
 
 /* background: linear-gradient(135deg, hsla(280, 84%, 41%, 1) 0%, hsla(218, 97%, 56%, 1) 100%);   */
 [data-theme='dark'] body {
-  background: linear-gradient(180deg, rgb(127, 16, 183) 0%, rgb(31, 17, 139) 100%);  
+  background: linear-gradient(180deg, rgb(108, 14, 155) 0%, rgb(25, 14, 113) 100%);  
 }
 
 /* background: linear-gradient(135deg, hsla(1, 84%, 80%, 1) 0%, hsla(56, 59%, 67%, 1) 100%); */
 [data-theme='light'] body {
-  background: linear-gradient(135deg, hsla(1, 84%, 80%, 1) 0%, hsla(56, 59%, 67%, 1) 100%);   
+background: linear-gradient(135deg, rgb(49, 186, 255), rgba(253, 255, 234, 1.0));   
 }
 
 /* body {

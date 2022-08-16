@@ -4,7 +4,7 @@
   <ul class="menu w-full shadow-none">
     <li class="my-1" *ngFor="let movie of movies; index as i">
       <app-list-menu-item
-        class="rounded-md"
+        class="list-menu-item rounded-md"
         [itemId]="movie.id"
         [title]="movie.title"
         [subtitle]="movie.releaseDate | date: 'mediumDate'"

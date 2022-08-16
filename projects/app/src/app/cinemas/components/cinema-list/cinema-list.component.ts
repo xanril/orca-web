@@ -8,6 +8,7 @@ import * as CinemasActions from '../../../store/cinemas/cinema.actions';
 @Component({
   selector: 'app-cinema-list',
   templateUrl: './cinema-list.component.html',
+  styleUrls: ['./cinema-list.component.css'],
 })
 export class CinemaListComponent implements OnInit {
   @Input() cinemas: Cinema[] | null = [];

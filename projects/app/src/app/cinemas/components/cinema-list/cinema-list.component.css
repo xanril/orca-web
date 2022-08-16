@@ -1,0 +1,7 @@
+.menu .list-menu-item:hover {
+    background-color: hsl(var(--b2));
+}
+
+.menu .list-menu-item.active:hover {
+    background-color: hsl(var(--p));
+}

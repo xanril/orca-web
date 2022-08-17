@@ -4,7 +4,24 @@
 ></app-week-calendar>
 
 <div class="overflow-x-auto mt-10">
-  <table class="table w-full">
+
+  <table class="table w-full" *ngIf="(schedules$ | async)?.length == 0">
+    <tbody>
+      <tr>
+        <td>
+          <app-add-schedule-item
+            [schedules]="schedules$ | async"
+            [movies]="movies$ | async"
+            [activeCinemaId]="activeCinemaId"
+            [activeRoomId]="activeRoomId"
+            [activeDayIndex]="activeDayIndex$ | async"
+          ></app-add-schedule-item>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table w-full" *ngIf="(schedules$ | async)?.length">
     <thead>
       <tr>
         <td>

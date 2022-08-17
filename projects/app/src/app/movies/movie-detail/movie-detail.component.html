@@ -18,20 +18,20 @@
       </div>
     </div>
   </div>
-  <div>
-    <article class="prose">
-      <blockquote class="mx-10">
-        <p>{{ movie.tagline }}</p>
-      </blockquote>
-      <p>
-        <strong
-          ><em><span class="prose-xl">Overview</span> </em></strong
-        >
-        <br />
-        {{ movie.overview }}
-      </p>
-    </article>
-  </div>
+  <article class="prose max-w-none mx-5">
+    <blockquote class="mx-10">
+      <p>{{ movie.tagline }}</p>
+    </blockquote>
+    <p>
+      <strong>
+        <em>
+          <span class="prose-xl">Overview</span>
+        </em>
+      </strong>
+      <br />
+      {{ movie.overview }}
+    </p>
+  </article>
 
   <button class="btn btn-primary btn-block mt-4" (click)="editHandler()">Edit Details</button>
 </div>

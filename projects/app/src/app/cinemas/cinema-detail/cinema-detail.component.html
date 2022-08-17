@@ -1,8 +1,23 @@
 <app-cinema-edit-form [cinema]="cinema$ | async"></app-cinema-edit-form>
 
-<div class="text-2xl m-5">Cinema Rooms</div>
+<div class="text-2xl mt-10 mb-5">Cinema Rooms</div>
 <div class="overflow-x-auto">
-  <table class="table w-full">
+
+  <table class="table w-full" *ngIf="(rooms$ | async)?.length == 0">
+    <tbody>
+      <tr>
+        <td colspan="2">
+          <app-add-new-item
+            addLabel="Add New Room"
+            placeholder="Room Name"
+            (onSubmit)="newRoomSubmitHandler($event)"
+          ></app-add-new-item>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table w-full" *ngIf="(rooms$ | async)?.length">
     <thead>
       <tr>
         <th></th>

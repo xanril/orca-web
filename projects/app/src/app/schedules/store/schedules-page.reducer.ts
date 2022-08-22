@@ -19,12 +19,6 @@ export const schedulesPageFeature = createFeature({
   name: schedulesPageFeatureKey,
   reducer: createReducer(
     initialState,
-    on(SchedulesPageActions.setActiveCinemaId, (state, action) => {
-      return {
-        ...state,
-        activeCinemaId: action.id,
-      };
-    }),
     on(SchedulesPageActions.setActiveRoomId, (state, action) => {
       return {
         ...state,

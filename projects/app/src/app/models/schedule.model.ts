@@ -1,6 +1,5 @@
 export interface Schedule {
   id: number;
-  cinemaId: number;
   roomId: number;
   movieId: number;
   dayOfWeek: number;

@@ -17,7 +17,6 @@ export class ScheduleDetailComponent implements OnInit, OnDestroy {
   schedules$ = new Observable<Schedule[]>();
   movies$ = new Observable<Movie[]>();
   activeDayIndex$ = new Observable<number>();
-  activeCinemaId: number = 0;
   activeRoomId: number = 0;
 
   constructor(private route: ActivatedRoute, private store: Store) {}
@@ -33,7 +32,6 @@ export class ScheduleDetailComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(({ cinemaId, roomId }) => {
-        this.activeCinemaId = cinemaId;
         this.activeRoomId = roomId;
 
         this.store.dispatch(

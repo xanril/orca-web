@@ -10,12 +10,11 @@ export const {
 
 export const selectSchedulesForActiveRoom = createSelector(
   SchedulesSelectors.selectSchedulesDataState,
-  selectActiveCinemaId,
   selectActiveRoomId,
-  (state, cinemaId, roomId) => {
+  (state, roomId) => {
     const schedules = SchedulesSelectors.selectAll(state);
     return schedules.filter(
-      (item) => item.cinemaId == cinemaId && item.roomId == roomId
+      (item) => item.roomId == roomId
     );
   }
 );

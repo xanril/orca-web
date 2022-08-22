@@ -12,7 +12,6 @@ import * as SchedulesActions from '../../../store/schedules/schedules.actions';
 export class AddScheduleItemComponent implements OnInit {
   @Input() schedules: Schedule[] | null = [];
   @Input() movies: Movie[] | null = [];
-  @Input() activeCinemaId: number = 0;
   @Input() activeRoomId: number = 0;
   @Input() activeDayIndex: number | null = 0;
   isFormShown: boolean = false;
@@ -32,7 +31,6 @@ export class AddScheduleItemComponent implements OnInit {
   submitHandler(event: { startTime: Date; endTime: Date; movieId: number; ticketPrice: number }) {
     const newSchedule: Schedule = {
       id: -1,
-      cinemaId: this.activeCinemaId,
       roomId: this.activeRoomId,
       dayOfWeek: this.activeDayIndex ?? 0,
       movieId: event.movieId,

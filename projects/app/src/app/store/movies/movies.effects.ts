@@ -42,11 +42,9 @@ export class MoviesEffects {
       ofType(MoviesActions.addMovie),
       switchMap((actionData) =>
         this.tmdbService.getMovieDetails(actionData.searchMovieResult.id).pipe(
-          withLatestFrom(this.store.select(MoviesSelectors.selectTotalMoviesCount)),
-          map(([tmdbMovieDetails, totalCount]) => {
-            // TODO: assign proper movie id
+          map((tmdbMovieDetails) => {
             const newMovie: Movie = {
-              id: totalCount,
+              id: 0,
               tmdbId: actionData.searchMovieResult.id,
               title: actionData.searchMovieResult.title,
               tagline: tmdbMovieDetails.tagline ?? '',
@@ -55,7 +53,6 @@ export class MoviesEffects {
               posterUrl: actionData.searchMovieResult.poster_path,
               backdropUrl: actionData.searchMovieResult.backdrop_path,
               releaseDate: new Date(tmdbMovieDetails.release_date),
-              genre: tmdbMovieDetails.genres?.map((item) => item.name ?? '') ?? [],
             };
 
             return newMovie;
@@ -96,7 +93,7 @@ export class MoviesEffects {
       ofType(MoviesActions.updateMovie),
       switchMap((actionData) =>
         this.moviesService.updateMovie(actionData.updatedMovie).pipe(
-          map((data) => MoviesActions.updateMovieSuccess({ updatedMovie: data })),
+          map((data) => MoviesActions.updateMovieSuccess({ updatedMovie: data! })),
           catchError((error) => of(MoviesActions.updateMoviesError({ error })))
         )
       )

@@ -1,47 +1,53 @@
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { of } from "rxjs";
+import { map, of } from "rxjs";
+import { environment } from "../../environments/environment";
 import { Room } from "../models/room.model";
-
-const DUMMY_CINEMA_ROOMS: Room[] = [
-    {
-      id: 0,
-      cinemaId: 0,
-      name: 'Cinema 1',
-    },
-    {
-      id: 1,
-      cinemaId: 0,
-      name: 'Cinema 2',
-    },
-    {
-      id: 2,
-      cinemaId: 1,
-      name: 'Cinema 1',
-    },
-    {
-      id: 3,
-      cinemaId: 2,
-      name: 'Cinema 1',
-    },
-  ];
 
 @Injectable({ providedIn: 'root' })
 export class RoomsService {
-  constructor() {}
+  constructor(private http:HttpClient) {}
 
   getRooms() {
-    return of(DUMMY_CINEMA_ROOMS);
+    return this.http.get<Room[]>(environment.apiBaseUrl + '/rooms');
   }
 
   addRoom(room: Room) {
-    return of(room);
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.http.post<Room>(environment.apiBaseUrl + '/room', JSON.stringify(room), {
+      headers: headers,
+    });
   }
 
   deleteRoom(id: number) {
-    return of(id);
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.http.delete<number>(environment.apiBaseUrl + '/room/' + id).pipe(
+      map((response) => {
+        return id;
+      })
+    );
   }
 
   updateRoom(updatedRoom: Room) {
-    return of(updatedRoom);
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.http
+      .put<Room>(
+        environment.apiBaseUrl + '/room/' + updatedRoom.id,
+        JSON.stringify(updatedRoom),
+        {
+          headers: headers,
+        }
+      )
+      .pipe(
+        map((response) => {
+          return updatedRoom;
+        })
+      );
   }
 }

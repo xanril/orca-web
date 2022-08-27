@@ -1,18 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { catchError, map, mergeMap, concatMap, of, withLatestFrom } from 'rxjs';
+import { catchError, map, mergeMap, concatMap, of } from 'rxjs';
+import { Room } from '../../models/room.model';
 import { RoomsService } from '../../services/rooms.service';
 import * as RoomsActions from './rooms.actions';
-import * as RoomsSelectors from './rooms.selectors';
 
 @Injectable()
 export class RoomsEffects {
-  constructor(
-    private actions$: Actions,
-    private roomsService: RoomsService,
-    private store: Store
-  ) {}
+  constructor(private actions$: Actions, private roomsService: RoomsService) {}
 
   loadRooms$ = createEffect(() => {
     return this.actions$.pipe(
@@ -29,19 +24,17 @@ export class RoomsEffects {
   addRoom$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(RoomsActions.addRoom),
-      withLatestFrom(this.store.select(RoomsSelectors.selectTotalCount)),
-      mergeMap(([actionData, totalRoomCount]) =>
-        // TODO: Derive the ID from the service response
-        this.roomsService
-          .addRoom({
-            ...actionData.room,
-            id: totalRoomCount,
-          })
-          .pipe(
-            map((data) => RoomsActions.addRoomSuccess({ room: data })),
-            catchError((error) => of(RoomsActions.addRoomFailure({ error })))
-          )
-      )
+      mergeMap((actionData) => {
+        const newRoom: Room = {
+          ...actionData.room,
+          id: 0,
+        };
+
+        return this.roomsService.addRoom(newRoom).pipe(
+          map((data) => RoomsActions.addRoomSuccess({ room: data })),
+          catchError((error) => of(RoomsActions.addRoomFailure({ error })))
+        );
+      })
     );
   });
 

@@ -14,7 +14,7 @@ import { SearchMovieFormComponent } from './components/search-movie-form/search-
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { MoviesStartComponent } from './movies-start/movies-start.component';
 import { moviesPageFeature } from './store/movies-page.reducer';
-import { MoviesPageApiEffects } from './store/movies-page.effects';
+import { MoviesPageEffects } from './store/movies-page.effects';
 import { MovieEditComponent } from './movie-edit/movie-edit.component';
 
 @NgModule({
@@ -35,7 +35,7 @@ import { MovieEditComponent } from './movie-edit/movie-edit.component';
     SharedModule,
     MoviesPageRoutingModule,
     StoreModule.forFeature(moviesPageFeature),
-    EffectsModule.forFeature([MoviesPageApiEffects]),
+    EffectsModule.forFeature([MoviesPageEffects]),
   ],
 })
 export class MoviesModule {}

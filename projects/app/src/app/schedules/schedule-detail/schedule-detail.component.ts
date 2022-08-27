@@ -26,19 +26,12 @@ export class ScheduleDetailComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.unsubscribe$),
         map((params) => {
-          const cinemaId = +params['cinemaId'];
           const roomId = +params['roomId'];
-          return { cinemaId, roomId };
+          return { roomId };
         })
       )
-      .subscribe(({ cinemaId, roomId }) => {
+      .subscribe(({ roomId }) => {
         this.activeRoomId = roomId;
-
-        this.store.dispatch(
-          SchedulesPageActions.setActiveCinemaId({
-            id: cinemaId,
-          })
-        );
 
         this.store.dispatch(
           SchedulesPageActions.setActiveRoomId({

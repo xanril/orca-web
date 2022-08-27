@@ -18,3 +18,8 @@ export const setActiveDayIndex = createAction(
   '[Schedules Page] Set Active Day Index',
   props<{ dayIndex: number }>()
 )
+
+export const setError = createAction(
+  '[Schedules Page] Set Error',
+  props<{ error: any }>()
+)

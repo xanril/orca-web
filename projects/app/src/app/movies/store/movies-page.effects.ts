@@ -9,7 +9,7 @@ import * as MoviesSelectors from '../../store/movies/movies.selectors';
 import { SearchMovieResult } from '../../models/search-movie-result.model';
 
 @Injectable()
-export class MoviesPageApiEffects {
+export class MoviesPageEffects {
   constructor(private actions$: Actions, private tmdbService: TMDBService, private store: Store) {}
 
   searchMovie$ = createEffect(() =>

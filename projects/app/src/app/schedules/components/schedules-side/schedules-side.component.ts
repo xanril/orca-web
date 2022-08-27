@@ -17,6 +17,7 @@ export class SchedulesSideComponent implements OnInit, OnDestroy {
   unsubscribe$ = new Subject<void>();
   cinemas$ = new Observable<Cinema[]>();
   rooms$ = new Observable<Room[]>();
+  activeCinemaId$ = new Observable<number | null>();
   selectForm = new FormGroup({
     cinema: new FormControl(''),
     room: new FormControl(''),
@@ -26,7 +27,8 @@ export class SchedulesSideComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cinemas$ = this.store.select(CinemasSelector.selectAllCinemas);
-
+    this.activeCinemaId$ = this.store.select(SchedulesPageSelectors.selectActiveCinemaId);
+    
     this.selectForm
       .get('cinema')
       ?.valueChanges.pipe(takeUntil(this.unsubscribe$))
@@ -42,8 +44,7 @@ export class SchedulesSideComponent implements OnInit, OnDestroy {
       ?.valueChanges.pipe(takeUntil(this.unsubscribe$))
       .subscribe((data) => {
         if (data !== '') {
-          const cinemaId = this.selectForm.get('cinema')?.value;
-          this.router.navigate(['schedules', 'cinema', cinemaId, 'room', data]);
+          this.router.navigate(['schedules', 'room', data]);
         }
       });
 
@@ -51,6 +52,7 @@ export class SchedulesSideComponent implements OnInit, OnDestroy {
       .select(SchedulesPageSelectors.selectActiveCinemaId)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((cinemaId) => {
+        console.log('cinema: ' + cinemaId);
         if (cinemaId != null) {
           this.selectForm.get('cinema')?.setValue(cinemaId);
         }
@@ -60,6 +62,7 @@ export class SchedulesSideComponent implements OnInit, OnDestroy {
       .select(SchedulesPageSelectors.selectActiveRoomId)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((roomId) => {
+        console.log('room: ' + roomId);
         if (roomId != null) {
           this.selectForm.get('room')?.setValue(roomId);
         }

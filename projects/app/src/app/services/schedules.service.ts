@@ -1,74 +1,28 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { Schedule } from '../models/schedule.model';
-
-const DUMMY_CINEMA_ROOM_SCHEDULES: Schedule[] = [
-  {
-    id: 0,
-    roomId: 0,
-    movieId: 0,
-    dayOfWeek: 0,
-    startTime: new Date(2022, 9, 17, 11, 15, 0),
-    endTime: new Date(2022, 9, 17, 14, 15, 0),
-    ticketPrice: 200,
-  },
-  {
-    id: 1,
-    roomId: 2,
-    movieId: 0,
-    dayOfWeek: 0,
-    startTime: new Date(2022, 9, 17, 14, 30, 0),
-    endTime: new Date(2022, 9, 17, 16, 30, 0),
-    ticketPrice: 200,
-  },
-  {
-    id: 2,
-    roomId: 0,
-    movieId: 2,
-    dayOfWeek: 1,
-    startTime: new Date(2022, 9, 17, 16, 45, 0),
-    endTime: new Date(2022, 9, 17, 18, 45, 0),
-    ticketPrice: 200,
-  },
-  {
-    id: 3,
-    roomId: 0,
-    movieId: 0,
-    dayOfWeek: 0,
-    startTime: new Date(2022, 9, 17, 14, 30, 0),
-    endTime: new Date(2022, 9, 17, 16, 30, 0),
-    ticketPrice: 200,
-  },
-  {
-    id: 4,
-    roomId: 0,
-    movieId: 0,
-    dayOfWeek: 0,
-    startTime: new Date(2022, 9, 17, 16, 45, 0),
-    endTime: new Date(2022, 9, 17, 18, 45, 0),
-    ticketPrice: 200,
-  },
-  {
-    id: 5,
-    roomId: 0,
-    movieId: 0,
-    dayOfWeek: 0,
-    startTime: new Date(2022, 9, 17, 18, 45, 0),
-    endTime: new Date(2022, 9, 17, 20, 45, 0),
-    ticketPrice: 200,
-  },
-];
 
 @Injectable({ providedIn: 'root' })
 export class SchedulesService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getSchedules() {
-    return of(DUMMY_CINEMA_ROOM_SCHEDULES);
+    return this.http.get<Schedule[]>(environment.apiBaseUrl + '/schedules');
   }
 
   addSchedule(schedule: Schedule) {
-    return of(schedule);
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.http.post<Schedule>(
+      environment.apiBaseUrl + '/schedule',
+      JSON.stringify(schedule),
+      {
+        headers: headers,
+      }
+    );
   }
 
   deleteSchedule(id: number) {

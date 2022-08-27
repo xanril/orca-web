@@ -25,6 +25,12 @@ export const schedulesPageFeature = createFeature({
         activeRoomId: action.id,
       };
     }),
+    on(SchedulesPageActions.setActiveCinemaId, (state, action) => {
+      return {
+        ...state,
+        activeCinemaId: action.id,
+      };
+    }),
     on(SchedulesPageActions.resetActiveRoomId, (state, action) => {
       return {
         ...state,

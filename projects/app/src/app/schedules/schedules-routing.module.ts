@@ -10,7 +10,7 @@ export const schedulesRoutes: Routes = [
     component: SchedulesPageComponent,
     children: [
       {
-        path: 'cinema/:cinemaId/room/:roomId',
+        path: 'room/:roomId',
         component: ScheduleDetailComponent,
       },
       { path: '', component: SchedulesStartComponent },

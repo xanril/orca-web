@@ -1,18 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { mergeMap, map, catchError, of, withLatestFrom } from 'rxjs';
+import { mergeMap, map, catchError, of } from 'rxjs';
+import { Schedule } from '../../models/schedule.model';
 import { SchedulesService } from '../../services/schedules.service';
 import * as SchedulesActions from './schedules.actions';
-import * as SchedulesSelectors from './schedules.selectors';
 
 @Injectable()
 export class SchedulesEffects {
-  constructor(
-    private actions$: Actions,
-    private schedulesService: SchedulesService,
-    private store: Store
-  ) {}
+  constructor(private actions$: Actions, private schedulesService: SchedulesService) {}
 
   loadSchedules$ = createEffect(() => {
     return this.actions$.pipe(
@@ -53,18 +48,17 @@ export class SchedulesEffects {
   addSchedule$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(SchedulesActions.addSchedule),
-      withLatestFrom(this.store.select(SchedulesSelectors.selectTotalCount)),
-      mergeMap(([actionData, totalSchedulesCount]) =>
-        this.schedulesService
-          .addSchedule({
-            ...actionData.schedule,
-            id: totalSchedulesCount,
-          })
-          .pipe(
-            map((data) => SchedulesActions.addScheduleSuccess({ schedule: data })),
-            catchError((error) => of(SchedulesActions.addScheduleFailure({ error })))
-          )
-      )
+      mergeMap((actionData) => {
+        const newSchedule: Schedule = {
+          ...actionData.schedule,
+          id: 0,
+        };
+
+        return this.schedulesService.addSchedule(newSchedule).pipe(
+          map((data) => SchedulesActions.addScheduleSuccess({ schedule: data })),
+          catchError((error) => of(SchedulesActions.addScheduleFailure({ error })))
+        );
+      })
     );
   });
 }

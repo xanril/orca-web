@@ -1,42 +1,53 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { map } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { Cinema } from '../models/cinema.model';
-
-const DUMMY_CINEMAS: Cinema[] = [
-    {
-      id: 0,
-      name: 'Ayala Malls - Glorietta',
-      location: 'Makati',
-    },
-    {
-      id: 1,
-      name: 'Ayala Malls - Greenbelt',
-      location: 'Makati',
-    },
-    {
-      id: 2,
-      name: 'SM Aura',
-      location: 'Taguig',
-    },
-  ];
 
 @Injectable({ providedIn: 'root' })
 export class CinemasService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getCinemas() {
-    return of(DUMMY_CINEMAS);
+    return this.http.get<Cinema[]>(environment.apiBaseUrl + '/cinemas');
   }
 
   addCinema(cinema: Cinema) {
-    return of(cinema);
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.http.post<Cinema>(environment.apiBaseUrl + '/cinema', JSON.stringify(cinema), {
+      headers: headers,
+    });
   }
 
   deleteCinema(id: number) {
-    return of(id);
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.http.delete<number>(environment.apiBaseUrl + '/cinema/' + id).pipe(
+      map((response) => {
+        return id;
+      })
+    );
   }
 
   updateCinema(updatedCinema: Cinema) {
-    return of(updatedCinema);
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.http
+      .put<Cinema>(
+        environment.apiBaseUrl + '/cinema/' + updatedCinema.id,
+        JSON.stringify(updatedCinema),
+        {
+          headers: headers,
+        }
+      )
+      .pipe(
+        map((response) => {
+          return updatedCinema;
+        })
+      );
   }
 }
